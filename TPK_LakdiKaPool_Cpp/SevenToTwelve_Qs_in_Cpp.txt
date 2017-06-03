@@ -1,0 +1,93 @@
+Program 1 : Demonstration of class.
+		A class is defined as template or model for an object. A class is collection
+	     of varibles and functions. An object is defined as an instance of the class.
+	     class is a reserved word. When we define a class, no memory is allocated to
+	     the class.
+
+Program 2 :      Write a C++ program for a triangle class. It contains 3 sides of a
+	    triangle, functions like getdata() for accepting the 3 sides, test() function to 
+	    test whether the 3 sides forms a triangle or not, area() function to find area, 
+	    perimeter() function to find perimeter.
+
+Program 3 : Assignment
+		Write a C++ program for a rectangle class. It contains length, breadth,
+	    getdata(), area(), perimeter().
+
+Program 4 : Assignment
+	         Write a C++ Program for student class. It contains roll no., student name, marks             of 3 subjects, total, average, grade. Functions like getdata(),compute(),putdata().
+
+Program 5 : Assignment
+	         Write a C++ program for an employee class. It contains employee
+	    number, employee name, salary, city, gross pay, net pay. Functions
+	    like getdata(), compute(), putdata().
+
+ Program 6 : Assignment
+		 Write a C++ program for a complex number class. It contains real
+	     part, imaginary part, getdata(), putdata(), add(), sub(), mul(), div().
+
+Program 7 : Assignment
+		Write a C++ program for a rational number class. It contains 
+	    numerator, denominator, getdata(), putdata(), add(), sub(), mul(), div() 
+
+Program 8 :	Write a C++ program for a stack class. It contains :
+	     Array s, variable top, push(), pop(), display(), initialize().
+		     Note : stack is nothing but LIFO(Last In First Out).
+	   When the stack is empty, top = -1
+	   When the stack is full, top = size-1
+	   When top < (size-1), the stack is not full, insertion is possible. Both 					insertion and deletion is possible only from top.
+
+Program 9 : Write a C++ program for a generic stack class.
+
+Program 10 : Write a C Program to implement the integer stack through linked lists. 
+	     Note: Stacks
+		   A Stack is a data structure in which data is organised in a LIFO form.
+		LIFO means Last In First Out. Stacks have the same entry and exit points.
+		push : The process of storing the data into the stack is called push.
+		pop : The process of retrieving the data from the stack is called pop.
+
+			A stack has a pointer called stack pointer which always points to the top 		most element of the stack. Stacks are used by the operating system to allocate 				memory for local variables.
+
+Program 11 :	Write a C++ program for a queue class. It contains :
+		     Array s, variables F, R,  insert(), del(), display(), initialize().
+		Note : Queue is nothing but FIFO(First In First Out).
+			F contains the position/index of the first element inserted.
+			R contains the position/index of the last element inserted.
+				In Queues, insertion is from rear end i.e., RHS and deletion is
+			from front end i.e., LHS.
+		For insertion, do R++ . For deletion, do F++ .
+		Condition for Queue empty is : R = -1.
+		Whenever R = (size-1), Queue is full and insertion is not possible.
+		When ther is only one element in the queue (F==R), to delete that
+		element, do not perform F++. Instead reinitialize F=0 and R=-1.
+			For implementing stacks, we require one Array, one variable.
+			For implementing queues, we require one Array, two variables.
+		Note : Stack insertion and Queue insertion methods are same whereas 
+			Stack Deletion and Queue Deletion methods are different.
+
+Program 12 : Write a C++ program for a generic queue class.
+	Note: 
+	1. If the member functions are defined outside the generic class, then
+		before each member function, we should write
+		template<class T>.
+		This is not required if the member functions are defined within
+		the generic class.
+	2. The generic queue class name is queue<T>. If it is normal classs, class
+		name is queue.
+	3. In Generic function, atleast one formal parameter must be of type T. In
+		Generic class, atleast one class variable must be generic type T.
+	4. Generic functions should be preceded by 
+		template<class T>.
+			There are two rules for generic functions.
+			(1). It must be written before the calling function i.e. main();
+			(2). It can not have prototypes.
+
+
+Program 13 : Write a C Program to implement queues through linked lists.
+		Note: Queues 
+			Queue is a data structure in which data is arranged in FIFO manner.
+		FIFO means First In First Out. Queues have a separate entry point and exit 				points. Queues are used by the operating systems to schedule the tasks that are 			to be submitted to the CPU.
+
+Program 14 : Write a C++ program to implement the Linked List.
+
+Program 15 : Write a C++ Program to implement the Generic Linked List.
+

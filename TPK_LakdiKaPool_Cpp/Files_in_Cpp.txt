@@ -1,0 +1,975 @@
+/* 
+Program 1 :
+Write a C++ Program to copy one file contents into another file 
+*/
+
+
+#include <iostream.h>
+#include <fstream.h>
+
+void main(int argc, char* argv[])
+{
+	cout << "\nNo.of arguments = " << argc << endl;
+	
+	for(int i=0; i< argc; i++)
+		cout << "argv[" << i <<"] = " << argv[i] << endl;
+
+	char ch;
+	ifstream fin(argv[1],ios::in);
+
+	if(fin.fail())
+	{
+		cout << argv[1] << " is not existing" << endl;
+	}
+	else
+	{
+		ofstream fout(argv[2],ios::out);
+		
+		while(fin.read(&ch,sizeof(char)))
+			fout.write(&ch,sizeof(char));
+
+		fin.close();
+		fout.close();
+
+	}
+}
+
+
+/* 
+Program 2 : 
+Write a C++ Program for creating an employee file. 
+It contains employee number, employee name, employee salary.
+Data is accepted from the keyboard and is written into the file.
+*/
+
+#include <fstream.h>
+#include <iostream.h>
+
+class CEmployee
+{
+protected:
+	int eno;
+	char ename[25];
+	float esal;
+
+public:
+	void GetData()
+	{
+		cout << "\nEnter employee number, name and salary\n";
+		cin >> eno;
+		cin.get();
+		cin.getline(ename,sizeof(ename),'\n');
+		cin >> esal;
+	}
+/*
+	void PutData()
+	{
+		cout << "\nEmployee Details are : \n";
+		cout << eno << endl;
+		cout << ename << endl;
+		cout << esal << endl;
+	}
+*/
+
+};
+void main()
+{
+/*	
+	CEmployee emp;
+	emp.GetData();
+	emp.PutData();
+*/
+	ofstream fout("emp.txt",ios::out);
+	char ch;
+
+	CEmployee emp;
+
+	do
+	{
+		emp.GetData();
+		fout.write((char*)&emp,sizeof(emp));
+
+		cout << "\nDo you want to store one more employee record (y/n) : ";
+		cin >> ch;
+
+	}while(ch == 'y' || ch == 'Y');
+
+	fout.close();	// closing a file is optional
+}
+
+
+/* 
+Program 3 : 
+Write a C++ Program to display an employee file "emp.txt" contents
+on the monitor in User-Understandable Form. 
+It contains Employee Number, Employee Name, Employee Salary.
+*/
+
+#include <fstream.h>
+#include <iostream.h>
+#include <process.h>	// exit(0)
+
+class CEmployee
+{
+protected:
+	int eno;
+	char ename[25];
+	float esal;
+
+public:
+/*
+	void GetData()
+	{
+		cout << "\nEnter employee number, name and salary\n";
+		cin >> eno;
+		cin.get();
+		cin.getline(ename,sizeof(ename),'\n');
+		cin >> esal;
+	}
+*/
+	void PutData()
+	{
+		cout << eno << "\t" << ename << "\t" << esal << endl;
+	}
+};
+void main()
+{
+	ifstream fin("emp.txt");
+
+	if(fin.fail())
+	{
+		cout << "\"emp.txt\" file is not existing" << endl;
+		exit(0);
+	}
+
+	CEmployee emp;
+	while(fin.read((char*)&emp,sizeof(emp)))
+		emp.PutData();
+
+	fin.close();	// closing a file is optional
+}
+
+
+/* Program 4 : Merging of two files */
+// CreateEmpFile.cpp
+
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+class CEmployee
+{
+private:
+	int id;
+	char name[25];
+	float sal;
+public:
+	// static int count;
+	CEmployee()
+	{
+		cout << "Default Constructor called. Object created" << endl;
+		cout << "memory allocated = " << sizeof(CEmployee) << " bytes" << endl;
+		id = 1001;
+		strcpy(name,"Palani Kumar");
+		sal = 25000;
+
+//		count++;
+//		cout << "\nNo.of Objects created = " << count << endl;
+	}
+	CEmployee(int id,char* name, float sal)
+	{
+		cout << "Overloaded Constructor called. Object created" << endl;
+		cout << "memory allocated = " << sizeof(CEmployee) << " bytes" << endl;
+		this->id = id;
+		strcpy(this->name,name);
+		(*this).sal = sal;
+
+//		count++;
+//		cout << "\nNo.of Objects created = " << count << endl;
+
+	}
+	CEmployee(const CEmployee& remp)
+	{
+		cout << "Copy Constructor called. Object created" << endl;
+		cout << "memory allocated = " << sizeof(CEmployee) << " bytes" << endl;
+		id = remp.id;
+		strcpy(name,remp.name);
+		sal = remp.sal;
+
+//		count++;
+//		cout << "\nNo.of Objects created = " << count << endl;
+
+	}
+	~CEmployee()
+	{
+		cout << "Destructor called. Object destroyed" << endl;
+
+//		count--;
+//		cout << "\nNo.of Objects Existing = " << count << endl;
+	}
+
+	void GetData()
+	{
+		cout << "\nEnter the employ ID : ";
+		cin >> id;
+
+		cout << "Enter the employ name : ";
+		cin.get();
+		cin.getline(name,25,'\n');
+
+		cout << "Enter the employ salary : ";
+		cin >> sal;
+	}
+	void PutData()
+	{
+		cout << "\nEmploy ID   : " << id << endl;
+		cout << "Employ Name   : " << name << endl;
+		cout << "Employ Salary : " << sal << endl;
+	}
+};
+// int CEmployee::count = 0;
+
+void main(int argc, char* argv[])
+{
+	/*
+	CEmployee a(2001,"sowmya",35000);
+	a.PutData();
+
+	cout << "count = " << a.count << endl;
+
+	CEmployee b(a);
+	b.PutData();
+	*/
+
+	if(argc > 1)
+	{
+		ofstream fout(argv[1],ios::out|ios::app);
+		if(fout.fail())
+		{
+			cout << "\nFailed to open the file \" " << argv[1] << " \" " << endl;
+		}
+		CEmployee a;
+		char ch;
+		do
+		{
+			a.GetData();
+			fout.write((char*)&a, sizeof(a));
+
+			cout << "\nDo you want to add one more record (y/n) : ";
+			cin >> ch;
+		}while(ch == 'y' || ch == 'Y');
+
+		cout << "Records are inserted" << endl;
+		fout.close();
+	}
+	else
+		cout << "\nEnter the file name in the command line" << endl;
+
+
+	
+}
+
+// ReadEmpFile.cpp
+
+
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+class CEmployee
+{
+private:
+	int id;
+	char name[25];
+	float sal;
+public:
+
+	void PutData()
+	{
+		cout << "\nEmploy ID   : " << id << endl;
+		cout << "Employ Name   : " << name << endl;
+		cout << "Employ Salary : " << sal << endl;
+	}
+};
+
+
+void main(int argc, char* argv[])
+{
+
+	if(argc > 1)
+	{
+		ifstream fin(argv[1],ios::in);
+		if(fin.fail())
+		{
+			cout << "\nFailed to open the file \" " << argv[1] << " \" " << endl;
+		}
+
+		CEmployee *a = new CEmployee;
+		
+		fin.seekg(0,ios::end);
+		int n = fin.tellg()/sizeof(CEmployee);
+		fin.seekg(0,ios::beg);
+
+		cout << "\nNo.of records = " << n << endl;
+
+		while(fin.read((char*)a,sizeof(CEmployee)))
+		{
+			a->PutData();
+		}
+
+	}
+	else
+		cout << "\nEnter the file name in the command line" << endl;
+
+
+	
+}
+
+
+/* Write a C++ Program for merging two files */
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+class CEmployee
+{
+private:
+	int id;
+	char name[25];
+	float sal;
+public:
+
+	void PutData()
+	{
+		cout << "\nEmploy ID   : " << id << endl;
+		cout << "Employ Name   : " << name << endl;
+		cout << "Employ Salary : " << sal << endl;
+	}
+	int GetID()
+	{
+		return id;
+	}
+};
+
+
+void main(int argc, char* argv[])
+{
+	
+	ifstream fin1("emp1.txt",ios::in);
+	if(fin1.fail())
+	{
+		cout << "\nFile \" emp1.txt \" is not existing to open" << endl;
+		exit(0);
+	}
+	cout << "File \" emp1.txt \" is opened" << endl;
+
+	ifstream fin2("emp2.txt",ios::in);
+	if(fin2.fail())
+	{
+		cout << "\nFile \" emp2.txt \" is not existing to open" << endl;
+		exit(0);
+	}
+	cout << "File \" emp2.txt \" is opened" << endl;
+
+	ofstream fout("merge.txt",ios::out);
+	if(fout.fail())
+	{
+		cout << "Failed to open the file";
+		exit(0);
+	}
+	else
+		cout << "merge.txt file is opened to write" << endl;
+
+	CEmployee a, b, c;
+	fin1.read((char*)&a, sizeof(CEmployee));
+	fin2.read((char*)&b, sizeof(CEmployee));
+
+	while(!fin1.eof() && !fin2.eof())
+	{
+		if(a.GetID() < b.GetID())
+		{
+			fout.write((char*)&a, sizeof(a));
+			fin1.read((char*)&a, sizeof(a));
+		}
+		else
+		{
+			fout.write((char*)&b, sizeof(b));
+			fin2.read((char*)&b, sizeof(b));
+		}
+
+	}
+	
+	while(!fin1.eof())
+	{
+		fout.write((char*)&a, sizeof(a));
+		fin1.read((char*)&a, sizeof(a));
+	}
+
+	while(!fin2.eof())
+	{
+		fout.write((char*)&b, sizeof(b));
+		fin2.read((char*)&b, sizeof(b));
+	}
+
+	fin1.close();
+	fin2.close();
+	fout.close();
+
+	cout << "\nThe following are the merged records" << endl;
+
+	fstream finout("merge.txt",ios::in);
+	if(finout.fail())
+	{
+		cout << "\nFailed to open the file" << endl;
+		exit(0);
+	}
+
+	while(finout.read((char*)&a, sizeof(a)))
+	{
+		a.PutData();
+	}
+
+	finout.close();
+
+}
+
+
+/* 
+Program 5:
+Write a C++ program for customer file. It contains account number, customer name, balance.
+
+Perform the following operations.
+void menu()
+{
+	cout << "\n1. Display all customers" << endl;
+	cout << \n2. Display total balance of all the customers\n"
+	cout << "\n3. Display the no.of customers\n";
+	cout << "\n 4.Given account no., Display customer details"
+	cout << "\n 5. Display i'th customer" << endl;
+	cout << "\n 6. Append a new customer" << endl;
+	cout << "\n 7. Deleting the existing customer " << endl;
+	cout<< "\n8.Find the customer having the largest balance";
+	cout << "\n 9.Perform credit transaction" << endl;
+	cout << "\n 10. Perform debit transaction " << endl;
+	cout << "\n 11. Sort the customer wrt. balance " << endl;
+	cout << "\n 12. Sort the customer wrt. name " << endl;
+	cout << "\n 13. Exit" << endl;
+}		// Excellent Program
+*/
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+void menu()
+{
+	cout << "\n\n 1. Display all customers" << endl;
+	cout << " 2. Display total balance of all the customers\n";
+	cout << " 3. Display the no.of customers\n";
+	cout << " 4. Given account no., Display customer details\n";
+	cout << " 5. Display i'th customer" << endl;
+	cout << " 6. Append a new customer" << endl;
+	cout << " 7. Deleting the existing customer " << endl;
+	cout << " 8. Find the customer having the largest balance\n";
+	cout << " 9. Perform credit transaction" << endl;
+	cout << "10. Perform debit transaction " << endl;
+	cout << "11. Sort the customer wrt. balance " << endl;
+	cout << "12. Sort the customer wrt. name " << endl;
+	cout << "13. Exit\n" << endl;
+}
+
+class Customer
+{
+protected:
+	int acno;
+	char name[25];
+	float balance;
+public:
+	void GetData();
+	void PutData();
+	float& GetBalance();
+	void Credit(float amt);
+	void Debit(float amt);
+	int& GetAcno();
+	void Sort(int n);	// sorting wrt. balance
+	void SortByNames(int n);
+};
+
+void Customer::GetData()
+{
+	cout << "\nEnter customer name, balance" << endl;
+	cin.get();
+	cin.getline(name,25,'\n');
+	cin >> balance;
+}
+void Customer::PutData()
+{
+	cout << endl << acno << "\t" << name << "\t" << balance;
+}
+float& Customer::GetBalance()
+{
+	return balance;
+}
+void Customer::Credit(float amt)
+{
+	balance += amt;
+	// balance = balance + amt;
+	cout << "\nCredit transaction is completed" << endl;
+}
+void Customer::Debit(float amt)
+{
+	if( (balance - amt) >= 500)
+	{
+		balance -= amt;
+		// balance = balance - amt;
+		cout << "\nDebit transaction is completed" << endl;
+	}
+	else
+		cout << "\nWithdrawal is not possible "<< endl;
+}
+int& Customer::GetAcno()
+{
+	return acno;
+}
+
+// Sorting wrt balance
+void Customer::Sort(int n)
+{
+	Customer temp;
+	for(int i=0; i < n-1; i++)
+		for(int j=i+1; j < n; j++)
+			if(this[i].balance > this[j].balance)
+			{
+				temp = this[i];
+				this[i] = this[j];
+				this[j] = temp;
+			}
+}
+
+// Sorting wrt names
+void Customer::SortByNames(int n)
+{
+	Customer temp;
+	for(int i=0; i < n-1; i++)
+		for(int j=i+1; j < n; j++)
+			if(strcmp(this[i].name , this[j].name) > 0)
+			{
+				temp = this[i];
+				this[i] = this[j];
+				this[j] = temp;
+			}
+}
+
+void main()
+{
+	float amt;
+	Customer* b;
+	Customer a;
+	int ch, n, acno1, i, found;
+	float max, sum;
+
+	menu();
+	cout << "\nEnter your choice : " ;
+	cin >> ch;
+
+	while(ch < 13)
+	{
+		switch(ch)
+		{
+			case 1 :	// Display all customers
+			{
+				/*
+				fstream finout;
+				finout.open("d:\\customer.dat",ios::in|ios::out);
+				if(finout.is_open())
+					cout << "file is opened";
+				if(finout.fail())
+					cout << "Failed to open the file" << endl;
+				while(finout.read((char*)&a, sizeof(Customer)))
+				{
+					a.PutData();
+				}
+				finout.close();
+				*/
+
+				ifstream fin("d:\\customer.dat", ios::in);
+				if(fin.fail())
+				{
+					cout << "\nFile is not existing";
+					break;
+
+				}
+				while(fin.read((char*)&a, sizeof(a)))
+					a.PutData();
+
+				fin.close();
+			}
+			break;
+			case 2 :	// Display total balance of all the customers
+				{
+					/*
+					sum = 0;
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					if(!finout.is_open())
+					{
+						cout << "Failed to open the file" << endl;
+						break;
+					}
+					finout.seekg(0,ios::beg);
+
+					while(finout.read((char*)&a, sizeof(Customer)))
+					{
+						sum += a.GetBalance();
+						// sum = sum + a.GetBalance();
+					}
+					cout << "\nTotal balance = " << sum << endl;
+					finout.close();
+					*/
+
+					sum = 0;
+					ifstream fin("d:\\customer.dat",ios::in);
+					if(!fin.is_open())
+					{
+						cout << "\nFailed to open the file" << endl;
+						break;
+					}
+					while(fin.read((char*)&a, sizeof(a)))
+					{
+						sum += a.GetBalance();
+						// sum = sum + a.GetBalance();
+					}
+					fin.close();
+					cout << "\nTotal balance of all the customers = " << sum << endl;
+						
+				}
+				break;
+			case 3:		// Display the no.of customers
+				{
+					/*
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					if(!finout.is_open())
+					{
+						cout << "Failed to open the file" << endl;
+						break;
+					}
+					finout.seekg(0,ios::end);
+					int n = finout.tellg()/sizeof(Customer);
+					cout << "\nNo.of customer's existing = " << n << endl;
+					finout.close();
+					*/
+
+					ifstream fin("d:\\customer.dat",ios::in);
+					fin.seekg(0,ios::end);
+					int n = fin.tellg()/sizeof(Customer);
+					cout << "\nNo.of customers = " << n << endl;
+					fin.close();
+				}
+				break;
+			case 4:		// Given account no., Display customer details
+				{
+					found = 0;	// not found
+					cout << "\nEnter the Account Number : ";
+					cin >> acno1;
+					
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					/*
+					if(!finout.is_open())
+					{
+						cout << "Failed to open the file" << endl;
+						break;
+					}*/
+					if(finout.fail())
+					{
+						cout << "\nFailed to open the file" << endl;
+						break;
+					}
+					finout.seekg(0,ios::beg);
+
+					while(finout.read((char*)&a,sizeof(Customer)))
+					{
+						if(a.GetAcno() == acno1)
+						{
+							found = 1;
+							a.PutData();
+							break;
+						}
+					}
+					
+					if(found == 0)
+						cout << "\nInvalid Account Number" << endl;
+					finout.close();
+				}
+				break;
+			case 5:		// Display i'th customer , Random Accessing
+				{
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					if(finout.fail())
+					{
+						cout << "\nFailed to open the file" << endl;
+						break;
+					}
+
+					// Find the no.of records in the file
+					finout.seekg(0,ios::end);
+					int n = finout.tellg()/sizeof(Customer);
+
+					cout << "\nEnter the record number : ";
+					cin >> i;
+
+					if(i > n)
+						cout << "\nInvalid Record number" << endl;
+					else
+					{
+						finout.seekg((i-1)*sizeof(Customer),ios::beg);
+						finout.read((char*)&a, sizeof(Customer));
+						a.PutData();
+					}
+					finout.close();
+				}
+				break;
+			case 6:		// Append a new customer
+				{
+					fstream finout;
+					finout.open("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					
+					if(!finout.is_open())
+					{
+						ofstream fout("d:\\customer.dat",ios::out);
+						if(fout.fail())
+							break;
+						fout.close();
+					
+						finout.open("d:\\customer.dat",ios::in|ios::out|ios::ate);
+						if(finout.is_open())
+						{
+							cout << "File is opened" << endl;
+						}
+						else
+						{
+							cout << "Failed to open the file" << endl;
+							break;
+						}
+
+					}
+					
+
+
+					finout.seekp(0,ios::end);
+					cout << "size = " << sizeof(Customer) << "   tellp = " << finout.tellp() << endl;
+					int x = finout.tellp();
+					if(x == -1)
+						a.GetAcno() = 1000;
+
+					if(x != -1)
+					{
+						int n = finout.tellp()/sizeof(Customer);
+						a.GetAcno() = n+1;
+						a.GetData();
+
+						finout.write((char*)&a, sizeof(Customer));
+						cout << "\nNew customer data is appended" << endl;
+					}
+					finout.close();
+				}
+				break;
+			case 7:		// Deleting the existing customer
+				{
+					//fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					ifstream fin("d:\\customer.dat",ios::in);
+					
+					cout << "\nEnter the Account number whose record has to be deleted : ";
+					cin >> acno1;
+
+					found = 0;
+					while(fin.read((char*)&a, sizeof(Customer)))
+					{
+						if(a.GetAcno() == acno1)
+						{
+							found = 1;
+							break;
+						}
+					}
+
+					if(found == 0)
+					{
+						cout << "\nAccount number " << acno1 << " is not existing" << endl;
+						fin.close();
+					}
+					else
+					{
+						ofstream fout("temp.dat",ios::out);
+
+						fin.seekg(0,ios::beg);
+
+						while(fin.read((char*)&a, sizeof(Customer)))
+						{
+							if(a.GetAcno() != acno1)
+								fout.write((char*)&a, sizeof(Customer));
+						}
+						fout.close();
+						fin.close();
+
+						unlink("d:\\customer.dat");	// file is deleted
+						rename("temp.dat","d:\\customer.dat");
+
+					}
+				}
+				break;
+			case 8:		// Find the customer having the largest balance
+				{
+					ifstream fin("d:\\customer.dat",ios::in);
+					float max = 0;
+					while(fin.read((char*)&a, sizeof(Customer)))
+					{
+						if(a.GetBalance() > max)
+							max = a.GetBalance();
+					}
+					fin.seekg(0,ios::beg);
+					fin.close();
+
+					ifstream fin1("d:\\customer.dat",ios::in);
+					while(fin1.read((char*)&a, sizeof(Customer)))
+					{
+						if(a.GetBalance() == max)
+							a.PutData();
+					}
+					fin1.close();
+				}
+				break;
+			case 9:		// Perform Credit Transaction
+				{
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+
+					cout << "\nEnter the Account number : ";
+					cin >> acno1;
+
+					found = 0;
+					finout.seekg(0,ios::beg);
+					while(finout.read((char*)&a, sizeof(Customer)))
+					{
+						if(a.GetAcno() == acno1)
+						{
+							found = 1;
+							n = finout.tellg()/sizeof(Customer);
+							break;
+						}
+					}					
+					if(found == 1)
+					{
+						float amt;
+						cout << "\nEnter the amount to deposit : ";
+						cin >> amt;
+						if(amt > 0)
+						{
+							a.Credit(amt);
+							finout.seekp((n-1)*sizeof(Customer),ios::beg);
+							finout.write((char*)&a, sizeof(Customer));
+						}
+						else
+							cout << "\nInvalid Amount" << endl;
+					}
+					else
+						cout << "\nInvalid Account number" << endl;
+
+					finout.close();
+				}
+				break;
+			case 10:	//	Perform debit transaction
+				{
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+
+					cout << "\nEnter the Account number : ";
+					cin >> acno1;
+
+					found = 0;
+					finout.seekg(0,ios::beg);
+					while(finout.read((char*)&a, sizeof(Customer)))
+					{
+						if(a.GetAcno() == acno1)
+						{
+							found = 1;
+							float amt;
+							cout << "\nEnter the amount to withdraw : ";
+							cin >> amt;
+
+							if(amt > 0)
+							{
+								a.Debit(amt);
+								n = finout.tellg()/sizeof(Customer);
+								finout.seekp((n-1)*sizeof(Customer),ios::beg);
+
+								finout.write((char*)&a, sizeof(Customer));
+							}
+							else
+								cout << "\nInvalid Amount" << endl;
+							break;
+						}
+					}
+					if(found == 0)
+						cout << "\nInvalid Account number" << endl;
+
+					finout.close();
+				}
+				break;
+			case 11:	// Sort the customer wrt. balance
+				{
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+					finout.seekg(0,ios::end);
+					n = finout.tellg()/sizeof(Customer);
+					finout.seekg(0,ios::beg);
+					cout << "\nNo.of customers existing = " << n << endl;
+
+					b = new Customer[n];
+					finout.read((char*)b, n*sizeof(Customer));
+
+					b[0].Sort(n);
+					finout.seekp(0,ios::beg);
+					finout.write((char*)b, n*sizeof(Customer));
+					cout << "\nRecords are sorted wrt balance successfully" << endl;
+
+					if(b != NULL)
+						delete []b;
+					finout.close();
+				}
+				break;
+			case 12:	// Sort the customer wrt. name
+				{
+					fstream finout("d:\\customer.dat",ios::in|ios::out|ios::ate);
+
+					finout.seekg(0,ios::end);
+					n = finout.tellg()/sizeof(Customer);
+					finout.seekg(0,ios::beg);
+
+					b = new Customer[n];
+					finout.read((char*)b, n*sizeof(Customer));
+
+					b[0].SortByNames(n);
+
+					finout.seekp(0, ios::beg);
+					finout.write((char*)b, n*sizeof(Customer));
+
+					cout << "\nRecords are sorted wrt name successfully" << endl;
+
+					if(b != NULL)
+						delete []b;
+
+					finout.close();
+				}
+				break;
+			default:
+				{
+					cout << "\nInvalid Option";
+				}
+				break;
+		}	// end of switch
+
+		cout << "\nPress any key to continue.....";
+		cin.get();
+		getchar();
+
+		system("cls");
+		menu();
+		cout << "\nEnter the proper choice : ";
+		cin >> ch;
+	}	// end of while
+}	// end of main

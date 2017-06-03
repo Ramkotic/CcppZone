@@ -1,0 +1,281 @@
+/* Program 1 :	
+
+		Introduction to Operator Overloading
+		------------------------------------
+	In C++, all the operators are defined wrt variables. No operator is defined wrt
+arrays, structures, objects(except = operator).
+	Operator overloading allows us to define operators wrt objects but not for arrays
+and structures.
+	Operator Overloading is nothing but assigning one more meaning for all the operators 
+wrt objects. After overloading, the existing meaning is not lost i.e., if we overload
++ operator wrt objects, variable + variable is valid and also object + object is also
+valid.
+	Every operator can be overloaded in C++ except four operators. They are:
+		1. Conditional operator/Ternary operator ? :
+		2. Scope Resolution Operator ::
+		3. sizeof operator
+		4. Member access parameter .,*
+	Each operator can be overloaded as member function or non-member function.
+
+Operator			Member Function		Non-Member Function/Friend Function
+--------			---------------		-----------------------------------
+1. Binary Operators		1 parameter				2 parameters
+	+,-,*,/,%,<,> etc
+2. Unary Operators		0 parameter				1 parameter
+	++,--,-
+3.	<< , >>			-					2 parameters
+4. new, delete, [],		1 parameter 				We can't write these 
+(), =, += etc							functions as friend functions
+
+			We can not implement << , >> as member functions since they are already
+defined as member functions in istream and ostream classes resply.
+			Binary operators(+,-,*,/,% etc) can be implemented as member function or
+non-member function(friend function).
+			=, +=, new, delete, [], () must be overloaded as member functions only
+but not as friend functions.
+	a = b;	equivalent to a.operator =(b) where a is owner object, b is parameter object
+	a += =b;		a.operator +=(b);
+	a[2];			a.operator [](2);
+	new classname;		operator new(classname);
+	delete p;		operator delete(p);
+	(i,l);			operator ()(i,l);
+*/
+
+#include <iostream.h>
+#include <string.h>
+
+class Test
+{
+public:
+	int a;
+	float b;
+	char c;
+	char *d;
+	Test()
+	{
+		a=10;
+		b=20.85;
+		c='p';
+		d = new char[25];
+		strcpy(d, "Hyderabad");
+	}
+	void Display()
+	{
+	cout << a << "\t" << b << "\t" << c << "\t" << d << endl;
+	}
+};
+
+void main()
+{
+	Test obj;
+	obj.Display();
+
+	cout << "\n\t obj.a = " << obj.a;
+	cout << "\n\t obj.b = " << obj.b;
+	cout << "\n\t obj.c = " << obj.c  << endl;
+
+	cout << "\n\t obj.d[0] = " << obj.d[0];
+	cout << "\n\t obj.d[1] = " << obj.d[1];
+	cout << "\n\t obj.d[2] = " << obj.d[2] << endl;
+}
+
+Output :
+10      20.85   p       Hyderabad
+
+         obj.a = 10
+         obj.b = 20.85
+         obj.c = p
+
+         obj.d[0] = H
+         obj.d[1] = y
+         obj.d[2] = d
+Press any key to continue
+
+
+/* Program 2: Overload +, -, *, /, <<, >> operators on complex number object.  */
+
+#include <iostream.h>
+
+class complex
+{
+private:
+	float rp, ip;
+public:
+
+	// Using friend functions
+	friend complex operator +(complex a, complex b);	
+	friend complex operator -(complex a, complex b);
+	friend complex operator *(complex a, complex b);
+	friend complex operator /(complex a, complex b);
+/*
+	// Using member functions / without friend functions
+	complex operator +(complex b);
+	complex operator -(complex b);	
+	complex operator *(complex b);
+	complex operator /(complex b);
+*/
+	// operators >> and << overloading must be friend functions only
+	friend istream& operator >>(istream& cin, complex& a);
+	friend ostream& operator <<(ostream& cin, complex& a);
+};
+// Note: istream and ostream classes are predefined in header file iostream.h.
+
+// Overloading + operator using friend function / non-member function
+complex operator +(complex a, complex b)
+{
+	complex z;
+	z.rp = a.rp + b.rp;
+	z.ip = a.ip + b.ip;
+	return (z);
+}
+
+//	Note: 
+//		complex a, b, c;
+//		c = a+b;	// c = operator +(a,b);	c =z;
+
+// Overloading - operator using friend function / non-member function
+complex operator -(complex a, complex b)
+{
+	complex z;
+	z.rp = a.rp - b.rp;
+	z.ip = a.ip - b.ip;
+	return (z);
+}
+
+//	Note: 
+//		complex a, b, c;
+//		c = a-b;	// c = operator -(a,b);	c =z;
+
+// Overloading * operator using friend function / non-member function
+complex operator *(complex a, complex b)
+{
+	complex z;
+	z.rp = a.rp*b.rp - a.ip*b.ip;
+	z.ip = a.ip*b.rp + a.rp*b.ip;
+	return (z);
+}
+
+//	Note: 
+//		complex a, b, c;
+//		c = a*b;	// c = operator *(a,b);	c =z;
+
+// Overloading / operator using friend function / non-member function
+complex operator /(complex a, complex b)
+{
+	complex z;
+	z.rp = (a.rp*b.rp + a.ip*b.ip)/(b.rp*b.rp + b.ip*b.ip);
+	z.ip = (a.ip*b.rp - a.rp*b.ip)/(b.rp*b.rp + b.ip*b.ip);
+	return (z);
+}
+
+//	Note: 
+//		complex a, b, c;
+//		c = a/b;	// c = operator /(a,b);	c =z;
+/*
+
+// Overloading + operator as member function /without using friend function
+complex complex::operator +(complex b)
+{
+	complex z;
+	z.rp = this->rp + b.rp;	// rp = this->rp = (*this).rp;
+	z.ip = (*this).ip + b.ip;
+	return (z);
+}
+//	Note: 
+//		complex a, b, c;
+//		c = a+b;	// c = a.operator +(b);	c =z;
+
+// Overloading - operator as member function /without using friend function
+complex complex::operator -(complex b)
+{
+	complex z;
+	z.rp = this->rp - b.rp;	// rp = this->rp = (*this).rp;
+	z.ip = (*this).ip - b.ip;
+	return (z);
+}
+//	Note: 
+//		complex a, b, c;
+//		c = a-b;	// c = a.operator -(b);	c =z;
+
+// Overloading * operator as member function /without using friend function
+complex complex::operator *(complex b)
+{
+	complex z;
+	z.rp = rp*b.rp - ip*b.ip;	// rp = this->rp = (*this).rp;
+	z.ip = ip*b.rp + rp*b.ip;
+	return (z);
+}
+//	Note: 
+//		complex a, b, c;
+//		c = a*b;	// c = a.operator *(b);	c =z;
+
+// Overloading * operator as member function /without using friend function
+complex complex::operator /(complex b)
+{
+	complex z;
+	z.rp = (rp*b.rp + ip*b.ip)/(b.rp*b.rp + b.ip*b.ip);
+	z.ip = (ip*b.rp - rp*b.ip)/(b.rp*b.rp + b.ip*b.ip);	// ip = this->ip = (*this).ip;
+	return (z);
+}
+//	Note: 
+//		complex a, b, c;
+//		c = a/b;	// c = a.operator /(b);	c =z;
+
+*/
+// Overloading >> operator as friend function only
+istream& operator >>(istream& cin, complex& a)
+{
+	cin >> a.rp >> a.ip;
+	return cin;
+}
+
+// Overloading << operator as friend function only
+ostream& operator <<(ostream& cout, complex& a)
+{
+	(a.ip >= 0) ? (cout << a.rp << "  +  " << a.ip << "i" << endl) : (cout << a.rp <<  "  -  " << -a.ip << "i" << endl);
+	return cout;
+}
+// Note:
+//	complex a, b, c;
+//	cout << a << b << c;	
+//	operator <<(cout, a) << b << c;
+//	cout << b << c;
+
+void main()
+{
+	complex a, b, c, d, e, f;
+
+	cout << "\nEnter two complex numbers\n";
+	cin >> a >> b;
+	cout << "\nThe entered complex numbers are " << endl;
+	cout << a << b;
+
+	c = a + b;
+	d = a - b;
+	e = a * b;
+	f = a / b;
+
+	cout << "c = a + b;	Result = " << c;
+	cout << "d = a - b;	Result = " << d;
+	cout << "e = a * b;	Result = " << e;
+	cout << "f = a / b;	Result = " << f;
+
+	cout << endl << endl;
+}
+
+Output :
+
+Enter two complex numbers
+5 -2
+-6 -9
+
+The entered complex numbers are
+5  -  2i
+-6  -  9i
+c = a + b;      Result = -1  -  11i
+d = a - b;      Result = 11  +  7i
+e = a * b;      Result = -48  -  33i
+f = a / b;      Result = -0.102564  +  0.487179i
+
+Press any key to continue
+

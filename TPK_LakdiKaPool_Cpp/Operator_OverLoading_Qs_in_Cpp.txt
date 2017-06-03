@@ -1,0 +1,45 @@
+Program 1 :	
+
+		Introduction to Operator Overloading
+		------------------------------------
+	In C++, all the operators are defined wrt variables. No operator is defined wrt
+arrays, structures, objects(except = operator).
+	Operator overloading allows us to define operators wrt objects but not for arrays
+and structures.
+	Operator Overloading is nothing but assigning one more meaning for all the operators 
+wrt objects. After overloading, the existing meaning is not lost i.e., if we overload
++ operator wrt objects, variable + variable is valid and also object + object is also
+valid.
+	Every operator can be overloaded in C++ except four operators. They are:
+		1. Conditional operator/Ternary operator ? :
+		2. Scope Resolution Operator ::
+		3. sizeof operator
+		4. Member access parameter .,*
+	Each operator can be overloaded as member function or non-member function.
+
+Operator			Member Function		Non-Member Function/Friend Function
+--------			---------------		-----------------------------------
+1. Binary Operators		1 parameter				2 parameters
+	+,-,*,/,%,<,> etc
+2. Unary Operators		0 parameter				1 parameter
+	++,--,-
+3.	<< , >>			-					2 parameters
+4. new, delete, [],		1 parameter 				We can't write these 
+(), =, += etc							functions as friend functions
+
+			We can not implement << , >> as member functions since they are already
+defined as member functions in istream and ostream classes resply.
+			Binary operators(+,-,*,/,% etc) can be implemented as member function or
+non-member function(friend function).
+			=, +=, new, delete, [], () must be overloaded as member functions only
+but not as friend functions.
+	a = b;	equivalent to a.operator =(b) where a is owner object, b is parameter object
+	a += =b;		a.operator +=(b);
+	a[2];			a.operator [](2);
+	new classname;		operator new(classname);
+	delete p;		operator delete(p);
+	(i,l);			operator ()(i,l);
+
+
+Program 2: Overload +, -, *, /, <<, >> operators on complex number object.
+

@@ -1,0 +1,2490 @@
+/* Program1 :  Usage of  cin and cout.
+Difference between c and c++ syntax.
+	C programming syntax:
+	#include<stdio.h>
+	#include <conio.h>	// getch()
+		main()
+		{
+			Declarations;
+			Executable statements;
+			getch();
+		}
+
+		C++ programming syntax:
+		#include <iostream.h>
+		main()
+		{
+			Declarations;
+			Executable statements;
+			Declarations;
+			Executable statements;
+			Declarations;
+			Executable statements;
+			.....
+			......
+			getch();
+			return(0);
+		}
+*/
+
+#include <iostream.h>
+void main()
+{
+	int a;
+	float b;
+	char c;
+	double d;
+	cout << "\nEnter values for int a, float b, char c, double d\n";
+	cin >> a >> b >> c >> d;
+	cout << "\n a = " << a << "\tb = " << b << "\tc = " << c << "\td = " << d << endl;
+
+	char txt[20];
+	cout << "\nEnter single word name : ";
+	cin >> txt;	// cin accepts only single word from the keyboard.
+	cout << "\nName : " << txt << endl;
+
+	char name[20];
+	cout << "\nEnter two word name : " ;
+	cin.get();
+	cin.getline(name, 20,'\n');	// To accept more than one word, use cin.getline()
+	cout << "\nTwo word name : " << name << endl;
+
+	cout << endl << 3 << "\t" << 20.8 << "\t" << "Hyderabad" << endl;
+	int x=10;
+	cout << "\nThe value of x is " << a << '\n';
+
+	a = 10;
+	b = 20.8;
+	c = 'g';
+	cout << a << endl << b << "\n" << c << '\n';
+
+	a = 3;
+	cout << "The result of (a + 3*a) where a =3 is " << a+3*a << endl;
+
+}
+
+Output :
+
+Enter values for int a, float b, char c, double d
+10
+12.234565
+t
+96.98765432
+
+ a = 10 b = 12.2346     c = t   d = 96.9877
+
+Enter single word name : Hyderabad
+
+Name : Hyderabad
+
+Enter two word name : sankar dayal sarma
+
+Two word name : sankar dayal sarma
+
+3       20.8    Hyderabad
+
+The value of x is 10
+10
+20.8
+g
+The result of (a + 3*a) where a =3 is 12
+Press any key to continue
+
+/* Program 2 : Usage of cin , cout, cout.precision(), cout.width(), cout.fill() */
+
+#include <iostream.h>
+
+void main()
+{
+	float a = 10.6782;
+	cout << a << endl;
+	cout.precision(2);
+	cout << a << endl;
+	cout.precision(3);
+	cout << a << endl;
+	cout.precision(12);
+	cout << a << endl;
+
+
+	a = 1234.56789;
+	cout << a << endl;
+	cout.width(25);
+	cout << a << endl;
+	cout.fill('@');
+	cout << a << '\n';
+
+}
+Output :
+10.6782
+11
+10.7
+10.6782
+1234.57
+                  1234.57
+1234.57
+Press any key to continue
+
+/* Program 3 : Usage of :: (scope resolution operator) */
+
+#include <iostream.h>
+
+int a = 10;		// global variable
+void main()
+{
+	int a = 20;		// local variable
+	{
+		int a = 30;
+		cout << "{ a = 30} : " << a << endl;
+		cout << "{::a = 10 } : " << ::a << endl;
+	}
+	cout << "a = 20 : " <<  a << "\n";
+	cout << "::a = 10 : " << ::a << '\n';
+}
+Output :
+{ a = 30} : 30
+{::a = 10 } : 10
+a = 20 : 20
+::a = 10 : 10
+Press any key to continue
+
+/* Program 4 : Usage of Reference Variables */
+
+#include <iostream.h>
+
+void main()
+{
+	int a=10;
+	int &b=a;
+	b=20;
+	
+	cout << "a = " << a << "\t b = " << b << endl;
+	cout << "sizeof(a) = " << sizeof(a) << "\t sizeof(b) = " << sizeof(b) << '\n';
+	cout << "&a = " << &a << "\t &b = " << &b << endl;
+
+	a=50;
+	cout << "a = " << a << "\t b = " << b << endl;
+	b++;
+	cout << "a = " << a << "\t b = " << b << endl;
+}
+Output :
+a = 20   b = 20
+sizeof(a) = 4    sizeof(b) = 4
+&a = 0x0012FED4  &b = 0x0012FED4
+a = 50   b = 50
+a = 51   b = 51
+Press any key to continue
+
+/* Program 5 : Usage of Reference variables : 2 */
+
+#include <iostream.h>
+
+void main()
+{
+	int a=10;
+	int& b=a;
+	int&c = b;
+	int &d = c;
+
+	cout << "a = " << a << "\tb = " << b << "\tc = " << c <<  "\td = " << d << "\n";
+	cout << "&a = " << &a <<"\t&b = " << &b << "\tc = " << &c << "\t&d = " << &d << endl;
+
+	b++;
+	cout << "a = " << a << "\tb = " << b << "\tc = " << c <<  "\td = " << d << "\n";
+	c++;
+	cout << "a = " << a << "\tb = " << b << "\tc = " << c <<  "\td = " << d << "\n";
+	d++;
+	cout << "a = " << a << "\tb = " << b << "\tc = " << c <<  "\td = " << d << "\n";
+
+	int x = 100;
+	int y = x;
+	cout << "x = " << x << "\ty = " << y << endl;
+	y++;
+	cout << "x = " << x << "\ty = " << y << endl;
+
+
+}
+Output :
+a = 10  b = 10  c = 10  d = 10
+&a = 0x0012FED4 &b = 0x0012FED4 c = 0x0012FED4  &d = 0x0012FED4
+a = 11  b = 11  c = 11  d = 11
+a = 12  b = 12  c = 12  d = 12
+a = 13  b = 13  c = 13  d = 13
+x = 100 y = 100
+x = 100 y = 101
+Press any key to continue
+
+/* Program 6 : Call by Reference.
+	Parameter passing mechanism :
+		There are 4 parameter passing mechanisms in C++. They are :
+			1. Call by Reference.
+			2. Call by Value.
+			3. Call by Address.
+			4. Call by constant reference.
+
+	In call by reference, the formal parameters must be reference variable and actual
+parameter is normal variable. */
+
+#include <iostream.h>
+
+void change(int &x, int &y)
+{
+	cout << "&x = " << &x << "\t &y = " << &y << '\n';
+	x = x+5;
+	y = y+7;
+}
+void main()
+{
+	int a=10, b=20;
+
+	cout << "&a = " << &a << "\t &b = " << &b << '\n';
+	cout << "a = " << a << "\t b = " << b << endl;
+	change(a, b);
+	cout << "a = " << a << "\t b = " << b << endl;
+
+}
+Output :
+&a = 0x0012FED4  &b = 0x0012FEC8
+a = 10   b = 20
+&x = 0x0012FED4  &y = 0x0012FEC8
+a = 15   b = 27
+Press any key to continue
+
+/* Program 7 : Call by Value.
+		In Call by Value, both actual parameter and formal parameter must be variable
+but not reference variable. */
+
+#include <iostream.h>
+#include <conio.h>		// getch()
+void main()
+{
+	int a=10, b=20;
+
+	void change(int x , int y);		// function prototype
+	cout << "&a = " << &a << "\t &b = " << &b << endl;
+	cout << "a = " << a << "\t b = " << b << endl;
+
+	change(a, b);
+	cout << "a = " << a << "\t b = " << b << endl;
+
+	getch();
+}
+
+void change(int x, int y)
+{
+	cout << "&x = " << &x << "\t &y = " << &y << endl;
+	x = x+5;
+	y = y+7;
+}
+Output :
+&a = 0x0012FED4  &b = 0x0012FEC8
+a = 10   b = 20
+&x = 0x0012FDF0  &y = 0x0012FDF4
+a = 10   b = 20
+Press any key to continue
+
+/* Program 8 : Call by Address.
+		In Call by Address, actual parameters are addresses and formal parameters are 
+pointers. */
+
+#include <iostream.h>
+
+void change(int*, int*);	// function prototype
+void main()
+{
+	int a=10, b=20;
+
+	cout << "&a = " << &a << "\t &b = " << &b << endl;
+	cout << "a = " << a << "\t b = " << b << endl;
+
+	change(&a, &b);
+	cout << "a = " << a << "\t b = " << b << endl;
+
+}
+void change(int *x, int *y)
+{
+	cout << "x = " << x << "\t y = " << y << endl;
+	cout << "&x = " << &x << "\t &y = " << &y << endl;
+	*x = *x+5;
+	*y = *y+7;
+}
+
+Output :
+&a = 0x0012FED4  &b = 0x0012FEC8
+a = 10   b = 20
+x = 0x0012FED4   y = 0x0012FEC8
+&x = 0x0012FDF0  &y = 0x0012FDF4
+a = 15   b = 27
+Press any key to continue
+
+/* Program 9 : Call by Constant Reference.
+		In Call by Constant Reference, formal parameters are constant reference variables, actual parameter is normal variable. 
+	Call by constant Reference is similar to call by value but it has two advantages.
+		1. Faster execution
+		2. No memory wastage.
+*/
+
+#include <iostream.h>
+
+void main()
+{
+	int a=10, b=20;
+	
+	void change(const int &x, const int& y);	// function prototype
+	cout << "&a = " << &a << "\t &b = " << &b << endl;
+	cout << "a = " << a << "\t b = " << b << endl;
+
+	change(a, b);
+	cout << "a = " << a << "\t b = " << b << endl;
+}
+
+void change(const int &x, const int &y)
+{
+	cout << "&x = " << &x << "\t &y = " << &y << endl;
+//	x = x+5;
+//	y = y+7;
+
+	int &p = const_cast<int&>(x);
+	p=100;
+	int &q = const_cast<int&>(y);
+	q=200;
+}
+
+Output :
+&a = 0x0012FED4  &b = 0x0012FEC8
+a = 10   b = 20
+&x = 0x0012FED4  &y = 0x0012FEC8
+a = 100  b = 200
+Press any key to continue
+
+/* Program 10 : Write a C++ program to find the roots of a quadratic equation.
+	ax^2 + bx + c = 0 is a quadratic equation.
+	Roots : x1 = (-b + sqrt(b^2-4ac))/2a;
+			x2 = (-b - sqrt(b^2-4ac))/2a;
+Note: i = sqrt(-1); ==> i^2 = -1;
+*/
+
+#include <iostream.h>
+#include <math.h>
+
+void roots(float a, float b, float c, float &r1, float &r2)
+{
+	float disc;		// discriminant = b^2-4ac;
+	disc = b*b - 4*a*c;	
+	//disc = pow(b,2) - 4*a*c;
+
+	if(disc >= 0)
+	{
+		r1 = (-b + sqrt(disc))/(2*a);
+		r2 = (-b - sqrt(disc))/(2*a);
+	}
+	else
+	{
+		r1 = -b/(2*a);	// real part
+		r2 = sqrt(4*a*c - b*b)/(2*a);	// imaginary part
+	}
+}
+
+void main()
+{
+	float a, b, c, disc, r1, r2;
+
+	void roots(float, float, float, float&, float&);	// function prototype
+
+	cout << "\nQuadratic Equation : ax^2 + bx + c = 0" << endl;
+	cout << "Enter the values for a, b, c : " << '\n';
+	cin >> a >> b >> c;
+
+	roots(a, b, c, r1, r2);
+
+	//disc = b*b - 4*a*c;
+	disc = pow(b,2) - 4*a*c;
+
+	if(disc >= 0)
+	{
+		cout << "\nRoot1 = " << r1 << "\n";
+		cout << "Root2 = " << r2 << endl;
+		cout.precision(0);
+		cout << "\ncondition checking : a*pow(r1,2) + b*r1 + c = " << a*pow(r1,2)+b*r1+c << endl;
+		cout << "condition checking : a*r2^2 + b*r2 + c = " << a*pow(r2,2)+b*r2+c << endl;
+	}
+	else
+	{
+		cout << "\nRoot1 = " << r1 << " + " << r2 << "i" << endl;
+		cout << "Root2 = " << r1 << " - " << r2 << "i" << endl;
+	}
+}
+
+Output : 
+
+Quadratic Equation : ax^2 + bx + c = 0
+Enter the values for a, b, c :
+1
+3
+2
+
+Root1 = -1	// roots are not equal
+Root2 = -2
+
+condition checking : a*pow(r1,2) + b*r1 + c = 0
+condition checking : a*r2^2 + b*r2 + c = 0
+
+Quadratic Equation : ax^2 + bx + c = 0
+Enter the values for a, b, c :
+4
+5
+6
+
+Root1 = -0.625 + 1.05327i	// roots are imaginary
+Root2 = -0.625 - 1.05327i
+
+Quadratic Equation : ax^2 + bx + c = 0
+Enter the values for a, b, c :
+2
+4
+2
+
+Root1 = -1	// roots are equal
+Root2 = -1
+
+condition checking : a*pow(r1,2) + b*r1 + c = 0
+condition checking : a*r2^2 + b*r2 + c = 0
+Press any key to continue
+
+/* Program 11 : Write a C++ program to find largest, smallest, and middle of the
+three numbers. */
+
+#include <iostream.h>
+#include <conio.h>	// getch()
+
+void f1(float a, float b, float c, float &max, float &mid, float &min)
+{
+	if( a>b && a>c)
+	{
+		max = a;
+		if(b>c)
+		{
+			mid = b;
+			min = c;
+		}
+		else
+		{
+			mid = c;
+			min = b;
+		}
+	}
+	else if(b>a && b>c)
+	{
+		max = b;
+		if(a>c)
+		{
+			mid = a;
+			min = c;
+		}
+		else
+		{
+			mid = c;
+			min = a;
+		}
+	}
+	else
+	{
+		max = c;
+		if(a>b)
+		{
+			mid = a;
+			min = b;
+		}
+		else
+		{
+			mid = b;
+			min = a;
+		}
+	}
+}
+
+void main()
+{
+	float a, b, c, max, mid, min;
+
+	cout << "\nEnter any 3 numbers\n";
+	cin >> a >> b >> c;
+
+	f1(a, b, c, max, mid, min);
+
+	cout << "\nLargest  number = " << max;
+	cout << "\nMiddle   number = " << mid;
+	cout << "\nSmallest number = " << min << endl;
+}
+Output :
+
+Enter any 3 numbers
+-695
+-87
+-254
+
+Largest  number = -87
+Middle   number = -254
+Smallest number = -695
+
+Enter any 3 numbers
+65
+985.25
+-45.846
+
+Largest  number = 985.25
+Middle   number = 65
+Smallest number = -45.846
+Press any key to continue
+
+/* Program 12 : Write a C++ Program to find GCD(Greatest Common Divisor) and 
+LCM(Least Common Multiplier) of two numbers.
+	LCM of two numbers = (Product of two numbers)/(GCD of two numbers)
+*/
+
+#include <iostream.h>
+
+int GCD(int dividend, int divisor)
+{
+	int rem;	// remainder
+	
+	rem = dividend % divisor;
+	while(rem != 0)
+	{
+		dividend = divisor;
+		divisor = rem;
+		rem = dividend % divisor;
+	}
+	
+	return divisor;
+}
+
+int LCM(int a, int b)
+{
+	int GCD(int, int);		// function prototype --- optional
+
+	return ( (a*b)/GCD(a,b) );
+}
+
+void main()
+{
+	int GCD(int, int);	// function prototype --- optional
+	int LCM(int, int);
+	
+	int gcd, lcm, x, y;
+	
+	cout << "\nEnter any two numbers whose GCD and LCM is to be found\n";
+	cin >> x >> y;
+
+	gcd = GCD(x, y);
+	lcm = LCM(x, y);
+
+	cout << "\nGCD = " << gcd << endl;
+	cout << "LCM = " << lcm << '\n';
+}
+Output :
+
+Enter any two numbers whose GCD and LCM is to be found
+25
+5
+
+GCD = 5
+LCM = 25
+
+Enter any two numbers whose GCD and LCM is to be found
+-12
+5
+
+GCD = 1
+LCM = -60
+Press any key to continue
+
+/* Program 13 : Function Overloading  ----- example1
+		Function Overloading is nothing but having more than one function with
+same name but having different signatures i.e., either no.of parameters must be
+different or parameter types must be different.
+		In C language, no two functions have same name but in C++, more than
+one functions have same name but should have different signatures (i.e., no.of
+parameters or parameter types should be different).
+	Note: whenever we want string datatype, use char* as string datatype.
+*/
+
+#include <iostream.h>
+#include <string.h>
+
+int add(int a, int b)	// 1st function
+{
+	return (a+b);
+}
+
+double add(double a, double b, double c)	// 2nd function
+{
+	return (a+b+c);
+}
+
+char* add(char *a, char *b)	// 3rd function
+{
+	char *c = new char[strlen(a) + strlen(b) + 1];
+	strcpy(c,a);
+	strcat(c,b);
+	return c;
+}
+
+void main()
+{
+	char *ans1;
+	double ans2;
+	int ans3, ans4;
+
+	ans3 = add(10,20);
+	ans4 = add(10.8, 20.6);	
+	// 1st function called and parameters are typecasted from float to int.
+
+	ans1 = add("palani ","kumar");
+	ans2 = add(10.8,20.6,30.2);
+
+	cout << ans1 << endl;
+	cout << ans2 << endl;
+	cout << ans3 << endl;
+	cout << ans4 << endl;
+
+	if(ans1 != NULL);
+		delete []ans1;
+}
+
+Output :
+palani kumar
+61.6
+30
+30
+Press any key to continue
+
+/* Program 14 : Function Overloading  ----- example2 */
+
+#include <iostream.h>
+
+int add(int a, int b)
+{
+	return (a+b);
+}
+
+float add(float a, float b)
+{
+	return (a+b);
+}
+
+void main()
+{
+	int ans1;
+	float ans2;
+
+	ans1 = add(10,20);
+	ans2 = add(10.2,20.8);
+	// error C2668: 'add' : ambiguous call to overloaded function
+	cout << "ans1 = " << ans1 << endl;
+	cout << "ans2 = " << ans2 << "\n";
+}
+Output :
+error C2668: 'add' : ambiguous call to overloaded function
+
+/* Program 15 : Function Overloading  ----- example3 */
+
+#include <iostream.h>
+
+int add(int a, float b)
+{
+	return (a+b);
+}
+
+float add(float a, int b)
+{
+	return (a+b);
+}
+
+void main()
+{
+	int ans1 = add(10,20.8);
+	float ans2 = add(10.6,10);
+
+	cout << "ans1 = " << ans1 << endl;
+	cout << "ans2 = " << ans2 << endl;
+}
+Output :
+ans1 = 30
+ans2 = 20.6
+Press any key to continue
+
+/* Program 16 : Function Overloading  ----- example4 */
+
+#include <iostream.h>
+
+int add(int a, int b)
+{
+	return (a+b);
+}
+
+double add(double a, double b)
+{
+	return (a+b);
+}
+
+void main()
+{
+	int ans1 = add(10, 20);
+	double ans2 = add(10.6,20.8);
+
+	cout << "ans1 = " << ans1 << endl;
+	cout << "ans2 = " << ans2 << endl;
+}
+Output :
+ans1 = 30
+ans2 = 31.4
+Press any key to continue
+
+/* Program 17 : Function Overloading  ----- example5 */
+
+#include <iostream.h>
+#include <string.h>
+
+void print(char a, char b)
+{
+	cout << a << "\t" << b << endl;
+}
+
+void print(int a, int b)
+{
+	cout << a << "\t" << b << endl;
+}
+
+void print(char *a, char *b)
+{
+	cout << a << "\t" << b << endl;
+}
+
+void print(double a, double b)
+{
+	cout << a << "\t" << b << endl;
+}
+
+void main()
+{
+	print(10.8, 20.6);
+	print("Hyderabad", "Secunderabad");
+	print(10, 20);
+	print('t', 'p');
+}
+Output :
+10.8    20.6
+Hyderabad       Secunderabad
+10      20
+t       p
+Press any key to continue
+
+/* Program 18 : Write a C++ program for the addition of 1-D and 2-D arrays. */
+
+#include <iostream.h>
+
+int m, n, sz;	// global variables
+
+void main()
+{
+	void add(int *a, int *b, int *c);	// function prototype
+	void add(int d[20][20], int e[20][20], int f[20][20]);
+
+	int a[20], b[20], c[20], i, j;
+	int d[20][20], e[20][20], f[20][20];
+	char ch='y';
+
+	do
+	{
+		if(ch == 'y')
+			cout << "\nEnter size of the 1-D array (max. 20) : ";
+		else
+		{
+			cout << endl << sz << " is Invalid Input." << endl;
+			cout << "Enter the valid size of the 1-D array (between 1 to 20 only) :  ";
+		}
+		cin >> sz;
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+	
+	cout << "\nEnter the 1st array numbers ( " << sz << " elements ) " << endl;
+	for(i=0; i<sz; i++)
+		cin >> a[i];
+
+	cout << "\nEnter the 2nd array numbers ( " << sz << " elements ) " << endl;
+	for(i=0; i<sz; i++)
+		cin >> b[i];
+
+	add(a, b, c);	// Adding 1-D arrays
+	
+	cout << "\n\nResultant 1-D array is as follows\n ";
+	for(i=0; i<sz; i++)
+		cout << c[i] << "\t";
+	cout << endl;
+
+	ch = 'y';
+	do
+	{
+		if(ch == 'y')
+			cout << "\nEnter the no.of rows and no.of columns of 2-D matrix (max. 20) " << endl;
+		else
+		{
+			cout << "\nInvalid Input.";
+			cout << "\nEnter the valid no.of rows and columns of 2-D matrix (between 1 to 20 only) " << endl;
+		}
+		cin >> m >> n;
+		if(m<=0 || m>20 || n<=0 || n>20)
+			ch='n';
+	}while(m<=0 || m>20 || n<=0 || n>20);
+
+	cout << "\n\nEnter 1st 2-D matrix elements ( " << m*n << " elements ) " <<  endl;
+	for(i=0; i<m; i++)	// controls no.of rows
+		for(j=0; j<n; j++)	// controls no.of columns
+			cin >> d[i][j];
+
+	cout << "\n\nEnter 2nd 2-D matrix elements ( " << m*n << " elements ) " <<  endl;
+	for(i=0; i<m; i++)	// controls no.of rows
+		for(j=0; j<n; j++)	// controls no.of columns
+			cin >> e[i][j];
+
+	add(d,e,f);
+
+	cout << "\n\tMatrix 1 : " << endl;
+	for(i=0; i<m; i++)
+	{
+		cout << "\n";
+		for(j=0; j<n; j++)
+			cout << d[i][j] << "\t";
+	}
+
+	cout << "\n\tMatrix 2 : " << endl;
+	for(i=0; i<m; i++)
+	{
+		cout << "\n";
+		for(j=0; j<n; j++)
+			cout << e[i][j] << "\t";
+	}
+
+	cout << "\n\nThe resultant 2-D array is as follows\n";
+	for(i=0; i<m; i++)
+	{
+		cout << "\n";
+		for(j=0; j<n; j++)
+			cout << f[i][j] << "\t";
+	}
+	cout << endl<< "\n";
+}	// end of main()
+
+void add(int *a, int *b, int *c)
+{
+	for(int i=0; i<sz; i++)
+		c[i] = a[i] + b[i];
+}
+
+void add(int d[20][20], int e[][20], int f[20][20])
+{
+	for(int i=0; i<m; i++)
+		for(int j=0; j<n; j++)
+			f[i][j] = d[i][j] + e[i][j];
+}
+
+Output :
+
+Enter size of the 1-D array (max. 20) : -5
+
+-5 is Invalid Input.
+Enter the valid size of the 1-D array (between 1 to 20 only) :  5
+
+Enter the 1st array numbers ( 5 elements )
+10
+20
+30 40 50
+
+Enter the 2nd array numbers ( 5 elements )
+5 10 15 20 25
+
+
+Resultant 1-D array is as follows
+ 15     30      45      60      75
+
+Enter the no.of rows and no.of columns of 2-D matrix (max. 20)
+4
+-5
+
+Invalid Input.
+Enter the valid no.of rows and columns of 2-D matrix (between 1 to 20 only)
+4
+4
+
+
+Enter 1st 2-D matrix elements ( 16 elements )
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+
+
+Enter 2nd 2-D matrix elements ( 16 elements )
+2 3 4 5 6 7 8 9 10 11 12 13 14 15
+16
+17
+
+        Matrix 1 :
+
+1       2       3       4
+5       6       7       8
+9       10      11      12
+13      14      15      16
+
+        Matrix 2 :
+
+2       3       4       5
+6       7       8       9
+10      11      12      13
+14      15      16      17
+
+The resultant 2-D array is as follows
+
+3       5       7       9
+11      13      15      17
+19      21      23      25
+27      29      31      33
+
+Press any key to continue
+
+/* Program 19 : Assignment 
+	Write a C++ program for subtracting two variables, subtracting two 1-D arrays and
+ subtracting two 2-D arrays using function overloading. */
+
+#include <iostream.h>
+
+int m, n, sz;	// global variables
+
+void main()
+{
+	void sub(int a, int b);	// function prototype
+	void sub(int *a, int *b, int *c);	
+	void sub(int d[][20], int e[][20], int f[20][20]);
+
+	int a[20], b[20], c[20], i, j;
+	int x, y;
+	int d[20][20], e[20][20], f[20][20];
+	char ch='y';
+
+	cout << "\nEnter the two numbers which are to be subtracted\n";
+	cin >> x >> y;
+	
+	sub(x, y);
+
+	do
+	{
+		if(ch == 'y')
+			cout << "\nEnter size of the 1-D array (max. 20) : ";
+		else
+		{
+			cout << endl << sz << " is Invalid Input." << endl;
+			cout << "Enter the valid size of the 1-D array (between 1 to 20 only) :  ";
+		}
+		cin >> sz;
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+	
+	cout << "\nEnter the 1st array numbers ( " << sz << " elements ) " << endl;
+	for(i=0; i<sz; i++)
+		cin >> a[i];
+
+	cout << "\nEnter the 2nd array numbers ( " << sz << " elements ) " << endl;
+	for(i=0; i<sz; i++)
+		cin >> b[i];
+
+	sub(a, b, c);	// Adding 1-D arrays
+	
+	cout << "\n\nResultant 1-D array is as follows\n ";
+	for(i=0; i<sz; i++)
+		cout << c[i] << "\t";
+	cout << endl;
+
+	ch = 'y';
+	do
+	{
+		if(ch == 'y')
+			cout << "\nEnter the no.of rows and no.of columns of 2-D matrix (max. 20) " << endl;
+		else
+		{
+			cout << "\nInvalid Input.";
+			cout << "\nEnter the valid no.of rows and columns of 2-D matrix (between 1 to 20 only) " << endl;
+		}
+		cin >> m >> n;
+		if(m<=0 || m>20 || n<=0 || n>20)
+			ch='n';
+	}while(m<=0 || m>20 || n<=0 || n>20);
+
+	cout << "\n\nEnter 1st 2-D matrix elements ( " << m*n << " elements ) " <<  endl;
+	for(i=0; i<m; i++)	// controls no.of rows
+		for(j=0; j<n; j++)	// controls no.of columns
+			cin >> d[i][j];
+
+	cout << "\n\nEnter 2nd 2-D matrix elements ( " << m*n << " elements ) " <<  endl;
+	for(i=0; i<m; i++)	// controls no.of rows
+		for(j=0; j<n; j++)	// controls no.of columns
+			cin >> e[i][j];
+
+	sub(d,e,f);
+
+	cout << "\n\tMatrix 1 : " << endl;
+	for(i=0; i<m; i++)
+	{
+		cout << "\n";
+		for(j=0; j<n; j++)
+			cout << d[i][j] << "\t";
+	}
+
+	cout << "\n\tMatrix 2 : " << endl;
+	for(i=0; i<m; i++)
+	{
+		cout << "\n";
+		for(j=0; j<n; j++)
+			cout << e[i][j] << "\t";
+	}
+
+	cout << "\n\nThe resultant 2-D array after subtraction is as follows\n";
+	for(i=0; i<m; i++)
+	{
+		cout << "\n";
+		for(j=0; j<n; j++)
+			cout << f[i][j] << "\t";
+	}
+	cout << endl<< "\n";
+}	// end of main()
+
+void sub(int a , int b)
+{
+	cout << a << " - " << b << " = " << a-b << endl;
+}
+
+void sub(int *a, int *b, int *c)
+{
+	for(int i=0; i<sz; i++)
+		c[i] = a[i] - b[i];
+}
+
+void sub(int d[20][20], int e[][20], int f[20][20])
+{
+	for(int i=0; i<m; i++)
+		for(int j=0; j<n; j++)
+			f[i][j] = d[i][j] - e[i][j];
+}
+
+Output :
+
+Enter the two numbers which are to be subtracted
+15
+7
+15 - 7 = 8
+
+Enter size of the 1-D array (max. 20) : -4
+
+-4 is Invalid Input.
+Enter the valid size of the 1-D array (between 1 to 20 only) :  4
+
+Enter the 1st array numbers ( 4 elements )
+10
+20
+30
+40
+
+Enter the 2nd array numbers ( 4 elements )
+5
+10
+15
+20
+
+
+Resultant 1-D array is as follows
+ 5      10      15      20
+
+Enter the no.of rows and no.of columns of 2-D matrix (max. 20)
+-3
+5
+
+Invalid Input.
+Enter the valid no.of rows and columns of 2-D matrix (between 1 to 20 only)
+3 4
+
+
+Enter 1st 2-D matrix elements ( 12 elements )
+5 10 15 20 25 30 35 40 45 50 55 60
+
+
+Enter 2nd 2-D matrix elements ( 12 elements )
+2 4 6 8 10 12 14 16 18 20 22 24
+
+        Matrix 1 :
+
+5       10      15      20
+25      30      35      40
+45      50      55      60
+        Matrix 2 :
+
+2       4       6       8
+10      12      14      16
+18      20      22      24
+
+The resultant 2-D array after subtraction is as follows
+
+3       6       9       12
+15      18      21      24
+27      30      33      36
+
+Press any key to continue
+
+/* Program 20 : Usage of new and delete operator --- example1
+	If memory is allocated at compilation time, it is static memory allocation.
+	If memory is allocated at run time(during execution time), it is dynamic
+		memory allocation.
+
+		SMA and DMA for variables.
+*/
+
+#include <iostream.h>
+void main()
+{
+	int a1;		// contains garbage value
+	int *p1;
+	p1 = new int;
+	cout << a1 << "\t" << *p1 << endl;
+
+	int a2=10;
+	int *p2 = new int(20);
+	cout << a2 << "\t" << *p2 << endl;
+
+	char ch='t';
+	char *pch = new char('p');
+	cout << ch << "\t" << *pch << "\n";
+
+	float f=10.85;
+	float *pf = new float(20.987);
+	cout << f << "\t" << *pf << endl;
+
+	// Releasing the memory which are allocated dynamically
+	delete p1;
+	delete p2;
+	delete pch;
+	delete pf;
+
+	cout << "\n\nValues after releasing the dynamic memory" << endl;
+
+	cout << a1 << "\t" << *p1 << endl;
+	cout << a2 << "\t" << *p2 << endl;
+	cout << ch << "\t" << *pch << "\n";
+	cout << f << "\t" << *pf << endl;
+}
+
+Output :
+-858993460      -842150451
+10      20
+t       p
+10.85   20.987
+
+
+Values after releasing the dynamic memory
+-858993460      -572662307
+10      -572662307
+t       ¦
+10.85   -1.9984e+018
+
+Press any key to continue
+
+
+/* Program 21 : Usage of new and delete operator --- example2
+		SMA and DMA for 1-D arrays
+*/
+
+#include <iostream.h>
+void main()
+{
+	int a[5] = {10,20,30,40,50};
+	float b[5] = {10.5, 20.5, 30.5, 40.5, 50.5};
+	char c[5] = {'a', 'b', 'c', 'd', 'e'};
+
+	int *p = new int[5];
+	float *q = new float[5];
+	char *r = new char[5];
+	
+	for(int i=0; i<5; i++)
+	{
+		p[i] = (i+1)*5;
+		q[i] = i*.25;
+		r[i] = 65+i;
+	}
+
+	for(i=0; i<5; i++)
+		cout << a[i] << "\t" << p[i] << "\t" << b[i] << "\t" << q[i]
+				<< "\t" << c[i] << "\t" << r[i] << endl;
+
+	// Releasing the dynamic memory
+	delete []p;
+	delete []q;
+	delete []r;
+
+	cout << "\nValues after releasing the dynamic memory\n" << endl;
+	for(i=0; i<5; i++)
+	cout << a[i] << "\t" << p[i] << "\t" << b[i] << "\t" << q[i]
+			<< "\t" << c[i] << "\t" << r[i] << endl;
+	
+	cout << endl;
+}
+
+Output :
+10      5       10.5    0       a       A
+20      10      20.5    0.25    b       B
+30      15      30.5    0.5     c       C
+40      20      40.5    0.75    d       D
+50      25      50.5    1       e       E
+
+Values after releasing the dynamic memory
+
+10      -572662307      10.5    -1.9984e+018    a       ¦
+20      -572662307      20.5    -1.9984e+018    b       ¦
+30      -572662307      30.5    -1.9984e+018    c       ¦
+40      -572662307      40.5    -1.9984e+018    d       ¦
+50      -572662307      50.5    -1.9984e+018    e       ¦
+
+Press any key to continue
+
+/* Program 22 : Usage of new and delete operator --- example3
+	SMA and DMA for 2-D arrays (matrices)
+
+Difference between malloc() and new operator
+----------------------------------------------------------------------------
+malloc()					new operator
+--------					-------------
+1. It is a function				1. new is a operator.
+2. Behind malloc(), code			2. Behind new, nothing is there and hence
+   is there.					    no code is executed.
+3. slow memory allocation			3. Faster memory allocation.
+4. Difficult syntax				4. Easy syntax.
+5. int *a;					5. int *a;
+a = (int*) malloc(5*sizeof(int));	 	   a = new int[5];
+-----------------------------------------------------------------------------
+
+*/
+
+#include <iostream.h>
+
+void main()
+{
+	int a[3][4] = 
+	{
+		{10,20,30,40},
+		{50,60,70,80},
+		{90,15,25,35}
+	};		// SMA
+
+	int **pp;
+	pp = new int*[3];
+	for(int i=0; i<3; i++)
+		pp[i] = new int[4];
+
+	for(i=0; i<3; i++)
+		for(int j=0; j<4; j++)
+			pp[i][j] = (i+1)*(j+2);
+
+	cout << "2-D array elements allocated with SMA " << endl;
+	for(i=0; i<3; i++)
+	{
+		cout << endl;
+		for(int j=0; j<4; j++)
+			cout << a[i][j] << "\t";
+	}
+
+	cout << "\n\n2-D array elements allocated with DMA " << endl;
+	for(i=0; i<3; i++)
+	{
+		cout << endl;
+		for(int j=0; j<4; j++)
+			cout << pp[i][j] << "\t";
+	}
+
+	// Releasing the 2-D array allocated with DMA
+	for(i=0; i<3; i++)
+		delete []pp[i];
+	// delete pp;
+
+	cout << "\n\n2-D array elements allocated with DMA after Release " << endl;
+	for(i=0; i<3; i++)
+	{
+		cout << endl;
+		for(int j=0; j<4; j++)
+			cout << pp[i][j] << "\t";
+	}
+	cout << endl;
+}
+
+Output : 
+2-D array elements allocated with SMA
+
+10      20      30      40
+50      60      70      80
+90      15      25      35
+
+2-D array elements allocated with DMA
+
+2       3       4       5
+4       6       8       10
+6       9       12      15
+
+2-D array elements allocated with DMA after Release
+
+-572662307      -572662307      -572662307      -572662307
+-572662307      -572662307      -572662307      -572662307
+-572662307      -572662307      -572662307      -572662307
+Press any key to continue
+
+/* Program 23 : Usage of inline functions.
+
+Note : 	Whenever an inline function is called, substitution takes place, whereas
+if a normal function is called, then branching takes place. inline is a reserved word. 
+		Rules for inline functions
+		--------------------------
+1. It must be a small function i.e., it should not contain too many statements.
+2. It should not contain control structures such as if, switch, while, do--while, for.
+3. inline function has no prototype. Hence it must be defined before the calling function.
+		If any of these rules are violated, then compiler ignores the word inline and
+treats it as normal function.
+	Advantages :
+	------------
+	inline function execution is faster than normal function, since no
+branching is involved during execution.
+	Similarity between inline functions and macro
+	---------------------------------------------
+Both inline function and macro call are expanded i.e., substitution is performed.
+
+		Difference between inline function and macro
+		--------------------------------------------
+inline function				----			macro
+---------------							------
+1. inline void f1()				1.	#define f1 cout << "Hyderabad\n"; \
+{							cout << "Secunderabad\n";	\
+	cout << "Hyderabad\n";				cout << "Cyberabad\n";
+	cout << "Secunderabad\n";
+	cout << "Cyberabad\n";
+}
+2. inline function is called by f1();		2. macro is called by f1
+3 inline function is processed by		3. macro is processed by preprocessor.
+   compiler.
+4. inline function can not contain		4. macro can contain control structures.
+   control structures.
+5. inline function must be small.		5. macro can contain any no.of statements.
+6. inline function can contain			6. macro can not contain return statement.
+    return statement.
+----------------------------------------------------------------------------------------
+
+*/
+
+
+
+#include <iostream.h>
+inline void f1()
+{
+	cout << "\nHyderabad" << endl;
+	cout << "Secunderabad\n";
+	cout << "Cyberabad" << '\n';
+}
+
+main()
+{
+	f1();
+	f1();
+	f1();
+
+	cout << "\n";
+}
+
+Output :
+
+Hyderabad
+Secunderabad
+Cyberabad
+
+Hyderabad
+Secunderabad
+Cyberabad
+
+Hyderabad
+Secunderabad
+Cyberabad
+
+Press any key to continue
+
+/* Program 24 : Usage of Default Arguments 
+	Default values must be assigned only in the function prototype. The parameters
+having default values must appear at the end of the list.
+	The following function prototype is invalid.
+		float SI(float p=1000, float t, float r=0.14);	// wrong
+			This is invalid because the parameter t which is not assigned any default
+value must appear at the beginning of the list but not in the middle.
+	float SI(float p=1000, float t, float r);	// invalid
+	float SI(float t, float r, float p=1000);	// valid
+		In the function call, if i th parameter takes default value then the following
+parameters must take default values. It is not possible to send actual values from 
+i+1 th parameter onwards. The following function call gives error.
+	ans = SI(4000, , 0.19);	// invalid
+*/
+
+#include <iostream.h>
+/* Note : Default values must be given in function prototypes/declarations only, not in
+function definition/heading */
+
+float SI(float p, float t, float r)	// function definition
+{
+	return (p*t*r)/100;
+}
+
+void main()
+{
+	float ans1, ans2,ans3, ans4;
+
+	float SI(float p, float t = 0.10, float r = 0.12);	// function prototype
+
+	ans1 = SI(1000,0.15,0.18);
+	ans2 = SI(2000,0.14);
+	ans3 = SI(3000);
+
+	//ans4 = SI();	// error because no actual value for p or no default value for p
+	
+	cout << ans1 << endl;
+	cout << ans2 << endl;
+	cout << ans3 << endl;
+	//cout << ans4 << endl;
+}
+Output :
+0.27
+0.336
+0.36
+Press any key to continue
+
+/* Program 25 : Write a C++ function for a to the power of b (a^b). If b is missing, 
+find a^2. */
+
+#include <iostream.h>
+#include <math.h>
+
+void main()
+{
+	char ch;
+	int b;
+	float a;
+	double ans;
+
+	double power(float a, int b=2);	// function prototype with default argument.
+
+	cout << "\nEnter base value :  ";
+	cin >> a;
+
+	cout << "\nDo you want to enter power (y/n)? :  ";
+	cin >> ch;
+	
+	if(ch == 'y' || ch == 'Y')
+	{
+		cout << "\nEnter power :  ";
+		cin >> b;
+		ans = power(a, b);
+	}
+	else
+	{
+		b=2;
+		ans = power(a);
+	}
+
+	cout << "\nResult : " << a << " power " << b << " = "  << ans << endl;
+}
+
+double power(float a, int b)
+{
+	 return pow(a,b);
+/*
+	double prod=1;
+	
+	for(int i=1; i<=abs(b); i++)
+		prod = prod * a;	// prod *= a;
+	
+	if(b >= 0)
+		return prod;
+	else
+		return (1/prod);
+*/
+}
+
+Output :
+
+Enter base value :  5
+Do you want to enter power (y/n)? :  y
+Enter power :  -4
+Result : 5 power -4 = 0.0016
+
+Enter base value :  5
+Do you want to enter power (y/n)? :  n
+Result : 5 power 2 = 25
+
+Enter base value :  25
+Do you want to enter power (y/n)? :  y
+Enter power :  3
+Result : 25 power 3 = 15625
+
+Press any key to continue
+
+/* Program 26 : Write a function for n factorial and if n value is missing , find
+	0(zero) factorial. */
+
+#include <iostream.h>
+
+void main()
+{
+	long ans1, ans2, n;
+	long factorial(int n = 0);	// function prototype with default argument
+
+	cout << "\nEnter the number whose factorial is to be found :  ";
+	cin >> n;
+	ans1 = factorial(n);
+	ans2 = factorial();
+	
+	cout << "\nFactorial of " << n << " is  :  " << ans1 << endl;
+	cout << "Factorial of " << 0 << " is  :  " << ans2 << endl;
+
+	cout << endl;
+}
+
+long factorial(int n)
+{
+	long prod=1;
+	for(int i=1; i<=n; i++)
+		prod = prod*i;
+	return prod;
+}
+/*
+// Finding factorial using recursive method
+long factorial(int n)
+{
+	long prod=1;
+	if(n <= 1)
+		return 1;
+	prod = n * factorial(n-1);
+	return prod;
+}
+*/
+
+Output :
+
+Enter the number whose factorial is to be found :  5
+Factorial of 5 is  :  120
+Factorial of 0 is  :  1
+
+Enter the number whose factorial is to be found :  10
+Factorial of 10 is  :  3628800
+Factorial of 0 is  :  1
+
+Press any key to continue
+
+/* Program 27 : Write a function for ncr and npr. If r value is missing, find
+	nc2 and np2.
+		ncr = n! /( (n-r)! * r! );
+		npr = n! / (n-r)!
+*/
+
+#include <iostream.h>
+#include <math.h>
+
+long factorial(int n)
+{
+	long prod=1;
+	if(n <= 1)
+		return 1;
+	for(int i=1; i<=n; i++)
+		prod = prod*i;	// prod *= i;
+
+	return prod;
+}
+
+long ncr(int n, int r)
+{
+	return factorial(n) / ( factorial(n-r) * factorial(r) );
+}
+
+long npr(int n, int r)
+{
+	return factorial(n) / factorial(n-r);
+}
+
+void main()
+{
+	long ans1, ans2, n, r=2;
+	
+	long ncr(int n, int r=2);	// function prototype with default argument
+	long npr(int n, int r=2);
+
+	cout << "\nCalculating ncr and npr" << endl;
+	char ch;
+	
+	cout << "\nEnter n value :  ";
+	cin >> n;
+
+	cout << "\nDo you want to enter r value :  ";
+	cin >> ch;
+	if(ch=='y' || ch=='Y')
+	{
+		cout << "\nEnter r value :  ";
+		cin >> r;
+		ans1 = ncr(n,r);
+		ans2 = npr(n,r);
+	}
+	else
+	{
+		ans1 = ncr(n);
+		ans2 = npr(n);
+	}
+	cout << n << "c" << r << " = " << ans1 << endl;
+	cout << n << "p" << r << " = " << ans2 << endl;
+
+	cout << endl;
+}
+
+Output :
+
+Calculating ncr and npr
+
+Enter n value :  3
+
+Do you want to enter r value :  y
+
+Enter r value :  3
+3c3 = 1
+3p3 = 6
+
+
+Calculating ncr and npr
+
+Enter n value :  3
+
+Do you want to enter r value :  n
+3c2 = 3
+3p2 = 6
+
+Press any key to continue
+
+/* Program 28 : Usage of enum --- enumerated.
+	enum is a reserved word which allows us to define our datatypes.
+syntax:
+	enum datatype { enumerated list};
+		The names in the enumerated list are assigned the values starting from 0(zero).
+We can override these values by our own values.
+		In the enumerated list, duplicate names are not allowed but duplicate values
+are allowed.
+	enum color { red, red = 100, red };	// invalid since duplicate names are not allowed.
+	enum color { red=0, green=0, blue=0 }; // valid. duplicate values allowed.
+		Internal operations are wrt integers although we are using the names of the
+enumerated list.
+	enum month{ jan=1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec };
+		Program clarity increases if we use enum.
+month a = nov;
+switch(a)
+{
+case jan :
+	.....
+case feb :
+	.....
+	.
+	.
+case dec:
+	.....
+}
+The advantage of enum is that program clarity increase.
+	enum ns { bin=2, oct=8, dec=10, hex=16 };
+	ns a = dec;
+	cout << a;	// output : 10
+Limitations of enum :
+---------------------
+invalid eg1:
+  enum ns { bin=2, oct=8, dec=10, hex=16 };
+  enum month { jan=1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec };
+  cout << dec;  // confusion to computer because dec is available in two enumerated list.
+	same name can not appear in two enumerated list.
+	cout << dec;	// leads to confusion
+
+Invalid eg2:
+	enum boolean { false, true };
+	boolean a;
+	cin >> a;	// invalid
+	a = true;	// valid. Initialization is allowed.
+		User-defined datatype variables can not accepted from the keyboard. However
+initialization is allowed.
+
+Invalid eg3:
+	enum color { red, green, blue };
+	color a = black;	// invalid since black is not present in the enumerated list.
+
+*/
+
+#include <iostream.h>
+
+enum boolean { FALSE, TRUE };
+
+void main()
+{
+	boolean a = FALSE ,	b;
+	cout << a << endl;
+
+	// cin >> b;
+	b = TRUE;
+	cout << b << endl;
+
+	enum color{ red, green=4, yellow, blue=7, white, black=0};
+	color a1 = white;	// internal operations are wrt integers only
+	cout << "white color = " << a1<< endl;
+}
+Output :
+0
+1
+white color = 8
+Press any key to continue
+
+/* Program 29 : Generic Functions (Multi-Purpose functions) --- swapping program
+	Rules
+	------
+1. A Generic function must have atleast one parameter of type T where T is a
+	generic type.
+2. Generic function must be preceded by 
+		template<class T>
+3. Generic function must be defined before calling function.
+4. Generic function has no prototype.
+		Based on actual parameter datatype, formal parameter datatype is decided.
+It is compiler which performs the substitution. For each function call, compiler
+generates a different function.
+		Generic function is an alternative to function overloading. Normal function
+has higher priority over Generic function.
+
+*/
+
+#include <iostream.h>
+
+template<class T>
+void swap(T &x, T &y)		// Generic function
+{
+	T temp;
+	temp = x;
+	x = y;
+	y = temp;
+}
+
+void main()
+{
+	int a=10, b=20;
+	cout << "Before swapping : a = " << a << "\tb = " << b << endl;
+	swap(a, b);
+	cout << "After  swapping : a = " << a << "\tb = " << b << endl;
+
+	float x=10.8, y=20.6;
+	cout << "\nBefore swapping : x = " << x << "\ty = " << y << endl;
+	swap(x, y);
+	cout << "After  swapping : x = " << x << "\ty = " << y << endl;
+
+	char ch1='t', ch2='p'; 
+	cout << "\nBefore swapping : ch1 = " << ch1 << "\tch2 = " << ch2 << endl;
+	swap(ch1, ch2);
+	cout << "After  swapping : ch1 = " << ch1 << "\tch2 = " << ch2 << endl;
+
+	char *s1 = "Hyderabad", *s2 = "Secunderabad";
+	cout << "\nBefore swapping : s1 = " << s1 << "\ts2 = " << s2 << endl;
+	swap(s1, s2);
+	cout << "After  swapping : s1 = " << s1 << "\ts2 = " << s2 << endl;
+
+	cout << endl;
+}
+Output :
+Before swapping : a = 10        b = 20
+After  swapping : a = 20        b = 10
+
+Before swapping : x = 10.8      y = 20.6
+After  swapping : x = 20.6      y = 10.8
+
+Before swapping : ch1 = t       ch2 = p
+After  swapping : ch1 = p       ch2 = t
+
+Before swapping : s1 = Hyderabad        s2 = Secunderabad
+After  swapping : s1 = Secunderabad     s2 = Hyderabad
+
+Press any key to continue
+
+/* Program 30 : Write a generic function for absolute.
+		absolute(-4) = 4;
+		absolute(-20.6) = 20.6;
+		absolute(25) = 25;
+		absolute(40.7) = 40.7;
+*/
+
+#include <iostream.h>
+
+template<class T>
+T absolute(T x)
+{
+	if(x < 0)
+		return (-x);
+	else
+		return (x);
+}
+
+void main()
+{
+	int ans1 = absolute(-4);
+	float ans2 = absolute(-20.6);
+	int ans3 = absolute(25);
+	float ans4 = absolute(40.2);
+
+	cout << "absolute(-4) = " << ans1 << endl;
+	cout << "absolute(-20.6) = " << ans2 << endl;
+	cout << "absolute(25) = " << ans3 << endl;
+	cout << "absolute(40.2) = " << ans4 << endl;
+
+	cout << endl;
+}
+
+Output :
+absolute(-4) = 4
+absolute(-20.6) = 20.6
+absolute(25) = 25
+absolute(40.2) = 40.2
+
+Press any key to continue
+
+/* Program 31 : Write a Generic function call max(a, b):
+	max(10,20) = 20;
+	max(20.6,10.8) = 20.6;
+	max('G', 'S') = 'S';
+	max("Rama", "Sita") = "Sita"
+*/
+
+#include <iostream.h>
+#include <string.h>
+
+template <class T>
+T max(T x, T y)			// Generic function
+{
+	if(x > y)
+		return x;
+	else
+		return y;
+}
+
+char* max(char* a, char* b)		// Normal function
+{
+	if(strcmp(a, b) > 0)
+		return(a);
+	else
+		return (b);
+}
+
+void main()
+{
+	int ans1 = max(10, 20);
+	char* ans2 = max("Rama", "Sita");
+	float ans3 = max(10.8, 20.6);
+	char ans4 = max('G', 'S');
+
+	cout << " max(10, 20) = " <<  ans1 << endl;
+	cout << " max(\"Rama\", \"Sita\") = " << ans2 << endl;
+	cout << " max(10.8, 20.6) = " << ans3 << endl;
+	cout << " max('G', 'S') = " << ans4 << endl;
+
+	cout << endl;
+}
+Output :
+ max(10, 20) = 20
+ max("Rama", "Sita") = Sita
+ max(10.8, 20.6) = 20.6
+ max('G', 'S') = S
+
+Press any key to continue
+
+/* Program 32 : Write a generic function for arithmetic mean */
+
+#include <iostream.h>
+
+template <class T>
+float AM(T *a, int sz)
+{
+	T sum = 0;
+	for(int i=0; i<sz; i++)
+		sum = sum + a[i];
+	return sum/(float)sz;
+}
+
+void main()
+{
+	int a[] = {10,20,30,40,50};
+	float ans1 = AM(a, 5);
+
+	float b[] = {10.8,20.8,30.8,40.8,50.8};
+	float ans2 = AM(b, 5);
+
+	cout << "Average of 10,20,30,40,50 =  " << ans1 << endl;
+	cout << "Average of 10.8,20.8,30.8,40.8,50.8 =  " << ans2 << endl;
+
+	cout << endl;
+}
+Output :
+Average of 10,20,30,40,50 =  30
+Average of 10.8,20.8,30.8,40.8,50.8 =  30.8
+
+Press any key to continue
+
+/* Program 33 : Write a Generic function for display(t1, t2) where 
+	t1 and t2 are generic types. */
+
+#include <iostream.h>
+
+template<class T1, class T2>
+void display(T1 x, T2 y)
+{
+	cout << x << "\t" << y << endl;
+}
+
+void main()
+{
+	display(10,20.8);
+	display("Hyderabad",15);
+	display('G', 150.2352);
+	display(3000000.96585, "Secunderabad");
+
+	cout << endl;
+}
+Output :
+10      20.8
+Hyderabad       15
+G       150.235
+3e+006  Secunderabad
+
+Press any key to continue
+
+/* Program 34 : Write a Generic function for bubble sort and for  	display 1-D array */
+
+#include <iostream.h>
+#include <string.h>
+
+template <class T>
+void bubblesort(T *a, int sz)	// void bubblesort(T a[], int sz)
+{
+	T temp;
+	for(int i=0; i<sz-1; i++)
+		for(int j=i+1; j<sz; j++)
+			if(a[i] > a[j])
+			{
+				temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+}
+
+// Generic function to display 1-D array
+template <class T>
+void display(T *a, int sz)
+{
+	for(int i=0; i<sz; i++)
+		cout << a[i] << "\t";
+	cout << endl;
+}
+
+void main()
+{
+	int a[] = {10,20,5,15,2,-14,18};
+	
+	cout << "\nElements before sorting " << endl;
+	display(a, 7);
+	bubblesort(a, 7);
+	cout << "\nElements after sorting " << endl;
+	display(a, 7);
+
+	char c[] = {'h','y','d','e','r','a','b','a','d','\0'};
+	int n = strlen(c);	// counts all characters except null character
+
+	cout << "\nElements before sorting " << endl;
+	display(c, n);
+	bubblesort(c, n);
+	cout << "\nElements after sorting " << endl;
+	display(c, n);
+
+	cout << endl;
+}
+Output :
+
+Elements before sorting
+10      20      5       15      2       -14     18
+
+Elements after sorting
+-14     2       5       10      15      18      20
+
+Elements before sorting
+h       y       d       e       r       a       b       a       d
+
+Elements after sorting
+a       a       b       d       d       e       h       r       y
+
+Press any key to continue
+
+/* Program 35 : Assignment
+	Write a Generic function for Sequential search.
+prototype : int SequentialSearch(T *a, int sz, T key);
+*/
+
+#include <iostream.h>
+
+template < class T >
+int SequentialSearch(T *a, int sz, T key)
+{
+	for(int i=0; i<sz; i++)
+		if(a[i] == key)
+			return i;
+
+	return -1;
+}
+
+void main()
+{
+	int ch;
+	cout << "\n1. Integer Array \n2. Float Array  \n3. Exit\n";
+	cout << "\nEnter your choice :  ";
+	cin >> ch;
+
+	while(ch < 3)
+	{
+		switch(ch)
+		{
+		case 1:
+			{
+				int *a, i, key, size, ans;
+				cout << "\nEnter the size of the Integer array :  ";
+				cin >> size;
+				a = new int[size];
+				
+				cout << "\nEnter " << size << " integer elements\n";
+				for(i=0; i<size; i++)
+					cin >> a[i];
+
+				cout << "\nEnter the number to be searched :  ";
+				cin >> key;
+
+				ans = SequentialSearch(a, size, key);
+				if(ans == -1)
+					cout << "\nNumber is not found";
+				else
+					cout << "\nNumber is found at the position " << ans+1 << endl;
+
+				if(a != NULL)
+					delete []a;
+
+				break;
+			}
+		case 2:
+			{
+				float *a, key;
+				int i, size, ans;
+				cout << "\nEnter the size of the Float array :  ";
+				cin >> size;
+				a = new float[size];
+				
+				cout << "\nEnter " << size << " float elements\n";
+				for(i=0; i<size; i++)
+					cin >> a[i];
+
+				cout << "\nEnter the number to be searched :  ";
+				cin >> key;
+
+				ans = SequentialSearch(a, size, key);
+				if(ans == -1)
+					cout << "\nNumber is not found";
+				else
+					cout << "\nNumber is found at the position " << ans+1 << endl;
+
+				if(a != NULL)
+					delete []a;
+
+				break;
+			}
+		default:
+			cout << "Invalid choice" << endl;
+			break;
+		}	// switch match
+		cout << "\n1. Integer Array \n2. Float Array  \n3. Exit\n";
+		cout << "\nEnter your choice :  ";
+		cin >> ch;
+
+	} // while match
+}
+Output : 
+
+1. Integer Array
+2. Float Array
+3. Exit
+
+Enter your choice :  2
+
+Enter the size of the Float array :  5
+
+Enter 5 float elements
+10.2
+23.3
+265
+62.3
+521
+
+Enter the number to be searched :  62.3
+
+Number is found at the position 4
+
+1. Integer Array
+2. Float Array
+3. Exit
+
+Enter your choice :  1
+
+Enter the size of the Integer array :  4
+
+Enter 4 integer elements
+125
+36
+52
+41
+
+Enter the number to be searched :  212
+
+Number is not found
+
+1. Integer Array
+2. Float Array
+3. Exit
+
+Enter your choice :  3
+Press any key to continue
+
+/* Program 36 : Assignment
+	Write a Generic function for add(a, b) where a,b are either integers, floats,
+characters, or strings */
+
+#include <iostream.h>
+#include <string.h>
+
+template <class T >
+T add(T a, T b)
+{
+	return (a+b);
+}
+
+char* add(char *a, char *b)
+{
+	char *x = new char[strlen(a) + strlen(b) + 1];
+	strcpy(x, a);
+	strcat(x, b);
+	return x;
+}
+
+void main()
+{
+	int ans1;
+	float ans2;
+	char *ans3;
+
+	ans1 = add(10,20);
+	ans2 = add(10.8,20.6);
+	ans3 = add("palani", " kumar");
+
+	cout << ans1 << endl;
+	cout << ans2 << endl;
+	cout << ans3 << endl;
+
+	if(ans3 != NULL)
+		delete[] ans3;
+
+	cout << endl;
+}
+Output :
+30
+31.4
+palani kumar
+
+Press any key to continue
+
+/* Program 37 : Assignment
+		Write a Generic function for adding two vectors. The vector may contain
+either integer or float.
+	vector means 1-D array.
+	integer array + integer array
+	float array + float array
+*/
+
+#include <iostream.h>
+
+template < class T >
+void add(T *a, T *b, T *c, int sz)
+//void add(T a[], T b[], T c[], int sz)
+{
+	for(int i=0; i<sz; i++)
+		c[i] = a[i] + b[i];
+}
+
+template<class T>
+void display(T *a , int sz)
+{
+	for(int i=0; i<sz; i++)
+		cout << a[i] << "\t";
+
+	cout << endl;
+}
+
+void main()
+{
+	int a[] = {10,20,30,40,50};
+	int b[] = {10,20,30,40,50};
+	int c[5];
+
+	add(a, b, c, 5);
+	display(a,5);
+	display(b,5);
+	cout << "\nThe addition of two integer vectors\n";
+	display(c,5);
+
+	float p[] = {10.2,20.2,30.2,40.2};
+	float q[] = {4.2,5.2,6.2,7.2};
+	float r[4];
+
+	add(p, q, r, 4);
+	cout << endl;
+	display(p,4);
+	display(q,4);
+	cout << "\nThe addition of two float vectors\n";
+	display(r,4);
+
+	cout << endl;
+}
+
+Output :
+10      20      30      40      50
+10      20      30      40      50
+
+The addition of two integer vectors
+20      40      60      80      100
+
+10.2    20.2    30.2    40.2
+4.2     5.2     6.2     7.2
+
+The addition of two float vectors
+14.4    25.4    36.4    47.4
+
+Press any key to continue
+
+/* Program 38 : Assignment
+		Write a Generic function for adding two matrices. The matrices may contain
+either integers or floats. */
+
+#include <iostream.h>
+
+int nrows, ncols;	// global variables
+
+template < class T >
+void add(T a[][20], T b[][20], T c[][20])
+{
+	for(int i=0; i<nrows; i++)
+		for(int j=0; j<ncols; j++)
+			c[i][j] = a[i][j] + b[i][j];
+}
+
+// Generic function to display the 2-D matrice
+template < class T >
+void display(T a[][20])
+{
+	for(int i=0; i<nrows; i++)
+	{
+		cout << "\n\t";
+		for(int j=0; j<ncols; j++)
+			cout << a[i][j] << "\t";
+	}
+}
+
+void main()
+{
+	int ch;
+	cout << "\n1. Addition of 2-D Integer matrices"
+			"\n2. Addition of 2-D Float matrices"
+			"\n3. Exit\n";
+	cout << "\nEnter your choice :  ";
+	cin >> ch;
+
+	while(ch < 3)
+	{
+		switch(ch)
+		{
+		case 1:
+			{
+				int a[20][20], b[20][20], c[20][20];
+				cout << "\nEnter no.of rows and columns\n";
+				cin >> nrows >> ncols;
+
+				cout << "\nEnter 1st 2-D matrix. ( " << nrows*ncols << " elements )" << endl;
+				for(int i=0; i<nrows; i++)
+					for(int j=0; j<ncols; j++)
+						cin >> a[i][j];
+
+				cout << "\nEnter 2nd 2-D matrix. ( " << nrows*ncols << " elements )" << endl;
+				for(int i=0; i<nrows; i++)
+					for(int j=0; j<ncols; j++)
+						cin >> b[i][j];
+
+				add(a, b, c);
+				
+				cout << "\n\tDisplaying 1st matrix\n";
+				display(a);
+				cout << "\n\n\tDisplaying 2nd matrix\n";
+				display(b);
+				cout << "\n\n\tDisplaying the Resultant matrix\n";
+				display(c);
+			}
+			break;
+		case 2:
+			{
+				float a[20][20], b[20][20], c[20][20];
+				cout << "\nEnter no.of rows and columns\n";
+				cin >> nrows >> ncols;
+
+				cout << "\nEnter 1st 2-D matrix. ( " << nrows*ncols << " elements )" << endl;
+				for(int i=0; i<nrows; i++)
+					for(int j=0; j<ncols; j++)
+						cin >> a[i][j];
+
+				cout << "\nEnter 2nd 2-D matrix. ( " << nrows*ncols << " elements )" << endl;
+				for(int i=0; i<nrows; i++)
+					for(int j=0; j<ncols; j++)
+						cin >> b[i][j];
+
+				add(a, b, c);
+				
+				cout << "\n\tDisplaying 1st matrix\n";
+				display(a);
+				cout << "\n\n\tDisplaying 2nd matrix\n";
+				display(b);
+				cout << "\n\n\tDisplaying the Resultant matrix\n";
+				display(c);
+			}
+			break;
+		default:
+			cout << "\nInvalid choice\n";
+			break;
+		}	// switch match
+
+		cout << "\n\n1. Addition of 2-D Integer matrices"
+			"\n2. Addition of 2-D Float matrices"
+			"\n3. Exit\n";
+		cout << "\nEnter your choice :  ";
+		cin >> ch;
+
+	}	// while match
+}	// main match
+
+Output :
+
+1. Addition of 2-D Integer matrices
+2. Addition of 2-D Float matrices
+3. Exit
+
+Enter your choice :  0
+
+Invalid choice
+
+
+1. Addition of 2-D Integer matrices
+2. Addition of 2-D Float matrices
+3. Exit
+
+Enter your choice :  1
+
+Enter no.of rows and columns
+3
+4
+
+Enter 1st 2-D matrix. ( 12 elements )
+12 23 34 45 56 67 78 89 25 14 36 47 62 45
+
+Enter 2nd 2-D matrix. ( 12 elements )
+12 10 25 325 14 25
+23
+36
+52
+14
+
+        Displaying 1st matrix
+
+        12      23      34      45
+        56      67      78      89
+        25      14      36      47
+
+        Displaying 2nd matrix
+
+        62      45      12      10
+        25      325     14      25
+        23      36      52      14
+
+        Displaying the Resultant matrix
+
+        74      68      46      55
+        81      392     92      114
+        48      50      88      61
+
+1. Addition of 2-D Integer matrices
+2. Addition of 2-D Float matrices
+3. Exit
+
+Enter your choice :  2
+
+Enter no.of rows and columns
+2
+3
+
+Enter 1st 2-D matrix. ( 6 elements )
+10.25
+32.54 1.26 36.95 25.15
+55.251
+
+Enter 2nd 2-D matrix. ( 6 elements )
+33.33
+25.52 92.5
+1.021
+2.635
+3.54
+
+        Displaying 1st matrix
+
+        10.25   32.54   1.26
+        36.95   25.15   55.251
+
+        Displaying 2nd matrix
+
+        33.33   25.52   92.5
+        1.021   2.635   3.54
+
+        Displaying the Resultant matrix
+
+        43.58   58.06   93.76
+        37.971  27.785  58.791
+
+1. Addition of 2-D Integer matrices
+2. Addition of 2-D Float matrices
+3. Exit
+
+Enter your choice :  -1
+
+Invalid choice
+
+
+1. Addition of 2-D Integer matrices
+2. Addition of 2-D Float matrices
+3. Exit
+
+Enter your choice :  3
+Press any key to continue
+

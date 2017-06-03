@@ -1,0 +1,292 @@
+Program1 :  Usage of cin and cout.
+Difference between c and c++ syntax.
+	C programming syntax:
+	#include<stdio.h>
+	#include <conio.h>	// getch()
+		main()
+		{
+			Declarations;
+			Executable statements;
+			getch();
+		}
+
+		C++ programming syntax:
+		#include <iostream.h>
+		main()
+		{
+			Declarations;
+			Executable statements;
+			Declarations;
+			Executable statements;
+			Declarations;
+			Executable statements;
+			.....
+			......
+			getch();
+			return(0);
+		}
+
+
+Program 2 : Usage of cin , cout, cout.precision(), cout.width(), cout.fill().
+
+Program 3 : Usage of :: (scope resolution operator)
+
+Program 4 : Usage of Reference Variables
+
+Program 5 : Usage of Reference variables : 2
+
+Program 6 : Call by Reference.
+	Parameter passing mechanism :
+		There are 4 parameter passing mechanisms in C++. They are :
+			1. Call by Reference.
+			2. Call by Value.
+			3. Call by Address.
+			4. Call by constant reference.
+
+	In call by reference, the formal parameters must be reference variable and actual parameter is normal variable.
+
+Program 7 : Call by Value.
+		In Call by Value, both actual parameter and formal parameter must be variable but not reference variable.
+
+Program 8 : Call by Address.
+		In Call by Address, actual parameters are addresses and formal parameters are pointers.
+
+Program 9 : Call by Constant Reference.
+		In Call by Constant Reference, formal parameters are constant reference variables,
+actual parameter is normal variable. 
+	Call by constant Reference is similar to call by value but it has two advantages.
+		1. Faster execution
+		2. No memory wastage.
+
+Program 10 : Write a C++ program to find the roots of a quadratic equation.
+	ax^2 + bx + c = 0 is a quadratic equation.
+	Roots : x1 = (-b + sqrt(b^2-4ac))/2a;
+		x2 = (-b - sqrt(b^2-4ac))/2a;
+Note: i = sqrt(-1); ==> i^2 = -1;
+
+Program 11 : Write a C++ program to find largest, smallest, and middle of the three numbers.	
+
+Program 12 : Write a C++ Program to find GCD(Greatest Common Divisor) and 
+LCM(Least Common Multiplier) of two numbers.
+	LCM of two numbers = (Product of two numbers)/(GCD of two numbers).
+
+Program 13 : Function Overloading  ----- example1 
+		Function Overloading is nothing but having more than one function with
+same name but having different signatures i.e., either no.of parameters must be
+different or parameter types must be different.
+		In C language, no two functions have same name but in C++, more than
+one functions have same name but should have different signatures (i.e., no.of
+parameters or parameter types should be different).
+	Note: whenever we want string datatype, use char* as string datatype.
+
+Program 14 : Function Overloading  ----- example2
+
+Program 15 : Function Overloading  ----- example3
+
+Program 16 : Function Overloading  ----- example4
+
+Program 17 : Function Overloading  ----- example5
+
+Program 18 : Write a C++ program for the addition of 1-D and 2-D arrays.
+
+Program 19 : Assignment 
+	Write a C++ program for subtracting two variables, subtracting two 1-D arrays and
+ subtracting two 2-D arrays using function overloading.
+
+Program 20 : Usage of new and delete operator --- example1
+	If memory is allocated at compilation time, it is static memory allocation.
+	If memory is allocated at run time(during execution time), it is dynamic
+		memory allocation.
+
+		SMA and DMA for variables.
+
+
+Program 21 : Usage of new and delete operator --- example2
+		SMA and DMA for 1-D arrays
+
+Program 22 : Usage of new and delete operator --- example3
+		SMA and DMA for 2-D arrays (matrices)
+
+Difference between malloc() and new operator
+----------------------------------------------------------------------------
+malloc()					new operator
+--------					-------------
+1. It is a function				1. new is a operator.
+2. Behind malloc(), code			2. Behind new, nothing is there and hence
+   is there.					    no code is executed.
+3. slow memory allocation			3. Faster memory allocation.
+4. Difficult syntax				4. Easy syntax.
+5. int *a;					5. int *a;
+a = (int*) malloc(5*sizeof(int));	 	   a = new int[5];
+-----------------------------------------------------------------------------
+
+Program 23 : Usage of inline functions.
+
+Note : 	Whenever an inline function is called, substitution takes place, whereas
+if a normal function is called, then branching takes place. inline is a reserved word. 
+		Rules for inline functions
+		--------------------------
+1. It must be a small function i.e., it should not contain too many statements.
+2. It should not contain control structures such as if, switch, while, do--while, for.
+3. inline function has no prototype. Hence it must be defined before the calling function.
+		If any of these rules are violated, then compiler ignores the word inline and
+treats it as normal function.
+	Advantages :
+	------------
+	inline function execution is faster than normal function, since no
+branching is involved during execution.
+	Similarity between inline functions and macro
+	---------------------------------------------
+Both inline function and macro call are expanded i.e., substitution is performed.
+
+		Difference between inline function and macro
+		--------------------------------------------
+inline function				----			macro
+---------------							------
+1. inline void f1()				1.	#define f1 cout << "Hyderabad\n"; \
+{							cout << "Secunderabad\n";	\
+	cout << "Hyderabad\n";				cout << "Cyberabad\n";
+	cout << "Secunderabad\n";
+	cout << "Cyberabad\n";
+}
+2. inline function is called by f1();		2. macro is called by f1
+3 inline function is processed by		3. macro is processed by preprocessor.
+   compiler.
+4. inline function can not contain		4. macro can contain control structures.
+   control structures.
+5. inline function must be small.		5. macro can contain any no.of statements.
+6. inline function can contain			6. macro can not contain return statement.
+    return statement.
+----------------------------------------------------------------------------------------
+
+Program 24 : Usage of Default Arguments 
+	Default values must be assigned only in the function prototype. The parameters
+having default values must appear at the end of the list.
+	The following function prototype is invalid.
+		float SI(float p=1000, float t, float r=0.14);	// wrong
+			This is invalid because the parameter t which is not assigned any default
+value must appear at the beginning of the list but not in the middle.
+	float SI(float p=1000, float t, float r);	// invalid
+	float SI(float t, float r, float p=1000);	// valid
+		In the function call, if i th parameter takes default value then the following
+parameters must take default values. It is not possible to send actual values from 
+i+1 th parameter onwards. The following function call gives error.
+	ans = SI(4000, , 0.19);	// invalid
+
+
+Program 25 : Write a C++ function for a to the power of b (a^b). If b is missing, 
+find a^2.
+
+Program 26 : Write a function for n factorial and if n value is missing , find
+	0(zero) factorial.
+
+Program 27 : Write a function for ncr and npr. If r value is missing, find
+	nc2 and np2.
+		ncr = n! /( (n-r)! * r! );
+		npr = n! / (n-r)!
+
+Program 28 : Usage of enum --- enumerated.
+	enum is a reserved word which allows us to define our datatypes.
+syntax:
+	enum datatype { enumerated list};
+		The names in the enumerated list are assigned the values starting from 0(zero).
+We can override these values by our own values.
+		In the enumerated list, duplicate names are not allowed but duplicate values
+are allowed.
+	enum color { red, red = 100, red };	// invalid since duplicate names are not allowed.
+	enum color { red=0, green=0, blue=0 }; // valid. duplicate values allowed.
+		Internal operations are wrt integers although we are using the names of the
+enumerated list.
+	enum month{ jan=1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec };
+		Program clarity increases if we use enum.
+month a = nov;
+switch(a)
+{
+case jan :
+	.....
+case feb :
+	.....
+	.
+	.
+case dec:
+	.....
+}
+The advantage of enum is that program clarity increase.
+	enum ns { bin=2, oct=8, dec=10, hex=16 };
+	ns a = dec;
+	cout << a;	// output : 10
+Limitations of enum :
+---------------------
+invalid eg1:
+  enum ns { bin=2, oct=8, dec=10, hex=16 };
+  enum month { jan=1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec };
+  cout << dec;  // confusion to computer because dec is available in two enumerated list.
+	same name can not appear in two enumerated list.
+	cout << dec;	// leads to confusion
+
+Invalid eg2:
+	enum boolean { false, true };
+	boolean a;
+	cin >> a;	// invalid
+	a = true;	// valid. Initialization is allowed.
+		User-defined datatype variables can not accepted from the keyboard. However
+initialization is allowed.
+
+Invalid eg3:
+	enum color { red, green, blue };
+	color a = black;	// invalid since black is not present in the enumerated list.
+
+
+Program 29 : Generic Functions (Multi-Purpose functions) --- swapping program
+	Rules
+	------
+1. A Generic function must have atleast one parameter of type T where T is a
+	generic type.
+2. Generic function must be preceded by 
+		template<class T>
+3. Generic function must be defined before calling function.
+4. Generic function has no prototype.
+		Based on actual parameter datatype, formal parameter datatype is decided.
+It is compiler which performs the substitution. For each function call, compiler
+generates a different function.
+		Generic function is an alternative to function overloading. Normal function
+has higher priority over Generic function.
+
+Program 30 : Write a generic function for absolute.
+		absolute(-4) = 4;
+		absolute(-20.6) = 20.6;
+		absolute(25) = 25;
+		absolute(40.7) = 40.7;
+
+Program 31 : Write a Generic function call max(a, b):
+	max(10,20) = 20;
+	max(20.6,10.8) = 20.6;
+	max('G', 'S') = 'S';
+	max("Rama", "Sita") = "Sita"
+
+Program 32 : Write a generic function for arithmetic mean.
+
+Program 33 : Write a Generic function for display(t1, t2) where 
+	t1 and t2 are generic types.
+
+Program 34 : Write a Generic function for bubble sort and for display 1-D array,
+
+Program 35 : Assignment
+	Write a Generic function for Sequential search.
+prototype : int SequentialSearch(T *a, int sz, T key);
+
+
+Program 36 : Assignment
+	Write a Generic function for add(a, b) where a,b are either integers, floats,
+characters, or strings.
+
+Program 37 : Assignment
+		Write a Generic function for adding two vectors. The vector may contain
+either integer or float.
+	vector means 1-D array.
+	integer array + integer array
+	float array + float array
+
+Program 38 : Assignment
+		Write a Generic function for adding two matrices. The matrices may contain
+either integers or floats.
