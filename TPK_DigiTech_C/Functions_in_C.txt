@@ -1,0 +1,2716 @@
+/* Program 1 : Demonstrating the simple usage of function */
+
+#include <stdio.h>
+modify()
+{
+	int num;
+	num=20;
+}
+void main()
+{
+	int num=10;
+	printf("\nnum = %d",num);
+	modify();
+	printf("\nnum = %d\n",num);
+}
+Output : 
+
+num = 10
+num = 10
+Press any key to continue
+
+/* program 2 : Returning a value from a function. 
+Note: When a function returns a value , it has to be received in the calling function into a variable of same datatype */
+
+#include <stdio.h>
+int modify()		// called function
+{
+	int num;
+	num = 20;
+	return (num);
+}
+
+void main()			// calling function
+{
+	int num = 10;
+	printf("\nnum = %d",num);
+	num = modify();
+	printf("\nnum = %d\n",num);
+}
+output : 
+
+num = 10
+num = 20
+Press any key to continue
+
+/* Program 3 : Write a program to add and subtract two numbers. Use a function call */
+
+#include <stdio.h>
+add()
+{
+	int x, y;
+	printf("\nEnter two integer values which are to be added\n");
+	scanf("%d%d",&x, &y);
+	return (x+y);
+}
+
+sub()
+{
+	int x, y;
+	printf("\nEnter two integer values which are to be subtracted\n");
+	scanf("%d%d",&x, &y);
+	return (x-y);
+}
+
+main()
+{
+	int res;
+	res = add();
+	printf("\nResult of addition = %d",res);
+	res = sub();
+	printf("\nResult of subtraction = %d\n",res);
+}
+Output :
+
+Enter two integer values which are to be added
+25
+10
+
+Result of addition = 35
+Enter two integer values which are to be subtracted
+30
+10
+
+Result of subtraction = 20
+Press any key to continue
+
+/* Program 4 : Passing by value 
+	passing the contents of the variables declared in the calling function to the called function is called as passing by value */
+
+#include <stdio.h>
+add(int a, int b)
+{
+	int r;
+	r = a+b;
+	return r;
+}
+/*
+	add(int a, int b)
+	{
+		return a+b;
+	]
+*/
+
+sub(int a, int b)
+{
+	int r;
+	r = a-b;
+	return r;
+}
+/*
+sub(int a, int b)
+{
+	return a-b;
+}
+*/
+
+main()
+{
+	int x, y, res;
+	printf("\nEnter two integer values \n");
+	scanf("%d%d",&x,&y);
+
+	res = add(x,y);
+	printf("\nResult of addition = %d",res);
+
+	res = sub(x,y);
+	printf("\nResult of subtraction = %d\n",res);
+
+}
+Output: 
+
+Enter two integer values
+100
+50
+
+Result of addition = 150
+Result of subtraction = 50
+Press any key to continue
+
+/* Program 5 : Assignment
+   Write a program to simulate a simple calculator that performs basic arithmetic operations by using the following user-defined functions : 
+	add()  sub()  mul() division()  */
+
+#include <stdio.h>
+#include <conio.h>	// getch()
+#include <process.h>	// system()
+
+int add(int x, int y)
+{
+	return x+y;
+}
+int sub(int x, int y)
+{
+	return x-y;
+}
+int mul(int x, int y)
+{
+	return x*y;
+}
+float division(int x, int y)
+{
+	return (float)x/y;
+}
+
+void main()
+{
+	int n1, n2, res,choice;
+	float r;
+	char ch;
+
+	do
+	{
+		//system("cls");
+		printf("\n\tArithmetic Operations On Two Numbers \n");
+		printf("\nEnter two integer numbers\n");
+		scanf("%d%d",&n1, &n2);
+
+		printf("\n\t1. Addition\t\t3. Subtraction");
+		printf("\n\t2. Multiplication \t4. Division\n");
+
+		printf("\nEnter your choice(1/2/3/4) : ");
+		scanf("%d",&choice);
+
+		switch(choice)
+		{
+		case 1:
+			res = add(n1,n2);
+			printf("\n%d + %d = %d\n",n1,n2,res);
+			break;
+		case 2:
+			res = mul(n1,n2);
+			printf("\n%d * %d = %d\n",n1,n2,res);
+			break;
+		case 3:
+			res = sub(n1,n2);
+			printf("\n%d - %d = %d\n",n1,n2,res);
+			break;
+		case 4:
+			if(n2 != 0)
+			{
+				r = division(n1,n2);
+				printf("%d / %d = %f\n",n1,n2,r);
+				break;
+			}
+			else
+				printf("\nDenominator is zero. Not Divisible.\n");
+			break;
+		default:
+			printf("\nInvalid choice\n");
+		}
+		fflush(stdin);
+		printf("\nDo you want to perform one more arithmetic operation ? (y/n) : ");
+		ch = getchar();
+	}while(ch == 'y' || ch == 'Y');
+}
+
+Output :
+
+        Arithmetic Operations On Two Numbers
+
+Enter two integer numbers
+10
+3
+
+        1. Addition             3. Subtraction
+        2. Multiplication       4. Division
+
+Enter your choice(1/2/3/4) : 4
+10 / 3 = 3.333333
+
+Do you want to perform one more arithmetic operation ? (y/n) : y
+
+        Arithmetic Operations On Two Numbers
+
+Enter two integer numbers
+34
+8
+
+        1. Addition             3. Subtraction
+        2. Multiplication       4. Division
+
+Enter your choice(1/2/3/4) : 2
+
+34 * 8 = 272
+
+Do you want to perform one more arithmetic operation ? (y/n) : y
+
+        Arithmetic Operations On Two Numbers
+
+Enter two integer numbers
+999
+899
+
+        1. Addition             3. Subtraction
+        2. Multiplication       4. Division
+
+Enter your choice(1/2/3/4) : 3
+
+999 - 899 = 100
+
+Do you want to perform one more arithmetic operation ? (y/n) : y
+
+        Arithmetic Operations On Two Numbers
+
+Enter two integer numbers
+99999999
+11111111
+
+        1. Addition             3. Subtraction
+        2. Multiplication       4. Division
+
+Enter your choice(1/2/3/4) : 1
+
+99999999 + 11111111 = 111111110
+
+Do you want to perform one more arithmetic operation ? (y/n) : n
+Press any key to continue
+
+/* Program 6 : Using function prototypes
+	Note: Changes made to the dummy variables will not have any effect on its 
+original variables. By default a function always returns an integer value. 
+A function prototype is a preindicator to the compiler regarding its characteristics
+i.e., the type of values the function receives and the type of value the function
+returns.
+*/
+
+#include <stdio.h>
+void main()
+{
+	float res;
+	int x, y;
+	float division(int,int);	// prototype
+
+	printf("\nEnter two integer values\n");
+	scanf("%d%d",&x,&y);
+	
+	res = division(x,y);
+
+	if(res != 0)
+		printf("\n%d / %d = %f\n",x, y, res);
+	else
+		printf("\n%d / %d = Infinity\n",x,y);
+}
+
+float division(int a, int b)
+{
+	float r;
+	if(b != 0)
+	{
+		r = (float)a/b;
+	}
+	else
+		r =0;
+	return r;
+}
+
+Output :
+
+Enter two integer values
+157
+0
+
+157 / 0 = Infinity
+Press any key to continue
+
+Enter two integer values
+126
+5
+
+126 / 5 = 25.200001
+Press any key to continue
+
+/* Program 7 : 
+	Write a function average() which receives two integer values and returns the average value. */
+
+#include <stdio.h>
+
+void main()
+{
+	int x, y;
+	float res;
+	float average(int, int);	// function prototype
+
+	printf("\nEnter two integer values\n");
+	scanf("%d%d",&x, &y);
+
+	res = average(x,y);
+	printf("\nAverage of %d and %d = %.3f\n",x, y, res);
+}
+
+float average(int a, int b)
+{
+	return (a+b)/2.0;	// implicit conversion to float type
+}
+
+Output :
+
+Enter two integer values
+25
+18
+
+Average of 25 and 18 = 21.500
+Press any key to continue
+
+/* Program 8 : 
+	Write the following function within the same program.
+areac() --- receives radius of circle and returns its area
+circum() --- receives radius of circle and returns its circumference
+areat() --- receives 3 sides of a triangle and return its area 
+*/
+
+#include <stdio.h>	// printf(), scanf() etc.,
+#include <math.h>	// sqrt() ,  pow() sin()  etc.,
+
+void main()
+{
+	int r, a, b, c;
+	float r1, r2, r3;
+
+	float areac(int);				// function prototype
+	float circum(int);
+	float areat(int, int, int);
+
+	printf("\nEnter radius of circle : ");
+	scanf("%d",&r);
+
+	r1 = areac(r);
+	r2 = circum(r);
+
+	printf("\nArea of circle = %.3f",r1);
+	printf("\nCircumference of circle = %.3f\n", r2);
+
+	printf("\nEnter 3 sides of a triangle\n");
+	scanf("%d%d%d",&a, &b, &c);
+	 
+	r3 = areat(a,b,c);
+	printf("\nArea of triangle = %.3f\n",r3);
+
+	printf("\n");
+}
+
+float areac(int r)
+{
+	float res;
+	res = 3.1428 * r * r;
+	return res;
+}
+float circum(int r)
+{
+	float res;
+	res = 2.0*3.1428*r;
+	return (res);
+}
+float areat(int x, int y, int z)
+{
+	float s, area;
+	s = (x+y+z)/2.0;
+	area = sqrt(s*(s-x)*(s-y)*(s-z));
+	return area;
+}
+Output : 
+
+Enter radius of circle : 5
+
+Area of circle = 78.570
+Circumference of circle = 31.428
+
+Enter 3 sides of a triangle
+5
+6
+7
+
+Area of triangle = 14.697
+
+Press any key to continue
+
+/* Program 9 :
+	Write the following function in the same program.
+factorial() ---- which receives an integer value and returns its factorial as a long integer.
+power() ---- which receives base and exponent values and returns its power as long integer value.
+*/
+
+#include <stdio.h>
+#include <math.h>
+void main()
+{
+	int n, b, e;
+	long int r1, r2;	// long r1, r2;
+
+	long int factorial(int);		// function prototype
+	long int power(int, int);
+
+	printf("\nEnter a number whose factorial is to be found : ");
+	scanf("%d",&n);
+
+	r1 = factorial(n);
+	printf("\nFactorial of %d = %ld",n,r1);
+
+	printf("\nEnter base and exponent value\n");
+	scanf("%d%d",&b, &e);
+	r2 = power(b,e);
+	printf("\n%d power %d = %ld\n\n",b,e,r2);
+}
+
+// method 1
+long int factorial(int a)
+{
+	long int fact=1;
+	for(int i=1; i<=a; i++)
+		fact *= i;		//	fact = fact*i;
+	return (fact);
+}
+/*
+// method2
+long int factorial(int a)
+{
+	long fact=1;
+	while(a>0)
+	{
+		fact = fact*a;	// fact *= a;
+		a--;
+	}
+	return fact;	// return (fact)
+}
+*/
+
+long int power(int x, int y)
+{
+	long int res = 1;	// long res=1;
+	int i;
+	for(i=1; i<=y; i++)
+		res = res*x;	// res *= x;
+
+	return res;
+}
+Output :
+
+Enter a number whose factorial is to be found : 6
+
+Factorial of 6 = 720
+Enter base and exponent value
+5
+4
+
+5 power 4 = 625
+
+Press any key to continue
+
+/* Program 10 : Assignment 
+	Write functions max() and min() which receives two integer values and returns
+maximum value and minimum value respectively */
+
+#include <stdio.h>
+void main()
+{
+	int n1, n2;
+	int max(int, int);
+	int min(int, int);
+
+	printf("\nEnter two integer values\n");
+	scanf("%d%d",&n1, &n2);
+
+	printf("\nMaximum value = %d",max(n1,n2));
+	printf("\nMinimum value = %d\n", min(n1,n2));
+}
+
+/*
+// method 1: 
+int max(int a, int b)
+{
+	if(a > b)
+		return a;
+	else
+		return b;
+}
+*/
+
+// method 2:
+int max(int a, int b)
+{
+	return (a > b) ? a : b;
+}
+
+/*
+// method 1:
+int min(int a, int b)
+{
+	return a > b ? a : b;
+}
+
+*/
+
+// method 2:
+int min(int a, int b)
+{
+	if(a < b)
+		return a;
+	else
+		return b;
+}
+
+Output :
+
+Enter two integer values
+-25
+25
+
+Maximum value = 25
+Minimum value = -25
+Press any key to continue
+
+
+/* Program 11: Assignment
+	Write a function cal_bonus() which will receive the salary of an employee and returns his bonus based on the following conditions.
+	if salary <= 5000 , bonus = 30% of annual salary
+	if salary > 5000 and <= 10000 , bonus = 25% of annual salary
+	if salary > 10000 , bonus is 20% of annual salary
+*/
+
+#include <stdio.h>
+void main()
+{
+	int sal;
+	float bonus;
+	float cal_bonus(int);		// function prototype
+
+	printf("\nEnter salary of an employee : ");
+	scanf("%d",&sal);
+
+	bonus = cal_bonus(sal);
+
+	printf("\nbonus = %.2f\n", bonus);
+}
+
+float cal_bonus(int sal)
+{
+	float bonus;
+	if( sal <= 5000)
+		bonus = 0.3 * sal * 12;
+	else if( sal <= 10000)
+		bonus = 0.25 * sal * 12;
+	else
+		bonus = 0.2 * sal * 12;
+
+	return bonus;
+}
+Output : 
+
+Enter salary of an employee : 12000
+
+bonus = 28800.00
+Press any key to continue
+
+	salary			bonus
+	------			-----
+	4500			16250.00
+	5000			18000.00
+	5500			16500.00
+	8000			24000.00
+	9999			29997.00
+	12000			28800.00
+	2500			9000.00
+
+/* Program 12 :	Assignment
+	Write a function max_value() which receives 3 integer values and return its
+maximum value.
+*/
+
+#include <stdio.h>
+void main()
+{
+	int n1, n2, n3;
+	int max;
+	int max_value(int, int, int);	// function prototype
+
+	printf("\nEnter 3 integer values\n");
+	scanf("%d%d%d",&n1, &n2, &n3);
+
+	max = max_value(n1, n2, n3);
+
+	printf("\nMaximum value among given numbers %d , %d , %d = %d\n",n1,n2,n3,max);
+}
+/*
+int max_value(int a, int b, int c)
+{
+	int max;
+	if(a > b)
+		if(a > c)
+			max = a;
+		else
+			max = c;
+	else
+		if(b > c)
+			max = b;
+		else
+			max = c;
+
+	return max;
+}
+*/
+// Another method
+int max_value(int a, int b, int c)
+{
+	return (a > b) ? ( (a > c) ? a : c ) : (b > c) ? b : c;
+}
+Output :
+
+Enter 3 integer values
+-625
+584
+12
+
+Maximum value among given numbers -625 , 584 , 12 = 584
+Press any key to continue
+
+/* Program 13 : Passing single dimensional numeric arrays to functions
+	Note: Changes made to the dummy arrays are directly reflected in their original arrays whereas changes made to the dummy variables will not have any effect on its original variables. */
+
+#include <stdio.h>
+
+void main()
+{
+	int marks[50], sz;
+	float res = 0;
+	char ch='y';
+
+	void enter(int [], int);		// function prototype
+	float average(int [], int);
+	void dispAboveAverage(int [], int , float);
+
+	do
+	{
+		if(ch=='y')
+			printf("\nEnter no.of students(max. 50) : ");
+		else
+			printf("\nInvalid input. Enter correct value (1 to 50) : ");
+		scanf("%d",&sz);
+
+		if(sz <= 0 || sz > 50)
+			ch = 'n';
+	}while(sz <= 0 || sz > 50);
+	
+	enter(marks, sz);
+	res = average(marks, sz);
+	printf("\nAverage mark = %.3f",res);
+
+	printf("\nMarks above average\n");
+	dispAboveAverage(marks, sz, res);
+
+	printf("\n\n");
+}
+
+void enter(int m[], int sz)
+{
+	char ch='y';
+	int marks;
+
+	for(int i=0; i<sz; i++)
+	{
+		do
+		{
+			if(ch == 'y')
+				printf("Enter marks of student %d : ",i+1);
+			else
+				printf("Invalid input. Marks should be 0 to 100  only. Enter correct mark : ");
+			
+			scanf("%d",&m[i]);
+			if(m[i] < 0 || m[i] > 100)
+				ch = 'n';
+			else
+				ch = 'y';
+
+		}while(m[i] < 0 || m[i] > 100);
+
+	}	// for loop
+}
+
+float average(int mks[] , int sz)
+{
+	int i, total = 0;
+	float avg;
+
+	for(i=0; i<sz; i++)
+		total += mks[i];	// total = total + mks[i];
+
+	avg = (float)total/sz;
+	return avg;
+}
+
+void dispAboveAverage(int mks[], int sz, float avg)
+{
+	for(int i=0; i<sz; i++)
+		if(mks[i] > avg)
+			printf("%d\t",mks[i]);
+}
+
+Output : 
+
+Enter no.of students(max. 50) : -6
+
+Invalid input. Enter correct value (1 to 50) : 6
+Enter marks of student 1 : 55
+Enter marks of student 2 : 86
+Enter marks of student 3 : 102
+Invalid input. Marks should be 0 to 100  only. Enter correct mark : 99
+Enter marks of student 4 : 68
+Enter marks of student 5 : 94
+Enter marks of student 6 : 75
+
+Average mark = 79.500
+Marks above average
+86      99      94
+
+Press any key to continue
+
+
+/* Program 14 : Passing single dimensional numeric arrays to functions and finding the minimum and maximum value */
+
+#include <stdio.h>
+void main()
+{
+	int num[50], sz;
+	int min, max;
+	char ch='y';
+
+	void enter(int [], int);		// function prototype
+	int minValue(int [], int);
+	int maxValue(int [], int);
+	
+	do
+	{
+		if(ch=='y')
+			printf("\nEnter size of the array (max. 50) : ");
+		else
+			printf("\nInvalid input. Enter correct value (1 to 50) : ");
+		scanf("%d",&sz);
+
+		if(sz <= 0 || sz > 50)
+			ch = 'n';
+	}while(sz <= 0 || sz > 50);
+
+	enter(num, sz);
+	min = minValue(num, sz);
+	max = maxValue(num, sz);
+
+	printf("\nMinimum value = %d\nMaximum value = %d\n",min, max);
+}
+
+void enter(int a[], int n)
+{
+	for(int i=0; i<n; i++)
+	{
+		printf("Enter value %d : ",i+1);
+		scanf("%d",&a[i]);
+	}
+}
+
+int minValue(int a[], int n)
+{
+	int min = a[0];
+	for(int i=1; i<n; i++)
+		if(a[i] < min)
+			min = a[i];
+
+	return min;
+}
+
+int maxValue(int a[], int n)
+{
+	int max = a[0];
+	for(int i=1; i<n; i++)
+		if(a[i] > max)
+			max = a[i];
+
+	return max;
+}
+Output : 
+
+Enter size of the array(max. 50) : -7
+
+Invalid input. Enter correct value (1 to 50) : 7
+Enter value 1 : 85
+Enter value 2 : 64
+Enter value 3 : -69
+Enter value 4 : 84
+Enter value 5 : 92
+Enter value 6 : -64
+Enter value 7 : 15
+
+Minimum value = -69
+Maximum value = 92
+Press any key to continue
+
+/* Program 15 : Passing single dimensional numeric arrays to functions and displaying the sorted list */
+
+#include <stdio.h>
+void main()
+{
+	int num[50], sz;
+	char ch = 'y';
+
+	void enter(int [], int);
+	void sort(int [], int);
+	void disp(int [], int);
+
+	do
+	{
+		if(ch=='y')
+			printf("\nEnter size of the array (max. 50) : ");
+		else
+			printf("\nInvalid input. Enter correct value (1 to 50) : ");
+		scanf("%d",&sz);
+
+		if(sz <= 0 || sz > 50)
+			ch = 'n';
+	}while(sz <= 0 || sz > 50);
+
+	enter(num, sz);
+
+	printf("\nContents before sorting\n");
+	disp(num, sz);
+	printf("\n\nContents after sorting\n");
+	sort(num, sz);
+	disp(num, sz);
+
+	printf("\n\n");
+}
+
+void enter(int a[], int n)
+{
+	for(int i=0; i<n; i++)
+	{
+		printf("Enter value %d : ", i+1);
+		scanf("%d",&a[i]);
+	}
+}
+
+void disp(int a[], int n)
+{
+	for(int i=0; i<n; i++)
+		printf("%d\t",a[i]);
+}
+
+void sort(int a[], int n)
+{
+	int temp, i, j;
+	for(i=0; i<n-1; i++)
+		for(j=i+1; j<n; j++)
+			if(a[i] > a[j])
+			{/*
+				temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+				*/
+				// /*
+					a[i] = a[i] + a[j];
+					a[j] = a[i] - a[j];
+					a[i] = a[i] - a[j];
+				//*/
+			}
+}
+Output :
+
+Enter size of the array (max. 50) : -6
+
+Invalid input. Enter correct value (1 to 50) : 6
+Enter value 1 : 52
+Enter value 2 : 37
+Enter value 3 : -154
+Enter value 4 : 9
+Enter value 5 : 34
+Enter value 6 : 51
+
+Contents before sorting
+52      37      -154    9       34      51
+
+Contents after sorting
+-154    9       34      37      51      52
+
+Press any key to continue
+
+/* Program 16 : Passing single dimensional string array to functions.
+	Write a program to accept a line of text and display no.of words as well as dislpay the words with no.of characters . */
+
+#include <stdio.h>
+void main()
+{
+	char text[80];
+	int res;
+	
+	int nwords(char[]);			// function prototype
+	void dispwords(char []);
+
+	printf("\nEnter a line of text :\n");
+	gets(text);
+	//puts(text);
+
+	res = nwords(text);
+	printf("\nNo.of words = %d\n",res);
+
+	dispwords(text);
+}
+
+int nwords(char txt[])
+{
+	int i, nw=1;
+	for(i=0; txt[i] != '\0'; i++)
+		if(txt[i] == ' ' && txt[i+1] != ' ')
+			nw++;
+
+	if(txt[0] == ' ')
+		nw--;
+	return (nw);
+}
+
+void dispwords(char txt[])
+{
+	int i, count=0;
+	for(i=0; txt[i]!='\0'; i++)
+	{
+		if(txt[i] != ' ')
+		{
+			printf("%c",txt[i]);
+			count++;
+		}
+		else if(txt[i+1] != ' ')
+		{
+			printf("\t%d\n",count);
+			count = 0;
+		}
+	}
+	printf("\t%d\n",count);
+}
+Output : 
+
+Enter a line of text :
+There  is never  a wrong time to do the right thing.
+
+No.of words = 11
+There   5
+is      2
+never   5
+a       1
+wrong   5
+time    4
+to      2
+do      2
+the     3
+right   5
+thing.  6
+Press any key to continue
+
+/* Program 17 : Passing single dimensional string array to functions and displaying
+the converted text, encrypted text and decrypted text. */
+
+#include <stdio.h>
+#include <ctype.h>
+
+void main()
+{
+	char text[80];
+
+	void convert(char []);		// function prototype
+	void encrypt(char []);
+	void decrypt(char []);
+
+	printf("\nEnter a line of text : \n");
+	gets(text);
+
+	printf("\nEntered text before conversion \n");
+	puts(text);
+	printf("\nText after conversion\n");
+	convert(text);
+	printf("\n%s",text);		// puts(text);
+
+	printf("\nText Before Encryption\n%s\n",text);
+	encrypt(text);
+	printf("\nText After Encryption \n%s\n",text);
+
+	printf("\nText Before Decryption\n%s\n",text);
+	decrypt(text);
+	printf("\nText After Decryption \n%s\n",text);
+}
+
+void convert(char txt[])
+{
+	for(int i=0; txt[i]!='\0'; i++)
+	{
+		if(isalpha(txt[i]))
+			if(islower(txt[i]))
+				txt[i] = toupper(txt[i]);
+			else
+				txt[i] = tolower(txt[i]);
+	}
+}
+
+void encrypt(char txt[])
+{
+	for(int i=0; txt[i]!='\0'; i++)
+	{
+		if(isalpha(txt[i]))
+		{
+			if(txt[i] == 'z')
+				txt[i]='a';
+			else if(txt[i] == 'Z')
+				txt[i]='A';
+			else
+			txt[i] = txt[i]+1;		// txt[i] += 1;
+		}
+		else if(isdigit(txt[i]))
+		{
+			if(txt[i] == '9')
+				txt[i] = '0';
+			else
+				txt[i] += 1;		// txt[i] = txt[i]+1;
+		}
+	}
+}
+
+void decrypt(char txt[])
+{
+	for(int i=0; txt[i]!='\0'; i++)
+	{
+		if(isalpha(txt[i]))
+		{
+			if(txt[i] == 'a')
+				txt[i] = 'z';
+			else if(txt[i] == 'A')
+				txt[i] = 'Z';
+			else
+				txt[i] -= 1;		// txt[i] = txt[i]-1;
+		}
+		else if(isdigit(txt[i]))
+		{
+			if(txt[i] == '0')
+				txt[i] = '9';
+			else
+				txt[i] = txt[i]-1;		// txt[i] -= 1;
+		}
+	}
+}
+Output : 
+
+Enter a line of text :
+abc  ABC  XYZ  xyz  012  789   +-*/  Palani Kumar HAVE A nice day.
+
+Entered text before conversion
+abc  ABC  XYZ  xyz  012  789   +-*/  Palani Kumar HAVE A nice day.
+
+Text after conversion
+
+ABC  abc  xyz  XYZ  012  789   +-*/  pALANI kUMAR have a NICE DAY.
+Text Before Encryption
+ABC  abc  xyz  XYZ  012  789   +-*/  pALANI kUMAR have a NICE DAY.
+
+Text After Encryption
+BCD  bcd  yza  YZA  123  890   +-*/  qBMBOJ lVNBS ibwf b OJDF EBZ.
+
+Text Before Decryption
+BCD  bcd  yza  YZA  123  890   +-*/  qBMBOJ lVNBS ibwf b OJDF EBZ.
+
+Text After Decryption
+ABC  abc  xyz  XYZ  012  789   +-*/  pALANI kUMAR have a NICE DAY.
+Press any key to continue
+
+/* Program 18 : Passing two dimensional numeric arrays to functions.
+	Note: While receiving a two dimensional array into a dummy array, explicitly
+specify the column size within the second square brackets which has to be a constant. */
+
+#include <stdio.h>
+void main()
+{
+	int num[20][20];
+	int nr, nc;
+	char ch='y';
+
+	void enter(int [][20], int, int);		// function prototype
+	void disp(int [][20], int, int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of rows and no.of columns (max. 20) :\n");
+		else
+		{
+			printf("\nInvalid input. Enter correct input\n");
+			printf("\nEnter no.of rows and no.of columns (max. 20) :\n");
+			ch='n';
+		}
+		scanf("%d%d",&nr,&nc);
+
+		if((nr<0 || nr>20) || (nc<0 || nc>20))
+			ch='n';
+	}while( (nr<0 || nr>20) || (nc<0 || nc>20) );
+
+	enter(num, nr, nc);
+	printf("\nDisplaying the entered values\n");
+	disp(num, nr, nc);
+	printf("\n\n");
+}
+
+void enter(int n[][20], int nr, int nc)
+{
+	for(int i=0; i<nr; i++)		// controls no.of rows
+	{
+		printf("\n");
+		for(int j=0; j<nc; j++)		// controls no.of columns
+		{
+			printf("Enter value in row %d, column %d : ", i+1,  j+1);
+			scanf("%d",&n[i][j]);
+		}
+	}
+}
+
+void disp(int n[][20], int nr, int nc)
+{
+	int i, j;
+	for(i=0; i<nr; i++)
+	{
+		printf("\n\t");
+		for(j=0; j<nc; j++)
+			printf("%4d\t",n[i][j]);
+	}
+}
+Output :
+
+Enter no.of rows and no.of columns (max. 20) :
+-5
+5
+
+Invalid input. Enter correct input
+
+Enter no.of rows and no.of columns (max. 20) :
+4
+21
+
+Invalid input. Enter correct input
+
+Enter no.of rows and no.of columns (max. 20) :
+4
+3
+
+Enter value in row 1, column 1 : 12
+Enter value in row 1, column 2 : 253
+Enter value in row 1, column 3 : 30
+
+Enter value in row 2, column 1 : 54
+Enter value in row 2, column 2 : 695
+Enter value in row 2, column 3 : 26
+
+Enter value in row 3, column 1 : -85
+Enter value in row 3, column 2 : -36
+Enter value in row 3, column 3 : 1
+
+Enter value in row 4, column 1 : 15
+Enter value in row 4, column 2 : 34
+Enter value in row 4, column 3 : 92
+
+Displaying the entered values
+
+          12     253      30
+          54     695      26
+         -85     -36       1
+          15      34      92
+
+Press any key to continue
+
+/* Program 19 : Passing 2-D numeric arrays to functions and displaying average total marks, above average total marks of 3 subjects of students */
+
+#include <stdio.h>
+void main()
+{
+	int marks[20][4];
+	int sz;
+	float res;
+	char ch = 'y';
+
+	void enter(int [][4],int);		// function prototype
+	void disp(int [][4], int);
+	void total(int [][4], int);
+	float averageTotal(int [][4], int);
+	void dispAboveAverage(int [][4],int, float);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of students (max. 20) : ");
+		else
+		{
+			printf("\nInvalid input. Input must be between 1 to 20 only");
+			printf("\nEnter no.of students (max. 20) : ");
+		}
+		scanf("%d",&sz);
+		if(sz<0 || sz>20)
+			ch='n';
+	}while(sz<0 || sz>20);
+
+	enter(marks, sz);
+	total(marks, sz);
+	
+	printf("\nsub1   sub2    sub3     Total\n");
+	disp(marks, sz);
+
+	res = averageTotal(marks, sz);
+	printf("\nAveraget total marks = %.3f\n",res);
+	
+	printf("\nLists of above average marks\n");
+	printf("\nsub1   sub2    sub3     Total\n");
+	dispAboveAverage(marks, sz, res);
+	printf("\n\n");
+}
+
+void enter(int m[][4], int sz)
+{
+	int i, j;
+	char ch='y';
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<3; j++)
+		{
+			do
+			{
+				if(ch == 'y')
+					printf("Enter marks of student %d in subject %d = ",i+1,j+1);
+				else
+				{
+					printf("\nInvalid marks. Marks must be between 0 to 100 only");
+					printf("\nEnter correct marks of student %d in subject %d = ",i+1,j+1);
+				}
+				scanf("%d",&m[i][j]);
+				if(m[i][j]<0 || m[i][j]>100)
+					ch='n';
+				else
+				{
+					ch='y';
+				}
+			}while(m[i][j]<0 || m[i][j]>100);
+		}
+	}
+}
+
+void total(int m[][4], int sz)
+{
+	int i, j, total=0;
+	for(i=0; i<sz; i++)
+	{
+		total = 0;
+		for(j=0; j<3; j++)
+			total += m[i][j];		// total = total + m[i][j];
+		m[i][3] = total;
+	}
+}
+
+float averageTotal(int m[][4], int sz)
+{
+	int i, sum = 0;
+	float avg;
+	for(i=0; i<sz; i++)
+		sum += m[i][3];		// sum = sum+m[i][4];
+
+	avg = (float)sum/sz;
+	return (avg);
+}
+
+void dispAboveAverage(int m[][4], int sz, float avg)
+{
+	for(int i=0; i<sz; i++)
+	{
+		if(m[i][3] >= avg)
+		{
+			for(int j=0; j<4; j++)
+				printf("%d\t",m[i][j]);
+			printf("\n");
+		}
+	}
+}
+
+void disp(int m[][4], int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(int j=0; j<4; j++)
+			printf("%3d\t",m[i][j]);
+	}
+}
+Output : 
+
+Enter no.of students (max. 20) : -5
+
+Invalid input. Input must be between 1 to 20 only
+Enter no.of students (max. 20) : 5
+
+Enter marks of student 1 in subject 1 = 59
+Enter marks of student 1 in subject 2 = 68
+Enter marks of student 1 in subject 3 = 101
+
+Invalid marks. Marks must be between 0 to 100 only
+Enter correct marks of student 1 in subject 3 = 100
+
+Enter marks of student 2 in subject 1 = 85
+Enter marks of student 2 in subject 2 = 75
+Enter marks of student 2 in subject 3 = 94
+
+Enter marks of student 3 in subject 1 = 75
+Enter marks of student 3 in subject 2 = 36
+Enter marks of student 3 in subject 3 = 84
+
+Enter marks of student 4 in subject 1 = 99
+Enter marks of student 4 in subject 2 = -58
+
+Invalid marks. Marks must be between 0 to 100 only
+Enter correct marks of student 4 in subject 2 = 58
+Enter marks of student 4 in subject 3 = 68
+
+Enter marks of student 5 in subject 1 = 49
+Enter marks of student 5 in subject 2 = 85
+Enter marks of student 5 in subject 3 = 92
+
+sub1   sub2    sub3     Total
+
+ 59      68     100     227
+ 85      75      94     254
+ 75      36      84     195
+ 99      58      68     225
+ 49      85      92     226
+Averaget total marks = 225.400
+
+Lists of above average marks
+
+sub1   sub2    sub3     Total
+59      68      100     227
+85      75      94      254
+49      85      92      226
+
+
+Press any key to continue
+
+/* Program 20 : Passing 2-D numeric array to functions -- Original matrix , Transpose matrix */
+#include <stdio.h>
+void main()
+{
+	int matrix[20][20], sz;
+	char ch='y';
+	
+	void enter(int [][20], int);			// function prototype
+	void dispOriginal(int [][20], int);
+	void dispTranspose(int [][20], int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter the order of the square matrix(max. 20) : ");
+		else
+		{
+			printf("\nInvalid input. Input must be in between 1 to 20 only.");
+			printf("\nEnter the order of the square matrix(max. 20) : ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 ||  sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(matrix, sz);
+	
+	printf("\nOriginal matrix\n");
+	dispOriginal(matrix, sz);
+
+	printf("\nTransposed matrix\n");
+	dispTranspose(matrix, sz);
+
+	printf("\n\n");
+}
+
+void enter(int m[][20], int sz)
+{
+	int i, j;
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<sz; j++)
+		{
+			printf("Enter a value in row %d, column %d : ",i+1, j+1);
+			scanf("%d",&m[i][j]);
+		}
+	}
+}
+
+void dispOriginal(int m[][20], int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(int j=0; j<sz; j++)
+			printf("%3d\t",m[i][j]);
+	}
+}
+
+void dispTranspose(int m[][20], int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(int j=0; j<sz; j++)
+			printf("%3d\t",m[j][i]);
+	}
+}
+Output :
+
+Enter the order of the square matrix(max. 20) : -3
+
+Invalid input. Input must be in between 1 to 20 only.
+Enter the order of the square matrix(max. 20) : 3
+
+Enter a value in row 1, column 1 : 25
+Enter a value in row 1, column 2 : 62
+Enter a value in row 1, column 3 : 11
+
+Enter a value in row 2, column 1 : 95
+Enter a value in row 2, column 2 : 36
+Enter a value in row 2, column 3 : 8
+
+Enter a value in row 3, column 1 : 65
+Enter a value in row 3, column 2 : 958
+Enter a value in row 3, column 3 : 42
+
+Original matrix
+
+ 25      62      11
+ 95      36       8
+ 65     958      42
+Transposed matrix
+
+ 25      95      65
+ 62      36     958
+ 11       8      42
+
+Press any key to continue
+
+/* Program 21 : Passing two dimensional string arrays to functions -- sorting and displaying words */
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+	char words[20][30];
+	int sz;
+	char ch='y';
+
+	void enter(char [][30], int);		// function prototype
+	void disp(char [][30], int);
+	void sort(char [][30], int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of words to be sorted (max. 20) : ");
+		else
+		{
+			printf("\nInvalid input. Input must be in between 1 to 20 only");
+			printf("\nEnter no.of words to be sorted (max. 20 only) : ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(words, sz);
+	printf("\nWords before sorting\n");
+	disp(words, sz);
+
+	printf("\nWords after sorting\n");
+	sort(words, sz);
+	disp(words, sz);
+
+	printf("\n\n");
+}
+
+void enter(char wds[][30], int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("Enter word %d : ",i+1);
+		scanf("%s",&wds[i]);
+	}
+}
+
+void disp(char wds[][30], int sz)
+{
+	for(int i=0; i<sz; i++)
+		printf("%s\n",wds[i]);
+}
+
+void sort(char wds[][30], int sz)
+{
+	char temp[30];
+	for(int i=0; i<sz-1; i++)
+		for(int j=i+1; j<sz; j++)
+			if(stricmp(wds[i],wds[j]) > 0)
+			{
+				strcpy(temp,wds[i]);
+				strcpy(wds[i],wds[j]);
+				strcpy(wds[j],temp);
+			}
+}
+Output : 
+
+Enter no.of words to be sorted (max. 20) : -5
+
+Invalid input. Input must be in between 1 to 20 only
+Enter no.of words to be sorted (max. 20 only) : 5
+Enter word 1 : mango
+Enter word 2 : orange
+Enter word 3 : apple
+Enter word 4 : banana
+Enter word 5 : pineapple
+
+Words before sorting
+mango
+orange
+apple
+banana
+pineapple
+
+Words after sorting
+apple
+banana
+mango
+orange
+pineapple
+
+Press any key to continue
+
+/* Program 22 : Passing 2-D string arrays to functions --- 
+entering lines of text.
+	Program to display the words with no.of characters in the given lines of text */
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+	char text[20][80] , ch='y';
+	int sz;
+
+	void enter(char[][80], int);
+	void displines(char [][80], int);
+	void dispwords(char [][80], int);
+
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of lines (max. 20) : ");
+		else
+		{
+			printf("\nInvalid input. Input must be in between 1 to 20 only.");
+			printf("\nEnter no.of lines (max. 20 lines  only) : ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(text, sz);
+
+	printf("\n\nThe Entered lines are : \n");
+	displines(text, sz);
+
+	printf("\nThe words in the given lines are :");
+	dispwords(text, sz);
+
+	printf("\n\n");
+}
+
+void enter(char txt[][80], int sz)
+{
+	for(int  i=0; i<sz;  i++)
+	{
+		printf("Enter text for line %d : \n\t",i+1);
+		fflush(stdin);
+		gets(txt[i]);
+	}
+}
+
+void dispwords(char txt[][80], int sz)
+{
+	int i, j, count;
+	for(i=0; i<sz; i++)
+	{
+		count = 0;
+		printf("\n");
+		for(j=0; txt[i][j] != '\0'; j++)
+		{
+			if(txt[i][j] != ' ')
+			{
+				printf("%c",txt[i][j]);
+				count++;
+			}
+			else if(txt[i][j+1] != ' ')
+			{
+				printf("\t%d\n",count);
+				count=0;
+			}
+		}
+		printf("\t%d\n",count);
+	}
+}
+
+void displines(char txt[][80], int sz)
+{
+	for(int i=0; i<sz; i++)
+		puts(txt[i]);
+}
+
+Output : 
+
+Enter no.of lines (max. 20) : -4
+
+Invalid input. Input must be in between 1 to 20 only.
+Enter no.of lines (max. 20 lines  only) : 21
+
+Invalid input. Input must be in between 1 to 20 only.
+Enter no.of lines (max. 20 lines  only) : 4
+Enter text for line 1 :
+        There is   never a wrong  time to do the right thing
+Enter text for line 2 :
+        Have  a nice day  palani kumar
+Enter text for line 3 :
+        One Work  at a time
+Enter text for line 4 :
+        Believe your strength  and capabilities.
+
+
+The Entered lines are :
+There is   never a wrong  time to do the right thing
+Have  a nice day  palani kumar
+One Work  at a time
+Believe your strength  and capabilities.
+
+The words in the given lines are :
+There   5
+is      2
+never   5
+a       1
+wrong   5
+time    4
+to      2
+do      2
+the     3
+right   5
+thing   5
+
+Have    4
+a       1
+nice    4
+day     3
+palani  6
+kumar   5
+
+One     3
+Work    4
+at      2
+a       1
+time    4
+
+Believe 7
+your    4
+strength        8
+and     3
+capabilities.   13
+
+Press any key to continue
+
+/* Program 23 : Nested functions 
+	Note: Functions within functions are called as Nested functions.
+Write a program using nested functions to compute the following expression : z = sqrt(6x^3 + 4y^2 + 10)  */
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+	int x, y;
+	float z;
+
+	float compute(int, int);		// function prototype
+	
+	printf("\nThe expression to be evaluated is : z = sqrt(6x^3 + 4y^2 + 10) \n");
+	printf("\nEnter two integer values (x and y value) :\n");
+	scanf("%d%d",&x, &y);
+	
+	z = compute(x, y);
+	printf("z = %.3f\n",z);
+}
+
+float compute(int x, int y)
+{
+	long r1, r2;	// long int r1, r2;
+	float res;
+
+	long cube(int);		// function prototype --- nested function
+	long square(int);
+
+	r1 = cube(x);
+	r2 = square(y);
+
+	res = sqrt(6*cube(x) + 4*square(y) + 10);
+	return(res);
+}
+
+long cube(int x)
+{
+	//return (x*x*x);		// return (pow(x,3));
+	return (pow(x,3));
+}
+
+long square(int y)
+{
+	return	pow(y,2);		// return (y*y);
+}
+
+Output : 
+
+The expression to be evaluated is : z = sqrt(6x^3 + 4y^2 + 10)
+
+Enter two integer values (x and y value) :
+4
+3
+z = 20.736
+Press any key to continue
+
+	x	y	z = sqrt(6x^3 + 4y^2 + 10)
+	--	--	--------------------------
+	3	2	13.711
+	4	3	20.736
+	2	3	9.695
+	5	7	30.919
+	10	5	78.166
+	5	15	40.743
+
+
+/* Program 24 : Write a program using nested functions to compute the following  expression : z = sqrt(x^y + y^x) */
+
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+	int x, y;
+	float z;
+
+	float compute(int, int);		// function prototype
+
+	printf("\nThe expression to be evaluated is : z = sqrt(x^y + y^x)\n");
+	printf("\nEnter two integer values (x and y value) \n");
+	scanf("%d%d",&x, &y);
+
+	z = compute(x,y);
+	printf("\nz = %.3f\n",z);
+}
+
+float compute(int x, int y)
+{
+	long r1, r2;
+	float res;
+
+	long xtoy(int, int);		// function prototype --- nested function
+	long ytox(int, int);
+
+	r1 = xtoy(x,y);
+	r2 = ytox(x,y);
+
+	res = sqrt(r1+r2);
+	return res;
+}
+
+long xtoy(int x, int y)
+{
+	long res = 1;
+	for(int i=1; i<=y; i++)
+		res *= x;		// res = res*x;
+
+	return res;
+}
+
+long ytox(int x, int y)
+{
+	long res=1;
+	for(int i=1; i<=x; i++)
+		res = res*y;	// res *= y;
+	return(res);
+}
+Output : 
+
+The expression to be evaluated is : z = sqrt(x^y + y^x)
+
+Enter two integer values (x and y value)
+10
+3
+
+z = 245.049
+Press any key to continue
+	
+	x	y	z = sqrt(x^y + y^x)
+	--	--	-------------------
+	10	3	245.049
+	5	2	7.550
+	2	3	4.123
+	7	8	2803.917
+	4	4	22.627
+	2	7	13.304
+
+/* program 25 : Write a program to find the maximum of the given 3 numbers using nested functions */
+
+#include <stdio.h>
+void main()
+{
+	int x, y, z;
+	int res;
+
+	int max(int, int);		// function prototype
+	printf("\nEnter 3 integer values\n");
+	scanf("%d%d%d",&x, &y, &z);
+
+	res = max(x, max(y,z));
+	printf("\nMaximum value = %d\n",res);
+}
+
+int max(int a, int b)
+{
+	return (a > b) ? a : b;
+}
+Output : 
+
+Enter 3 integer values
+62
+598
+45
+
+Maximum value = 598
+Press any key to continue
+
+/* Program 26 : Write a program to compute the following expression : 
+	z = sqrt( (x+y)^2 + (x-y)^2 )	*/
+
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+	long x, y;
+	float z;
+
+	long xpy(long, long);		// function prototype
+	long xmy(long, long);
+
+	printf("\nThe expression to be evaluated is : z = sqrt( (x+y)^2 + (x-y)^2 )\n");
+	printf("\nEnter x any y values :\n");
+	scanf("%d%d",&x, &y);
+
+	z = sqrt(	xpy(x,y) + xmy(x,y) );
+	printf("\nresult = %.3f\n",z);
+}
+
+long xpy(long x, long y)
+{
+	return pow( (x+y),2);		// return (x+y)*(x+y);
+}
+
+long xmy(long x, long y)
+{
+	return (x-y)*(x-y);		// return pow( (x-y),2 );
+}
+Output : 
+
+The expression to be evaluated is : z = sqrt( (x+y)^2 + (x-y)^2 )
+
+Enter x any y values :
+4
+3
+
+result = 7.071
+Press any key to continue
+	x	y	z = sqrt( (x+y)^2 + (x-y)^2 )
+	--	--	----------------------------
+	10	10		20.000
+	5	2		7.616
+	2	3		5.099
+	7	8		15.033
+	4	4		8.000
+	2	7		10.296
+
+/* Program 27 : Write a program to compute the following expression.
+	z = sqrt( ( (x+y)^2 + (x-y)^2 )^3 + 10 )	*/
+
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+	long x, y, res;
+	float z;
+
+	long xpy(long, long) , xmy(long, long);			// function prototype
+	// long xpy(long, long);
+	// long xmy(long, long);
+	long cube(long,long);
+
+	printf("\nThe expression to be evaluated is : z = sqrt( ( (x+y)^2 + (x-y)^2 )^3 + 10 )\n");
+	printf("\nEnter x and y values : \n");
+	scanf("%ld%ld",&x, &y);
+
+	res = cube( xpy(x,y), xmy(x,y) );
+	z = sqrt(res);
+
+	printf("\nResult = %.3f\n",z);
+}
+
+long xpy(long x, long y)
+{
+	return pow( (x+y),2);	// return (x+y)*(x+y);
+}
+
+long xmy(long x, long y)
+{
+	long res;
+	res = (x-y)*(x-y);		// res = pow( (x-y),2 );
+	return res;
+}
+
+long cube(long a, long b)
+{
+	return ( pow( (a+b),3 ) + 10 );
+	//return ( (a+b)*(a+b)*(a+b)+10 );
+}
+Output : 
+
+The expression to be evaluated is : z = sqrt( ( (x+y)^2 + (x-y)^2 )^3 + 10 )
+
+Enter x and y values :
+5
+3
+
+Result = 560.751
+Press any key to continue
+
+	x	y	z = sqrt( ( (x+y)^2 + (x-y)^2 )^3 + 10 )
+	--	--	----------------------------------------
+	5	3		560.751
+	-3	2		132.612
+	5	7		1800.500
+	10	6		4485.940
+
+/* Program 28 : Write a program using nested functions to compute the following expression.
+		z = sqrt( ( (x+y)^2 )^3 )	*/
+
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+	int x, y;
+	float z;
+
+	long square(int, int);		// function prototype
+	long cube(long);
+
+	printf("\nThe expression to be evaluated is : z = sqrt( ( (x+y)^2 )^3 )\n");
+	printf("\nEnter x and y values : \n");
+	scanf("%d%d",&x, &y);
+
+	z = sqrt(cube(square(x,y)));
+	printf("\nResult = %.3f\n",z);
+}
+
+long square(int x, int y)
+{
+	return (x+y)*(x+y);		// return pow((x+y),2);
+}
+
+long cube(long a)
+{
+	return pow(a,3);	// return a*a*a;
+}
+Output :
+
+The expression to be evaluated is : z = sqrt( ( (x+y)^2 )^3 )
+
+Enter x and y values :
+5
+2
+
+Result = 343.000
+Press any key to continue
+
+	x	y	z = sqrt( ( (x+y)^2 )^3 )
+	--	--	-------------------------
+	5	2		343.000
+	14	20		39304.000
+	-2	4		8.000
+	10	10		8000.000
+
+/* Program 29 : Recursive Functions
+	Write a program using recursive methods to compute the factorial of a given number.
+
+	Note : A function calling itself is called as Recursive function.
+		Recursive functions are useful in implementing data structures such as binary trees. Recursive functions consume more system resources than non-recursive methods. So it is advisable to use non-recursive methods rather than recursive methods whenever possible. Infinite recursions leads to system hangup. There should be some logic built in the program that stops the no.of recursions at some call.
+
+*/
+
+#include <stdio.h>
+void main()
+{
+	long res;
+	int num;
+	long factorial(int);		// function prototype
+	char ch='y';
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter a number to find its factorial : ");
+		else
+		{
+			printf("\nInvalid input. Negative numbers are not accepted\n");
+			printf("Enter a positive number to find its factorial : ");
+		}
+		scanf("%d",&num);
+		if(num <0)
+			ch='n';
+	}while(num < 0);
+
+	res = factorial(num);
+
+	printf("\nFactorial of %d = %ld\n",num, res);
+}
+
+long factorial(int num)
+{
+	long res;
+	if(num == 0)
+		return 1;
+
+	res = num * factorial(num-1);
+	return res;
+}
+Output :
+
+Enter a number to find its factorial : -8
+
+Invalid input. Negative numbers are not accepted
+Enter a positive number to find its factorial : 8
+
+Factorial of 8 = 40320
+Press any key to continue
+
+/* Program 30 : Assignment
+	Write a program to find the sum of numbers from 1 to the given number using recursive functions */
+
+#include <stdio.h>
+void main()
+{
+	long res, res1;
+	int num;
+	long sum(int);			// function prototype
+
+	printf("\nEnter the number upto which you want the sum : ");
+	scanf("%d",&num);
+
+	res1 = (long)num*(num+1)/2;
+	printf("\nFormula used: n*(n+1)/2, sum = %ld",res1);
+
+	res = sum(num);
+	printf("\nUsing recursion, sum = %ld\n",res);
+}
+
+long sum(int n)
+{
+	long res;
+	if(n==0)
+		return 0;
+	res = n+sum(n-1);			
+	return res;
+}
+Output : 
+
+Enter the number upto which you want the sum : 50
+
+Formula used: n*(n+1)/2, sum = 1275
+Using recursion, sum = 1275
+Press any key to continue
+
+	number			sum
+	------			---
+	10			55	
+	15			120
+	20			210
+	100			5050;
+	150			11325;						500			12550
+	1500			1125750
+
+/* Program 31 : Write a program to fnd out the fibonocci series by using the recursive function */
+
+#include<stdio.h>
+void main()
+{
+	long num;
+	char ch='y';
+	void fibonocci(long);		// function prototype
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter how many finonocci numbers to be generated : ");
+		else
+		{
+			printf("\nInvalid input. Negative numbers are not accepted");
+			printf("\nEnter how many finonocci numbers to be generated : ");
+		}
+		scanf("%ld",&num);
+		if(num < 0)
+			ch='n';
+	}while(num<0);
+
+	printf("\nThe fibonocci series is ......\n");
+	fibonocci(num);
+
+	printf("\n\n");
+}
+
+void fibonocci(long n)
+{
+	static unsigned long a, b;
+	long temp;
+	if(n<2)
+	{
+		a=0;
+		b=1;
+	}
+	else
+	{
+		fibonocci(n-1);
+		temp=b;
+		b=a+b;
+		a=temp;
+	}
+	printf("%12u\t",a);
+}
+Output : 
+
+Enter how many finonocci numbers to be generated : -25
+
+Invalid input. Negative numbers are not accepted
+Enter how many finonocci numbers to be generated : 25
+
+The fibonocci series is ......
+           0               1               1               2               3
+           5               8              13              21              34
+          55              89             144             233             377
+         610             987            1597            2584            4181
+        6765           10946           17711           28657           46368
+
+
+Press any key to continue
+
+/* Program 32 : Global variables Example 1.
+	Note : 
+	1. They are declared outside a function.
+	2. The life of a global variable starts from its point of 	   declaration upto the end of the program.
+	3. Global variables are in active state in all the functions 		   that are defined after its declaration.
+	4. Global variables are initialized to 0 during declaration.
+	5. Global variables does'nt belong to one function, it belongs
+	   to all the functions.
+	6. Changes made to global variable by one function are visible
+	   in other functions.
+*/
+
+#include <stdio.h>
+
+int num = 10;		// global variable declaration
+void main()
+{
+	int temp;		// local variable wrt main()
+	
+	void modify();		// function prototype
+	void change();
+
+	temp = num + 10;	// temp = 10 + 10 = 20
+	printf("\n%d", num);	// 10
+	num++;		// 11
+	printf("\n%d",num);		//	11
+
+	modify();
+	printf("\n%d",num);		//	21
+	num++;					//	22
+	printf("\n%d",num);		//	22
+	
+	change();				//	23
+	printf("\n%d",num);		//	23
+	num++;					//	24
+	printf("\n%d\n\n", num);		//	24
+
+}
+
+void modify()
+{
+	num = num+10;		// num = 11+10=21
+	printf("\n%d",num);	//21
+}
+void change()
+{
+	num++;			//	23
+	printf("\n%d", num);	//	23
+}
+Output : 
+
+10
+11
+21
+21
+22
+23
+23
+24
+
+Press any key to continue
+
+/* Program 33 : Global variable example 2 */
+#include <stdio.h>
+void main()
+{
+	int temp, num=5;		// local variables
+	
+	void modify();			// function prototype
+	void change();				
+	
+	printf("\n%d", num);		// num = 5
+	num++;						// num = 6
+	printf("\n%d", num);		// num = 6
+	
+	modify();					// local variable is given preference when compared to global variable
+	printf("\n%d", num);		// num = 6
+	num++;						// num = 7
+	printf("\n%d", num);		// num = 7
+
+	change();
+	printf("\n%d", num);		// num = 7
+	num++;						// num = 8
+	printf("\n%d", num);		// num = 8
+
+	printf("\n\n");
+
+}
+int num = 10;				// global variable
+/*
+	Note: Only modify() and change() function can access the global variable, num. main() function can not access global variable, num, because num is declared as global after main function.
+*/
+
+void modify()
+{
+	num = num + 10;		// num = 10+10=20
+	printf("\n%d", num);	// num = 20
+}
+
+void change()
+{
+	num++;			// num = 20+1=21
+	printf("\n%d",num);	// num = 21
+}
+Output :
+
+5
+6
+20
+6
+7
+21
+7
+8
+
+Press any key to continue
+
+/* Program 34 : Global variable Example 3 */
+
+/* Note: If the local variable and global variable has the same name, then the priority is
+	given to a local variable */
+
+#include <stdio.h>
+void main()
+{
+	int temp, num=5;			// local variables declaration
+
+	void modify();				// function prototype
+	void change();
+
+	temp = num+10;				// temp = 5+10=15
+	printf("\n%d", num);		// num = 5
+	num++;						// num = 6
+	printf("\n%d",num);			// num = 6
+
+	modify();
+	printf("\n%d", num);		// num = 6
+	num++;						// num = 6+1 = 7
+	printf("\n%d",num);			// num = 7
+
+	change();
+	printf("\n%d", num);		// num = 7
+	num++;						// num = 7+1 = 8
+	printf("\n%d\n\n", num);	// num = 8
+}
+
+void modify()
+{
+	int num = 100;				// local variable
+	num = num+10;				// num = 100+10 = 110
+	printf("\n%d", num);		// num = 110
+}
+
+int num = 10;					// global variable declaration
+/*
+	Note: main() and modify() functions can not access the global variable, num.
+	Only change() function can access the global variable, num, since gloabl
+	variable num, is declared after modify() function.
+*/
+void change()
+{
+	num++;						// num = 10+1 = 11
+	printf("\n%d",num);			// num = 11
+}
+Output : 
+
+5
+6
+110
+6
+7
+11
+7
+8
+
+Press any key to continue
+
+/* Program 35 : Global Variable Example 4 : */
+#include <stdio.h>
+int num = 10;			// global variable
+
+/*
+	Note: If the local variable and global variable has the same name, then the 
+	priority is given to a local variable.
+*/
+
+void main()
+{
+	int temp, num=5;	// local variable declarations
+
+	void modify();		// function prototype
+	void change();
+
+	temp = num+10;		// temp = 5+10 = 15
+	printf("\n%d", num);	// num = 5
+	num++;				// num = 5+1 = 6
+	printf("\n%d",num);	// num = 6
+
+	modify();
+	printf("\n%d", num);	// num = 6
+	num++;					// num = 6+1 = 7
+	printf("\n%d", num);	// num = 7
+
+	change();
+	printf("\n%d", num);	// num = 7
+	num++;					// num = 7+1 = 8
+	printf("\n%d\n\n",num);	// num = 8
+}
+
+void modify()
+{
+/*
+	If a local variable has the same name as a global variable, the compiler will
+	consider the the local variable and will ignore the global variable within that
+	function.
+*/
+	int num = 100;			// local variable
+	num = num+10;			// num = 100+10 = 110
+	printf("\n%d",num);		// num = 110
+}
+
+void change()
+{
+	// Accesses global variable since no local variable with the same name as global variable
+	num++;					// num = 10+1 = 11
+	printf("\n%d",num);		// num = 11
+}
+Output : 
+
+5
+6
+110
+6
+7
+11
+7
+8
+
+Press any key to continue
+
+/* Program 36 : extern variable declaration example.
+	extern is a reserved word. */
+
+#include <stdio.h>
+/*
+	If global variables are not initialized externally, then automatically it
+	initializes to 0.
+*/
+void main()
+{
+	int temp;
+	extern num;				// extern int num;
+
+	void modify();			// function prototype
+	void change();
+	
+	temp = num+10;			// temp = 10+10 = 20
+	printf("\n%d",num);		// num = 10
+	num++;					// num = 10+1 = 11
+	printf("\n%d",num);		// num = 11
+
+	modify();
+	printf("\n%d",num);
+	num++;					// num = 11+1 = 12
+	printf("\n%d",num);		// num = 12
+	
+	change();
+	printf("\n%d",num);		// num = 13
+	num++;					// num = 13+1 = 14
+	printf("\n%d",num);		// num = 14
+
+	printf("\n\n");
+
+}
+
+void modify()
+{
+	int num = 100;			// local variable
+	num = num+10;			// num = 100+10 = 110
+	printf("\n%d",num);		// num = 110
+}
+
+void change()
+{
+	extern num;				// num = 12
+	num++;					// num = 12+1 = 13
+	printf("\n%d",num);		// num = 13
+}
+int  num = 10 ;
+
+Output : 
+
+10
+11
+110
+11
+12
+13
+13
+14
+
+Press any key to continue
+
+/* Program 37 : Global array Example */
+#include <stdio.h>
+
+int num[20], sz;			// global declaration
+void main()
+{
+	char ch = 'y';
+	void enter();
+	void disp();
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter the size of the array(max. 20) : ");
+		else
+		{
+			printf("\nInvalid input. Array size must be in between 1 to 20 only.");
+			printf("\nEnter the size of the array(max. 20) : ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>20)
+			ch = 'n';
+	}while(sz<=0 || sz>20);
+
+	enter();
+	disp();
+
+	printf("\n\n");
+}
+
+void enter()
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("Enter value %d : ",i+1);
+		scanf("%d",&num[i]);
+	}
+}
+
+void disp()
+{
+	for(int i=0; i<sz; i++)
+		printf("%d\t",num[i]);
+}
+
+Output :
+
+Enter the size of the array(max. 20) : -14
+
+Invalid input. Array size must be in between 1 to 20 only.
+Enter the size of the array(max. 20) : 25
+
+Invalid input. Array size must be in between 1 to 20 only.
+Enter the size of the array(max. 20) : 6
+Enter value 1 : 54
+Enter value 2 : 36
+Enter value 3 : -98
+Enter value 4 : 23
+Enter value 5 : 201
+Enter value 6 : 241
+54      36      -98     23      201     241
+
+Press any key to continue
+
+/* Program 38 : static variable example 1 :
+Note: 
+	1. They are declared inside a function.
+	2. The life of a static variable starts from its point of declaration upto the
+		end of the program.
+	3. static variables retain their latest value between function calls.
+	4. static variables are initialized to zero during declaration.
+	5. Declaration of static variable
+		static datatype varable(s);
+*/
+
+#include <stdio.h>
+void main()
+{
+	int i, res;				// local variable declarations
+
+	int modify();			// function prototype
+	for(i=0; i<5; i++)
+	{
+		res = modify();
+		printf("%d\n",res);
+	}
+}
+
+modify()
+{
+	int n = 5;		// local variable  
+	n++;
+	return n;
+}
+
+Output :
+6
+6
+6
+6
+6
+Press any key to continue
+
+/* Program 39 : static variable example 2 : */
+
+#include <stdio.h>
+void main()
+{
+	int i, res;				// local variable declarations
+
+	int modify();			// function prototype
+	for(i=0; i<5; i++)
+	{
+		res = modify();
+		printf("%d\n",res);
+	}
+}
+
+modify()
+{
+	static int n = 5;		// static variable
+	n++;
+	return n;
+}
+Output :
+6
+7
+8
+9
+10
+Press any key to continue
+
+/* Program 40 : static variable example 3 : */
+/*
+	Note: Local variables are allocated in memory stack whereas global and static
+variables are allocated in memory heap.
+*/
+#include <stdio.h>
+void main()
+{
+	int i, res;				// local variable declarations
+
+	int modify();			// function prototype
+	for(i=0; i<5; i++)
+	{
+		res = modify();
+		printf("%d\n",res);
+	}
+}
+
+modify()
+{
+	static int n;		// static variable. Default initialization is 0
+	n++;
+	return n;
+}
+Output :
+1
+2
+3
+4
+5
+Press any key to continue
+
+/* Program 41 : Register variable example :
+	Declaration:	register datatype variable;
+		Declaring a register variable is an request to an operating system(o/s) to allocate a register to the variable rather than allocating a memory. Memory is external to CPU 
+(Central Processing Unit). Registers are nothing but a high-speed memory. It is a part of
+CPU. The execution speed is very fast if a loop variable is declared as register. */
+
+#include <stdio.h>
+void main()
+{
+	register int i=0;			// Declaring i as register variable
+	//int i=0;					// Declaring i as non-register variable
+	long sum=0;
+	for(i=0; i<=32000; i++)
+		sum += i;	// sum = sum + i;
+	printf("\nsum = %d\n",sum);
+}
+/* Note : The execution speed is very fast when compared to not registered variables. */
+Output :
+
+sum = 512016000
+Press any key to continue
+

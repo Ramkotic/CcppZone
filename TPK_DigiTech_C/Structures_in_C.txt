@@ -1,0 +1,2356 @@
+/* Program 1 : Demonstrating the usage of structure template, taking book as entity */
+
+#include <stdio.h>
+#include <string.h>
+
+struct tt
+{
+	int bcode;			// book code
+	char title[30];
+	char author[30];
+	float price;
+	int ed;
+};
+
+void main()
+{
+	struct tt b1 = {101, "cobol", "rajaraman",175.50, 1992};
+	float price;
+	// initialization during declaration
+
+	struct tt b2, b3, b4;	// declaring structure variables
+
+	b2.bcode = 102;	// assignment
+	strcpy(b2.title , "c programming");
+	strcpy(b2.author, "bala guruswamy");
+	b2.price = 325.50;
+	b2.ed = 1999;
+
+	// Accepting/Scanning the record information from user
+	printf("\nEnter book code : ");
+	scanf("%d",&b3.bcode);
+	
+	printf("\nEnter title and author of the book : \n");
+	fflush(stdin);
+	gets(b3.title);
+
+	fflush(stdin);
+	gets(b3.author);
+
+	printf("\nEnter price and year of edition : \n");
+	scanf("%f%d",&price, &b3.ed);
+	b3.price = price;
+
+	/* copying the contents of stucture variable b1 to structure 			variable b4 */
+	b4 = b1;		
+
+	// printing all the books information
+	printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+	printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",b1.bcode, b1.title, b1.author, b1.price, b1.ed);
+	printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",b2.bcode, b2.title, b2.author, b2.price, b2.ed);
+	printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",b3.bcode, b3.title, b3.author, b3.price, b3.ed);
+	printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d\n\n",b4.bcode, b4.title, b4.author, b4.price, b4.ed);
+}
+
+Output :
+
+Enter book code : 103
+
+Enter title and author of the book :
+learning c++
+herbert schildt
+
+Enter price and year of edition :
+350.75
+2000
+
+
+bcode   title                   author                      price       edition
+
+101     cobol                   rajaraman                   175.50      1992
+102     c programming           bala guruswamy              325.50      1999
+103     learning c++            herbert schildt             350.75      2000
+101     cobol                   rajaraman                   175.50      1992
+
+Press any key to continue
+
+/* Program 2 ; Array of Structures */
+
+#include <stdio.h>
+#include <string.h>
+
+struct tt
+{
+	int bcode;
+	char title[30];
+	char author[30];
+	float price;
+	int ed;
+};
+
+void main()
+{
+	struct tt book[10];
+	int i, sz;
+	float price;
+	char ch='y';
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of books (max. 10) : ");
+		else
+		{
+			printf("\n%d is invalid input.",sz);
+			printf("\nEnter valid no.of books (max. 10 only) : ");
+		}
+		scanf("%d",&sz);
+
+		if(sz<=0 || sz>10)
+			ch='n';
+	}while(sz<=0 || sz>10);
+
+	// Accepting sz no.of books information from user
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		book[i].bcode = 101+i;
+
+		printf("Enter title of the book %d :  ",i+1);
+		fflush(stdin);
+		gets(book[i].title);
+
+		printf("Enter author of the book \"%s\"   :  ",book[i].title);
+		fflush(stdin);
+		gets(book[i].author);
+
+		printf("Enter price of the book \"%s\"    :  ",book[i].title);
+		scanf("%f",&price);
+		book[i].price = price;
+
+		printf("Enter year of edition for book \"%s\"   :  ",book[i].title);
+		scanf("%d",&book[i].ed);
+
+	}
+
+	printf("\nDetails of all the books");
+	printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+	
+	for(i=0; i<sz; i++)
+		printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",book[i].bcode, book[i].title, book[i].author, book[i].price, book[i].ed);
+
+	printf("\n\n");
+}
+
+Output : 
+
+Enter no.of books (max. 10) : 0
+
+0 is invalid input.
+Enter valid no.of books (max. 10 only) : -5
+
+-5 is invalid input.
+Enter valid no.of books (max. 10 only) : 15
+
+15 is invalid input.
+Enter valid no.of books (max. 10 only) : 5
+
+Enter title of the book 1 :  Thermodynamics
+Enter author of the book "Thermodynamics"   :  p.k. nag
+Enter price of the book "Thermodynamics"    :  325.55
+Enter year of edition for book "Thermodynamics"   :  1999
+
+Enter title of the book 2 :  Fluid Mechanics
+Enter author of the book "Fluid Mechanics"   :  bansal
+Enter price of the book "Fluid Mechanics"    :  199.99
+Enter year of edition for book "Fluid Mechanics"   :  2000
+
+Enter title of the book 3 :  Learing C++
+Enter author of the book "Learing C++"   :  Herbert Schildt
+Enter price of the book "Learing C++"    :  375.95
+Enter year of edition for book "Learing C++"   :  1998
+
+Enter title of the book 4 :  Windows Programming
+Enter author of the book "Windows Programming"   :  Charles Petzold
+Enter price of the book "Windows Programming"    :  725
+Enter year of edition for book "Windows Programming"   :  2002
+
+Enter title of the book 5 :  Thinking in C++
+Enter author of the book "Thinking in C++"   :  Bruce Eckel
+Enter price of the book "Thinking in C++"    :  499.99
+Enter year of edition for book "Thinking in C++"   :  2003
+
+Details of all the books
+
+bcode   title                   author                     price        edition
+
+101     Thermodynamics          p.k. nag                    325.55      1999
+102     Fluid Mechanics         bansal                      199.99      2000
+103     Learing C++             Herbert Schildt             375.95      1998
+104     Windows Programming     Charles Petzold             725.00      2002
+105     Thinking in C++         Bruce Eckel                 499.99      2003
+
+Press any key to continue
+
+
+Enter no.of books (max. 10) : 5
+-------------------------------------------------------------
+Enter title of the book 1 :  Learning C++
+Enter author of the book "Learning C++"  :  Herbert Schildt
+Enter price of book "Learning C++"  :  355.75
+Enter year of edition for book "Learning C++"  :  1999
+-------------------------------------------------------------
+Enter title of the book 2 :  Thermodynamics
+Enter author of the book "Thermodynamics"  :  pk nag
+Enter price of book "Thermodynamics"  :  175.99
+Enter year of edition for book "Thermodynamics"  :  2000
+-------------------------------------------------------------
+Enter title of the book 3 :  Windows Programming
+Enter author of the book "Windows Programming"  :  Charles Petzold
+Enter price of book "Windows Programming"  :  725.99
+Enter year of edition for book "Windows Programming"  :  2002
+-------------------------------------------------------------
+Enter title of the book 4 :  Thinking in C++
+Enter author of the book "Thinking in C++"  :  Bruce Eckel
+Enter price of book "Thinking in C++"  :  499.99
+Enter year of edition for book "Thinking in C++"  :  2003
+-------------------------------------------------------------
+Enter title of the book 5 :  Advanced Windows
+Enter author of the book "Advanced Windows"  :  Jeffrey Ritcher
+Enter price of book "Advanced Windows"  :  750.25
+Enter year of edition for book "Advanced Windows"  :  2003
+-------------------------------------------------------------
+Details of all the books
+
+bcode   title                   author                     price        edition
+
+101     Learning C++            Herbert Schildt             355.75      1999
+102     Thermodynamics          pk nag                      175.99      2000
+103     Windows Programming     Charles Petzold             725.99      2002
+104     Thinking in C++         Bruce Eckel                 499.99      2003
+105     Advanced Windows        Jeffrey Ritcher             750.25      2003
+
+Press any key to continue
+
+/* Program 3 : Array of Structures --- book program.
+	Extend  the above program(i.e., Program2) by solving the following queries.
+		1. Given the author name, display title and price of the books written by the
+			author.
+		2. Display the title, author name, price of the book and year of edition
+			whose price is greater than the user's entered value.
+		3. Display no.of books published in the given year.
+		4. Display the details of book which has the highest price.
+		5. Display the details of book which has the lowest price.
+		6. Display all the details of the books whose prices are less than the
+			entered value.
+		7. Display all the details of existing books.
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <conio.h>		// getch()
+#include <process.h>	// exit()
+
+#define line(n) for(k=1; k<=n; k++) printf("-")
+
+struct tt
+{
+	int bcode;
+	char title[30];
+	char author[30];
+	float price;
+	int ed;
+};
+
+void main()
+{
+	struct tt books[10], temp1;
+	int i, sz, choice, j, n=0, yr, k;
+	char ch='y', name[30];
+	float price, p, max=0, min=0;
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of books (max. 10) : ");
+		else
+		{
+			printf("\n%d is invalid input. 0 or Negative numbers are not accepted.",sz);
+			printf("\nEnter valid no.of books (in between 1 to 10 only) : ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>10)
+			ch='n';
+		else
+			ch='y';
+	}while(sz<=0 || sz>10);
+
+	line(80);
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		books[i].bcode = 101+i;
+
+		printf("Enter title of the book %d :  ",i+1);
+		fflush(stdin);
+		gets(books[i].title);
+
+		printf("Enter author of the book \"%s\"  :  ",books[i].title);
+		fflush(stdin);
+		gets(books[i].author);
+
+		printf("Enter price of book \"%s\"  :  ",books[i].title);
+		scanf("%f",&price);
+		books[i].price = price;
+
+		printf("Enter year of edition for book \"%s\"  :  ",books[i].title);
+		scanf("%d",&books[i].ed);
+		line(80);
+	}	// end of for loop
+	
+	printf("\nDetails of all the books");
+	printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+	
+	for(i=0; i<sz; i++)
+		printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+
+	do
+	{
+		printf("\n");
+		line(80);
+		printf("\nSelect any one of the following queries and get the result\n");
+		printf("\n1. Given the author name, display title and price of the books"
+			" written by the        author");
+		printf("\n2. Display the title, author, price and year of edition "
+			"of the book whose price      is greater than the "
+			"user's entered value");
+		printf("\n3. Display no.of books published in the given year");
+		printf("\n4. Display the details of book which has the highest price");
+		printf("\n5. Display the details of book which has the lowest price");
+		printf("\n6. Display all the details of books whose prices are "
+			"less than the entered value");
+		printf("7. Display all the details of existing books");
+		printf("\n8. Exit");
+
+		printf("\n");
+		printf("\nEnter your query choice (1/2/3/4/5/6/7/8) : ");
+		scanf("%d",&choice);
+
+		switch(choice)
+		{
+		case 1:
+			printf("\nEnter the author name : ");
+			fflush(stdin);
+			gets(name);
+
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+			for(i=0; i<sz; i++)
+			{
+				if(stricmp(books[i].author, name) == 0)
+					printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+			}
+			break;
+		case 2:
+			printf("\nEnter the amount above which you want to purchase : ");
+			scanf("%f",&p);
+
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+			for(i=0; i<sz; i++)
+			{
+				if(books[i].price >= p)
+					printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+			}
+			break;
+		case 3:
+			printf("\nEnter the year of edition : ");
+			scanf("%d",&yr);
+
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+			for(i=0; i<sz; i++)
+			{
+				if(books[i].ed == yr)
+				{
+					n++;
+					printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+				}
+			}
+			printf("\nNo.of books published in the year %d = %d",yr, n);
+			n=0;
+			break;
+		case 4:
+			printf("\nDetails of the book which have the highest price...\n");
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+
+			max = books[0].price;
+			for(i=1; i<sz; i++)
+			{
+				if(books[i].price > max)
+					max = books[i].price;
+			}
+			for(i=0; i<sz; i++)
+			{
+				if(books[i].price == max)
+					printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+			}
+			break;
+		case 5:
+			printf("\nDetails of the book which have the lowest price...\n");
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+
+			min = books[0].price;
+			for(i=1; i<sz; i++)
+			{
+				if(books[i].price < min)
+					min = books[i].price;
+			}
+			for(i=0; i<sz; i++)
+			{
+				if(books[i].price == min)
+					printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+			}
+			break;
+		case 6:
+			printf("\nAt what price you want to purchase (Enter amount) : ");
+			scanf("%f",&price);
+			
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+			for(i=0; i<sz; i++)
+			{
+				if(books[i].price <= price)
+				{
+					printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+					n++;
+				}
+			}
+			if(n>0)
+				printf("\nYou can purchase any of the above books");
+			else
+				printf("\nNo books are available for your amount %.2f :",price);
+			n=0;
+			break;
+		case 7:
+			printf("\nDetails of all the books");
+			printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+			
+			for(i=0; i<sz; i++)
+				printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",books[i].bcode, books[i].title, books[i].author, books[i].price, books[i].ed);
+			break;
+		case 8:
+			printf("\nDo you really want to exit (y/n)? : ");
+			fflush(stdin);
+			ch = getchar();
+			if(ch == 'y' || ch == 'Y')
+			{
+				printf("\nProgram is terminated.");
+				exit(0);
+			}
+			break;
+		default :
+			printf("\nInvalid choice. Press any key to continue...");
+			getch();
+			break;
+		}	// end of switch
+		ch = 'y';
+	}while(ch == 'y');
+
+	printf("\n\n");
+
+}
+
+Output : 
+
+Enter no.of books (max. 10) : 0
+
+0 is invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of books (in between 1 to 10 only) : -6
+
+-6 is invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of books (in between 1 to 10 only) : 11
+
+11 is invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of books (in between 1 to 10 only) : 6
+--------------------------------------------------------------------------------
+
+Enter title of the book 1 :  Thinking In C++
+Enter author of the book "Thinking In C++"  :  Bruce Eckel
+Enter price of book "Thinking In C++"  :  2000
+Enter year of edition for book "Thinking In C++"  :  2001
+--------------------------------------------------------------------------------
+
+Enter title of the book 2 :  Advanced Windows
+Enter author of the book "Advanced Windows"  :  Jeffrey Ritcher
+Enter price of book "Advanced Windows"  :  725
+Enter year of edition for book "Advanced Windows"  :  1999
+--------------------------------------------------------------------------------
+
+Enter title of the book 3 :  Learing C++
+Enter author of the book "Learing C++"  :  Herbert Schildt
+Enter price of book "Learing C++"  :  300
+Enter year of edition for book "Learing C++"  :  2001
+--------------------------------------------------------------------------------
+
+Enter title of the book 4 :  Thinking In Java
+Enter author of the book "Thinking In Java"  :  Bruce Eckel
+Enter price of book "Thinking In Java"  :  1999
+Enter year of edition for book "Thinking In Java"  :  1999
+--------------------------------------------------------------------------------
+
+Enter title of the book 5 :  Mastering C++
+Enter author of the book "Mastering C++"  :  Venu Gopal
+Enter price of book "Mastering C++"  :  300
+Enter year of edition for book "Mastering C++"  :  2001
+--------------------------------------------------------------------------------
+
+Enter title of the book 6 :  Let us C
+Enter author of the book "Let us C"  :  Yaswant Kanetkar
+Enter price of book "Let us C"  :  300
+Enter year of edition for book "Let us C"  :  1999
+--------------------------------------------------------------------------------
+
+Details of all the books
+
+bcode   title                   author                     price        edition
+
+101     Thinking In C++         Bruce Eckel                2000.00      2001
+102     Advanced Windows        Jeffrey Ritcher             725.00      1999
+103     Learing C++             Herbert Schildt             300.00      2001
+104     Thinking In Java        Bruce Eckel                1999.00      1999
+105     Mastering C++           Venu Gopal                  300.00      2001
+106     Let us C                Yaswant Kanetkar            300.00      1999
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 1
+
+Enter the author name : Bruce Eckel
+
+
+bcode   title                   author                     price        edition
+
+101     Thinking In C++         Bruce Eckel                2000.00      2001
+104     Thinking In Java        Bruce Eckel                1999.00      1999
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 7
+
+Details of all the books
+
+bcode   title                   author                     price        edition
+
+101     Thinking In C++         Bruce Eckel                2000.00      2001
+102     Advanced Windows        Jeffrey Ritcher             725.00      1999
+103     Learing C++             Herbert Schildt             300.00      2001
+104     Thinking In Java        Bruce Eckel                1999.00      1999
+105     Mastering C++           Venu Gopal                  300.00      2001
+106     Let us C                Yaswant Kanetkar            300.00      1999
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 7
+
+Details of all the books
+
+bcode   title                   author                     price        edition
+
+101     Thinking In C++         Bruce Eckel                2000.00      2001
+102     Advanced Windows        Jeffrey Ritcher             725.00      1999
+103     Learing C++             Herbert Schildt             300.00      2001
+104     Thinking In Java        Bruce Eckel                1999.00      1999
+105     Mastering C++           Venu Gopal                  300.00      2001
+106     Let us C                Yaswant Kanetkar            300.00      1999
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 3
+
+Enter the year of edition : 1999
+
+
+bcode   title                   author                     price        edition
+
+102     Advanced Windows        Jeffrey Ritcher             725.00      1999
+104     Thinking In Java        Bruce Eckel                1999.00      1999
+106     Let us C                Yaswant Kanetkar            300.00      1999
+No.of books published in the year 1999 = 3
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 5
+
+Details of the book which have the lowest price...
+
+
+bcode   title                   author                     price        edition
+
+103     Learing C++             Herbert Schildt             300.00      2001
+105     Mastering C++           Venu Gopal                  300.00      2001
+106     Let us C                Yaswant Kanetkar            300.00      1999
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 4
+
+Details of the book which have the highest price...
+
+
+bcode   title                   author                     price        edition
+
+101     Thinking In C++         Bruce Eckel                2000.00      2001
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 6
+
+At what price you want to purchase (Enter amount) : 1000
+
+
+bcode   title                   author                     price        edition
+
+102     Advanced Windows        Jeffrey Ritcher             725.00      1999
+103     Learing C++             Herbert Schildt             300.00      2001
+105     Mastering C++           Venu Gopal                  300.00      2001
+106     Let us C                Yaswant Kanetkar            300.00      1999
+You can purchase any of the above books
+--------------------------------------------------------------------------------
+
+Select any one of the following queries and get the result
+
+1. Given the author name, display title and price of the books written by the
+     author
+2. Display the title, author, price and year of edition of the book whose price
+     is greater than the user's entered value
+3. Display no.of books published in the given year
+4. Display the details of book which has the highest price
+5. Display the details of book which has the lowest price
+6. Display all the details of books whose prices are less than the entered value
+7. Display all the details of existing books
+8. Exit
+
+Enter your query choice (1/2/3/4/5/6/7/8) : 8
+
+Do you really want to exit (y/n)? : y
+
+Program is terminated.Press any key to continue
+
+/* Program 4 : Displaying all the prime numbers existing upto the given number */
+#include <stdio.h>
+
+void main()
+{
+	int i, j, sz, op,count=0;;
+	char ch = 'y';
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter the number upto which you want to display all the primes exitsing : ");
+		else
+		{
+			printf("\n%d is invalid input. 0 or Negative numbers are not accepted",sz);
+			printf("\nEnter the valid positive number : ");
+		}
+		scanf("%d",&sz);
+
+		if(sz <= 0)
+			ch = 'n';
+	}while(sz <= 0);
+/*
+	for(i=2; i<=sz; i++)
+	{
+		op = 0;
+		for(j=1; j<=i; j++)
+		{
+			if(i%j == 0)
+				op++;
+		}
+		if(op == 2)
+		{
+			printf("%5d\t",i);
+			count++;
+		}
+	}
+*/	
+// The below procedure is efficient when compared to above procedure.
+		for(i=2; i<=sz; i++)
+		{
+			op = 0;
+			for(j=2; j<=i/2; j++)
+			{
+				if(i%j == 0)
+				{
+					op++;
+					break;
+				}
+			}
+			if(op == 0)
+			{
+				printf("%5d\t",i);
+				count++;
+			}
+		}
+
+
+	printf("\n\nNo.of primes existing between 1 and %d = %d",sz,count);
+	printf("\n\n");
+	
+}
+
+Output : 
+
+Enter the number upto which you want to display all the primes exitsing : 1000
+    2       3       5       7      11      13      17      19      23      29
+   31      37      41      43      47      53      59      61      67      71
+   73      79      83      89      97     101     103     107     109     113
+  127     131     137     139     149     151     157     163     167     173
+  179     181     191     193     197     199     211     223     227     229
+  233     239     241     251     257     263     269     271     277     281
+  283     293     307     311     313     317     331     337     347     349
+  353     359     367     373     379     383     389     397     401     409
+  419     421     431     433     439     443     449     457     461     463
+  467     479     487     491     499     503     509     521     523     541
+  547     557     563     569     571     577     587     593     599     601
+  607     613     617     619     631     641     643     647     653     659
+  661     673     677     683     691     701     709     719     727     733
+  739     743     751     757     761     769     773     787     797     809
+  811     821     823     827     829     839     853     857     859     863
+  877     881     883     887     907     911     919     929     937     941
+  947     953     967     971     977     983     991     997
+
+No.of primes existing between 1 and 1000 = 168
+
+Press any key to continue
+
+/* Program 5 : Pointers to structures.
+	Pointer variables that can hold the starting addresses of structure variables
+are called as Pointers to Structures.
+	Syntax:
+	struct <tagname> *variables(s);
+		<tagname> is an identifier that identifies one structure template from other.
+
+The objective of pointers to structures is to manipulate the structures through pointers.
+  To access the individual members of a structure variable, use ->.
+	Usage :  pointerVariable->member.
+		Once a pointer variable is binded to one of its members using -> ,
+	(arrow operator), the entire combination should be treated like an ordinary variable.
+
+Note : 
+	Since arrow operator (->) has higher priority over ampersand (&), 
+	 &pointervariable->member is same as &(pointervariable->member).
+		eg, &pts->ed is same as &(pts->ed).
+
+*/
+
+#include <stdio.h>
+#include <conio.h>		// getch()
+
+struct tt
+{
+	int bcode;
+	char title[30];
+	char author[30];
+	float price;
+	int ed;
+};
+
+void main()
+{
+	struct tt b1, *pts;
+	float price;
+	pts = &b1;
+
+	pts->bcode = 101;
+	printf("\nEnter title and author of the book : \n");
+	fflush(stdin);
+	gets(pts->title);
+	fflush(stdin);
+	gets(pts->author);
+
+	printf("\nEnter price and year of edition :\n");
+	scanf("%f%d",&price, &(pts->ed));
+	pts->price = price;
+
+	printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+	printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",pts->bcode, pts->title, pts->author, pts->price, pts->ed);
+
+	printf("\n\n");
+
+}
+
+Output :
+
+Enter title and author of the book :
+Mastering C++
+Venu Gopal
+
+Enter price and year of edition :
+199.99
+2001
+
+
+bcode   title                   author                     price        edition
+
+101     Mastering C++           Venu Gopal                  199.99      2001
+
+Press any key to continue
+
+/* Program 6 : Array of Structures using Pointers. */
+
+#include <stdio.h>
+struct tt
+{
+	int bcode;
+	char title[30];
+	char author[30];
+	float price;
+	int ed;
+};
+
+void main()
+{
+	struct tt book[20];
+	int sz;
+	char ch='y';
+
+	void enter(struct tt*, int);	// function prototype
+	void disp(struct tt*, int);
+
+	do
+	{
+		if(ch=='y')
+			printf("\nEnter no.of books (max. 20 only) :  ");
+		else
+		{
+			printf("\n%d is Invalid Input.",sz);
+			printf("\nEnter valid no.of books (between 1 to 20 only) :  ");
+		}
+		scanf("%d",&sz);
+		if(sz <= 0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(book, sz);
+	disp(book, sz);
+	printf("\n\n");
+}
+
+/*
+
+	For accepting (scanning) values to members using pointers, use & symbol before
+pointervariable->member.
+	eg. scanf("%d",&(pts->ed));
+	scanf("%f",&(pts->price));.
+		For displaying the contents of members using pointers, don't put & before
+pointervariable->member.
+	eg. printf("%d",pts->ed); // right
+		printf("%d",&(pts->ed));	// wrong. no need to use &
+		printf("%f",pts->price);
+
+*/
+void enter(struct tt* pts, int sz)
+{
+	float price;
+	for(int i=0; i<sz; i++)
+	{
+		printf("\n");
+		(pts+i)->bcode = 101+i;
+		//pts[i].bcode = 101+i;
+		//(&pts[i])->bcode = 101+i;
+
+		printf("Enter title of the book :  ");
+		fflush(stdin);
+		gets((pts+i)->title);
+		//gets(pts[i].title);
+
+		printf("Enter author of the book \"%s\" :  ", (*(pts+i)).title);
+		//printf("Enter author of the book \"%s\" :  ", pts[i].title);
+		//printf("Enter author of the book \"%s\" :  ", (pts+i)->title);
+		
+		fflush(stdin);
+		gets(pts[i].author);
+		//gets((pts+i)->author);
+
+		printf("Enter price of book \"%s\" :  ", (pts+i)->title);
+		// printf("Enter price of book \"%s\" :  ", pts[i].title);
+		scanf("%f",&price);
+		(pts+i)->price = price;
+		//pts[i].price = price;
+
+		printf("Enter edition of book \"%s\" :  ",(pts+i)->title);
+		scanf("%d",&((pts+i)->ed));
+
+	}
+}
+
+void disp(struct tt* pts, int sz)
+{
+	printf("\nDetails of all the books");
+	printf("\n\nbcode\ttitle \t\t\tauthor\t\t\t   price\tedition\n");
+	
+	for(int i=0; i<sz; i++)
+	{
+		//printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d",pts[i].bcode, pts[i].title, pts[i].author, pts[i].price, pts[i].ed);
+		printf("\n%d\t%-20s\t%-20s\t%10.2f\t%4d", (pts+i)->bcode, (pts+i)->title, (pts+i)->author, (pts+i)->price, (pts+i)->ed);
+	}
+
+}
+
+Output : 
+
+Enter no.of books (max. 20 only) :  -5
+
+-5 is Invalid Input.
+Enter valid no.of books (between 1 to 20 only) :  21
+
+21 is Invalid Input.
+Enter valid no.of books (between 1 to 20 only) :  5
+
+Enter title of the book :  Thermodynamics
+Enter author of the book "Thermodynamics" :  p.k. nag
+Enter price of book "Thermodynamics" :  325.55
+Enter edition of book "Thermodynamics" :  1999
+
+Enter title of the book :  Fluid Mechanics
+Enter author of the book "Fluid Mechanics" :  bansal
+Enter price of book "Fluid Mechanics" :  199.99
+Enter edition of book "Fluid Mechanics" :  2000
+
+Enter title of the book :  Learning C++
+Enter author of the book "Learning C++" :  Herbert Schildt
+Enter price of book "Learning C++" :  375.95
+Enter edition of book "Learning C++" :  1998
+
+Enter title of the book :  Windows Programming
+Enter author of the book "Windows Programming" :  Charles Petzold
+Enter price of book "Windows Programming" :  725.00
+Enter edition of book "Windows Programming" :  2002
+
+Enter title of the book :  Thinking In C++
+Enter author of the book "Thinking In C++" :  Bruce Eckel
+Enter price of book "Thinking In C++" :  199.99
+Enter edition of book "Thinking In C++" :  2003
+
+Details of all the books
+
+bcode   title                   author                     price        edition
+
+101     Thermodynamics          p.k. nag                    325.55      1999
+102     Fluid Mechanics         bansal                      199.99      2000
+103     Learning C++            Herbert Schildt             375.95      1998
+104     Windows Programming     Charles Petzold             725.00      2002
+105     Thinking In C++         Bruce Eckel                 199.99      2003
+
+Press any key to continue
+
+/* Program 7 : payroll of employees */
+
+#include <stdio.h>
+#include <conio.h>
+
+struct tt
+{
+	int empno;
+	char ename[30];
+	char job[30];
+	float sal;
+	float comm;
+	int deptno;
+};
+
+void main()
+{
+	struct tt emp[20];
+	int sz, deptno, empno;
+	char ch='y';
+	float sal, comm;
+	float proll=0;	// payroll
+	float tpay=0;		// total pay
+
+	void enter(struct tt*, int);	// function prototype
+	void disp(struct tt*, int);
+	float payroll(struct tt*, int, int);
+	float totalpay(struct tt*, int, int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of employee's (max. 20 only) :  ");
+		else
+		{
+			printf("\n%d is Invalid Input.",sz);
+			printf("\nEnter valid no.of employee's (in between 1 to 20 only) :  ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(emp, sz);
+
+	do
+	{
+		disp(emp, sz);
+		printf("\nEnter the department number for its payroll :  ");
+		scanf("%d",&deptno);
+		
+		proll = payroll(emp, sz, deptno);
+		if(proll != 0)
+		{
+			printf("\nPayroll of department no. %d = %.2f", deptno, proll);
+		}
+		else
+			printf("\nThe given department no. %d is not present", deptno);
+
+		getch();
+		printf("\nEnter employee number for his total pay :  ");
+		scanf("%d",&empno);
+
+		tpay = totalpay(emp, sz, empno);
+		if(tpay != 0)
+			printf("\nTotal pay of empno: %d = %.2f", empno, tpay);
+		else
+			printf("\nThe given employee no. %d is not present",empno);
+
+		printf("\n\nDo you want to find other details of existing employee's (y/n)? :  ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch=='y' || ch=='Y');
+
+	printf("\n\n");
+}
+
+void enter(struct tt *pts, int sz)
+{
+	int i, deptno;
+	float sal, comm;
+	char ch = 'y';
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		(pts+i)->empno = 1001+i;
+		
+		printf("Enter name of employee %d :  ",i+1);
+		fflush(stdin);
+		gets((pts+i)->ename);
+		//gets(pts[i].ename);
+
+		printf("Enter job of employee \" %s \" :  ",pts[i].ename);
+		fflush(stdin);
+		gets(pts[i].job);
+		//gets((pts+i)->job);
+
+		printf("Enter salary and commission of employee \" %s \" :\n",(pts+i)->ename);
+		scanf("%f%f",&sal, &comm);
+		pts[i].sal = sal;		// (pts+i)->sal = sal;
+		(pts+i)->comm = comm;	//	pts[i].comm = comm;
+
+		do
+		{
+			if(ch == 'y')
+				printf("\nEnter department no. (10 / 20 / 30) :  ");
+			else
+			{
+				printf("\n%d is Invalid Department Number,",deptno);
+				printf("\nEnter the valid Department Number (10/20/30 only) :  ");
+			}
+			scanf("%d",&deptno);
+			if(deptno!=10 && deptno!=20 && deptno!=30)
+				ch='n';
+			else
+				ch='y';
+		}while(deptno!=10 && deptno!=20 && deptno!=30);
+
+		(pts+i)->deptno = deptno;
+	}
+}
+
+// Displaying all employee's details
+void disp(struct tt *pts, int sz)
+{
+	float total;
+	int i;
+
+	printf("\nEmpno   Ename        Job              Salary    Comm      Total_pay  Deptno\n");
+	for(i=0; i<sz; i++)
+	{
+		total = 0;
+		total = pts[i].sal+pts[i].comm;
+		//total = (pts+i)->sal + (pts+i)->comm;
+		printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",(pts+i)->empno,(pts+i)->ename,(pts+i)->job, (pts+i)->sal, (pts+i)->comm, total, (pts+i)->deptno);
+	}
+}
+
+// payroll of a given department number.
+/* payroll means the total salary and commission of all employee's working under one
+department */
+
+float payroll(struct tt *pts, int sz, int deptno)
+{
+	int i;
+	float r=0;
+	for(i=0; i<sz; i++)
+	{
+		if((pts+i)->deptno == deptno)
+		{
+			r = r + (pts+i)->sal + (pts+i)->comm;
+			// r = r + pts[i].sal + pts[i].comm;
+		}
+	}
+	return r;
+}
+
+/* The total pay of an employee. The sum of salary and commission of an employee is
+the total pay. */
+float totalpay(struct tt *pts, int sz, int empno)
+{
+	int i;
+	float sum=0;
+	for(i=0; i<sz; i++)
+	{
+		if(pts[i].empno == empno)
+		{
+			sum = pts[i].sal + pts[i].comm;
+			// sum = (pts+i)->sal + (pts+i)->comm;
+			break;
+		}
+	}
+	return sum;
+}
+
+Output :
+
+Enter no.of employee's (max. 20 only) :  0
+
+0 is Invalid Input.
+Enter valid no.of employee's (in between 1 to 20 only) :  25
+
+25 is Invalid Input.
+Enter valid no.of employee's (in between 1 to 20 only) :  -4
+
+-4 is Invalid Input.
+Enter valid no.of employee's (in between 1 to 20 only) :  4
+
+Enter name of employee 1 :  Palani Kumar
+Enter job of employee " Palani Kumar " :  Sr. Software
+Enter salary and commission of employee " Palani Kumar " :
+25000
+15000
+
+Enter department no. (10 / 20 / 30) :  20
+
+Enter name of employee 2 :  Madhu Sudhan
+Enter job of employee " Madhu Sudhan " :  Doctor
+Enter salary and commission of employee " Madhu Sudhan " :
+50000
+10000
+
+Enter department no. (10 / 20 / 30) :  10
+
+Enter name of employee 3 :  Sowmya
+Enter job of employee " Sowmya " :  Manager
+Enter salary and commission of employee " Sowmya " :
+20000
+10000
+
+Enter department no. (10 / 20 / 30) :  20
+
+Enter name of employee 4 :  Aishwarya Roi
+Enter job of employee " Aishwarya Roi " :  Actress
+Enter salary and commission of employee " Aishwarya Roi " :
+40000
+10000
+
+Enter department no. (10 / 20 / 30) :  30
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    25000.00  15000.00  40000.00      20
+1002    Madhu Sudhan  Doctor          50000.00  10000.00  60000.00      10
+1003    Sowmya        Manager         20000.00  10000.00  30000.00      20
+1004    Aishwarya Roi Actress         40000.00  10000.00  50000.00      30
+Enter the department number for its payroll :  20
+
+Payroll of department no. 20 = 70000.00
+Enter employee number for his total pay :  1002
+
+Total pay of empno: 1002 = 60000.00
+
+Do you want to find other details of existing employee's (y/n)? :  y
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    25000.00  15000.00  40000.00      20
+1002    Madhu Sudhan  Doctor          50000.00  10000.00  60000.00      10
+1003    Sowmya        Manager         20000.00  10000.00  30000.00      20
+1004    Aishwarya Roi Actress         40000.00  10000.00  50000.00      30
+Enter the department number for its payroll :  35
+
+The given department no. 35 is not present
+Enter employee number for his total pay :  1005
+
+The given employee no. 1005 is not present
+
+Do you want to find other details of existing employee's (y/n)? :  y
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    25000.00  15000.00  40000.00      20
+1002    Madhu Sudhan  Doctor          50000.00  10000.00  60000.00      10
+1003    Sowmya        Manager         20000.00  10000.00  30000.00      20
+1004    Aishwarya Roi Actress         40000.00  10000.00  50000.00      30
+Enter the department number for its payroll :  30
+
+Payroll of department no. 30 = 50000.00
+Enter employee number for his total pay :  1003
+
+Total pay of empno: 1003 = 30000.00
+
+Do you want to find other details of existing employee's (y/n)? :  n
+
+
+Press any key to continue
+
+/* Program 8 : Employee Details --- sorting by name, salary, comm or deptno */
+
+#include <stdio.h>
+#include <string.h>
+
+#define line(n) for(int k=1; k<=n; k++) \
+	printf("-")
+
+struct tt
+{
+	int empno;
+	char ename[30];
+	char job[30];
+	float sal;
+	float comm;
+	int deptno;
+};
+
+void main()
+{
+	struct tt emp[20];
+	int sz;
+	char op, ch='y';
+
+	void enter(struct tt*, int);	// function prototype
+	void disp(struct tt*, int);
+	void Sort(struct tt*, int, char);
+
+	line(80);
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of employee details to be entered (max. 20) :  ");
+		else
+		{
+			printf("\n%d is Invalid Input.",sz);
+			printf("\nEnter the valid no.of employee's (between 1 to 20 only) :  ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(emp, sz);
+	disp(emp, sz);
+
+	do
+	{
+		line(80);
+		printf("\nSelect the method of sorting\n");
+		printf("\nsorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  ");
+		fflush(stdin);
+		ch = getchar();
+
+		printf("\nDetails of all employee's Before Sorting\n");
+		disp(emp, sz);
+		printf("\n\nDetails of all employee's After Sorting\n");
+		Sort(emp, sz, ch);
+		disp(emp, sz);
+
+		line(80);
+		printf("\n\nDo you want to sort again in another method (y/n)? :  ");
+		fflush(stdin);
+		op = getchar();
+	}while(op=='y' || op=='Y');
+
+	printf("\n\n");
+}
+
+void enter(struct tt *pts, int sz)
+{
+	int i, deptno;
+	float sal, comm;
+	char ch = 'y';
+
+	line(80);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		(pts+i)->empno = 1001+i;
+		
+		printf("Enter name of employee %d :  ",i+1);
+		fflush(stdin);
+		gets((pts+i)->ename);
+		//gets(pts[i].ename);
+
+		printf("Enter job of employee \" %s \" :  ",pts[i].ename);
+		fflush(stdin);
+		gets(pts[i].job);
+		//gets((pts+i)->job);
+
+		printf("Enter salary and commission of employee \" %s \" :\n",(pts+i)->ename);
+		scanf("%f%f",&sal, &comm);
+		pts[i].sal = sal;		// (pts+i)->sal = sal;
+		(pts+i)->comm = comm;	//	pts[i].comm = comm;
+
+		do
+		{
+			if(ch == 'y')
+				printf("\nEnter department no. (10 / 20 / 30) :  ");
+			else
+			{
+				printf("\n%d is Invalid Department Number,",deptno);
+				printf("\nEnter the valid Department Number (10/20/30 only) :  ");
+			}
+			scanf("%d",&deptno);
+			if(deptno!=10 && deptno!=20 && deptno!=30)
+				ch='n';
+			else
+				ch='y';
+		}while(deptno!=10 && deptno!=20 && deptno!=30);
+
+		(pts+i)->deptno = deptno;
+
+		line(80);
+	}
+}
+
+// Displaying all employee's details
+void disp(struct tt *pts, int sz)
+{
+	float total;
+	int i;
+
+	printf("\nEmpno   Ename        Job              Salary    Comm      Total_pay  Deptno\n");
+	for(i=0; i<sz; i++)
+	{
+		total = 0;
+		total = pts[i].sal+pts[i].comm;
+		//total = (pts+i)->sal + (pts+i)->comm;
+		printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",(pts+i)->empno,(pts+i)->ename,(pts+i)->job, (pts+i)->sal, (pts+i)->comm, total, (pts+i)->deptno);
+	}
+	printf("\n");
+}
+
+void Sort(struct tt *pts, int sz, char ch)
+{
+	int i, j;
+	struct tt temp;
+
+	switch(ch)
+	{
+	case 'n':	// sorting by name
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(strcmp(pts[i].ename, pts[j].ename) > 0)
+				// if(strcmp((pts+i)->ename, (pts+j)->ename) > 0)
+				{
+					temp = pts[i];		// temp = *(pts+i);
+					pts[i] = pts[j];	// *(pts+i) = *(pts+j);
+					pts[j] = temp;		// *(pts+j) = temp;
+				}
+				break;
+	case 'j':
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				//if(strcmp(pts[i].job, pts[j].job) > 0)
+				if(strcmp((pts+i)->job, (pts+j)->job) > 0)
+				{
+					temp = *(pts+i);		// temp = pts[i];		
+					*(pts+i) = *(pts+j);	// pts[i] = pts[j];	
+					*(pts+j) = temp;		// pts[j] = temp;		
+				}
+				break;
+	case 's':
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if( (pts+i)->sal > (pts+j)->sal)
+				// if(pts[i].sal > pts[j].sal)
+				{
+					temp = *(pts+i);		// temp = pts[i];		
+					*(pts+i) = *(pts+j);	// pts[i] = pts[j];	
+					*(pts+j) = temp;		// pts[j] = temp;		
+				}
+				break;
+	case 'c':
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if( (pts+i)->comm > (pts+j)->comm)
+				// if(pts[i].comm > pts[j].comm)
+				{
+					temp = *(pts+i);		// temp = pts[i];		
+					*(pts+i) = *(pts+j);	// pts[i] = pts[j];	
+					*(pts+j) = temp;		// pts[j] = temp;		
+				}
+				break;
+
+	case 'd':
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pts[i].deptno > pts[j].deptno)
+				// if((pts+i)->deptno > (pts+j)->deptno)
+				{
+					temp = pts[i];		// temp = *(pts+i);
+					pts[i] = pts[j];	// *(pts+i) = *(pts+j);
+					pts[j] = temp;		// *(pts+j) = temp;
+				}
+				break;
+	default:
+		printf("\nInvalid Option");
+		break;
+	}	// end of switch
+} // end of Sort()
+
+Output :
+--------------------------------------------------------------------------------
+
+Enter no.of employee details to be entered (max. 20) :  0
+
+0 is Invalid Input.
+Enter the valid no.of employee's (between 1 to 20 only) :  25
+
+25 is Invalid Input.
+Enter the valid no.of employee's (between 1 to 20 only) :  -4
+
+-4 is Invalid Input.
+Enter the valid no.of employee's (between 1 to 20 only) :  4
+--------------------------------------------------------------------------------
+
+Enter name of employee 1 :  Palani Kumar
+Enter job of employee " Palani Kumar " :  Sr. Software
+Enter salary and commission of employee " Palani Kumar " :
+40000
+10000
+
+Enter department no. (10 / 20 / 30) :  20
+--------------------------------------------------------------------------------
+
+Enter name of employee 2 :  Aishwarya Roi
+Enter job of employee " Aishwarya Roi " :  Actress
+Enter salary and commission of employee " Aishwarya Roi " :
+25000
+15000
+
+Enter department no. (10 / 20 / 30) :  15
+
+15 is Invalid Department Number,
+Enter the valid Department Number (10/20/30 only) :  10
+--------------------------------------------------------------------------------
+
+Enter name of employee 3 :  Madhu Sudhan
+Enter job of employee " Madhu Sudhan " :  Doctor
+Enter salary and commission of employee " Madhu Sudhan " :
+15000
+30000
+
+Enter department no. (10 / 20 / 30) :  30
+--------------------------------------------------------------------------------
+
+Enter name of employee 4 :  Sowmya
+Enter job of employee " Sowmya " :  Manager
+Enter salary and commission of employee " Sowmya " :
+75000
+8000
+
+Enter department no. (10 / 20 / 30) :  20
+--------------------------------------------------------------------------------
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+--------------------------------------------------------------------------------
+
+Select the method of sorting
+
+sorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  n
+
+Details of all employee's Before Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Details of all employee's After Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+--------------------------------------------------------------------------------
+
+
+Do you want to sort again in another method (y/n)? :  y
+--------------------------------------------------------------------------------
+
+Select the method of sorting
+
+sorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  j
+
+Details of all employee's Before Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Details of all employee's After Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+--------------------------------------------------------------------------------
+
+
+Do you want to sort again in another method (y/n)? :  y
+--------------------------------------------------------------------------------
+
+Select the method of sorting
+
+sorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  s
+
+Details of all employee's Before Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+
+
+Details of all employee's After Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+--------------------------------------------------------------------------------
+
+
+Do you want to sort again in another method (y/n)? :  y
+--------------------------------------------------------------------------------
+
+Select the method of sorting
+
+sorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  c
+
+Details of all employee's Before Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Details of all employee's After Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+--------------------------------------------------------------------------------
+
+
+Do you want to sort again in another method (y/n)? :  y
+--------------------------------------------------------------------------------
+
+Select the method of sorting
+
+sorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  d
+
+Details of all employee's Before Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+
+Details of all employee's After Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+--------------------------------------------------------------------------------
+
+
+Do you want to sort again in another method (y/n)? :  y
+--------------------------------------------------------------------------------
+
+Select the method of sorting
+
+sorting by (n)ame, (j)ob, (s)alary,  (c)omm, (d)eptno :  p
+
+Details of all employee's Before Sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+
+Details of all employee's After Sorting
+
+Invalid Option
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+--------------------------------------------------------------------------------
+
+
+Do you want to sort again in another method (y/n)? :  n
+
+
+Press any key to continue
+
+/* Program 9 : Array of Pointers to structures ----- Mini Project
+			An array which can hold the addresses of structure variables of same
+template are called as Array of Pointers to Structures.
+	Syntax:
+		struct <tagname> *arrayname[ne]; ne-->no.of elements (integer constant)
+	Objective:
+		To manipulate array of structures through array of pointers to structures.
+
+		Employee's program using array of pointers --- sorting technique is also
+			using array of pointers.
+*/
+
+#include <stdio.h>
+#include <string.h>
+
+struct tt
+{
+	int empno;
+	char ename[30];
+	char job[30];
+	float sal;
+	float comm;
+	int deptno;
+};
+
+void main()
+{
+	struct tt emp[20];
+	struct tt *aop[20];
+
+	void enter(struct tt**, int);			// function prototype
+	void disp(struct tt**, int);
+	void Sort(struct tt**, int , char);
+	float payroll(struct tt**, int, int);
+	float totalpay(struct tt**, int, int);
+
+	float proll, tpay;
+	char ch='y', op;
+	int i, sz, deptno, empno;
+
+	for(i=0; i<20; i++)
+		aop[i] = &emp[i];
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of employee's (max. 20 only) :  ");
+		else
+		{
+			printf("\n%d is Invalid Input.",sz);
+			printf("\nEnter the valid no.of employee's (between 1 to 20 only :  ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0 || sz>20)
+			ch='n';
+	}while(sz<=0 || sz>20);
+
+	enter(aop, sz);
+
+	do
+	{
+		printf("\nDetails of all employee's before sorting\n");
+		disp(aop, sz);
+
+		printf("\n\nEnter Sorting method : \n\t(e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  ");
+		fflush(stdin);
+		op = getchar();
+
+		Sort(aop, sz, op);
+		disp(aop, sz);
+
+		printf("\n\nDo you want to sort again in another method (y/n)? :  ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch == 'y' || ch == 'Y');
+
+	ch = 'y';
+	do
+	{
+		printf("\nEnter Department number (10 / 20 / 30 ) to find its payroll :  ");
+		scanf("%d",&deptno);
+		
+		proll = payroll(aop, sz, deptno);
+		if(proll != 0)
+			printf("\n\nPayroll of Department Number %d = %.2f",deptno, proll);
+		else
+			printf("\n\nThe given Department Number %d is not present", deptno);
+
+		printf("\n\nEnter Employee Number to find his total pay :  ");
+		scanf("%d",&empno);
+		tpay = totalpay(aop, sz, empno);
+
+		if(tpay != 0)
+			printf("\n\nTotal pay of Employee Number : %d =  %.2f",empno, tpay);
+		else
+			printf("\n\nThe given Employee Number %d is not present ", empno);
+
+		printf("\n\nDo you want payroll's and employee's total pay's again (y/n)?:  ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch == 'y' || ch == 'Y');
+
+	printf("\n\n");
+}
+
+// User-Defined function
+void enter(struct tt **pp, int sz)
+{
+	int i, deptno;
+	float sal, comm;
+	char ch='y';
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		pp[i]->empno = 1001+i;
+		//(*(pp+i))->empno = 1001+i;
+
+		printf("Enter name of Employee %d :  ",i+1);
+		fflush(stdin);
+		//gets(pp[i]->ename);
+		gets((*(pp+i))->ename);
+
+		printf("Enter job of Employee \" %s \" :  ",pp[i]->ename);
+		fflush(stdin);
+		//gets((*(pp+i))->job);
+		gets(pp[i]->job);	// pp[i] = *(pp+i);
+
+		printf("Enter Salary and Commission\n");
+		scanf("%f%f",&sal, &comm);
+		pp[i]->sal = sal;
+		pp[i]->comm = comm;
+
+		do
+		{
+			if(ch == 'y')
+				printf("\nEnter the Department Number (10 / 20 / 30) for employee \" %s \" :  ",pp[i]->ename);
+			else
+			{
+				printf("\n%d is Invalid Department Number.",deptno);
+				printf("\nEnter the valid Department Number (either 10 / 20 / 30) :  ");
+			}
+			scanf("%d",&deptno);
+
+			if(deptno!=10 && deptno!=20 && deptno!=30)
+				ch = 'n';
+			else
+				ch = 'y';
+		}while(deptno!=10 && deptno!=20 && deptno!=30);
+		pp[i]->deptno = deptno;
+	}
+}
+
+// Displaying all employee's details
+void disp(struct tt **pp, int sz)
+{
+	float total;
+	int i;
+
+	printf("\nEmpno   Ename        Job              Salary    Comm      Total_pay  Deptno\n");
+	for(i=0; i<sz; i++)
+	{
+		total = 0;
+		total = pp[i]->sal+pp[i]->comm;
+		//total = (*(pp+i))->sal + (*(pp+i))->comm;
+		//printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",(*(pp+i))->empno,(*(pp+i))->ename,(*(pp+i))->job, (*(pp+i))->sal, (*(pp+i))->comm, total, (*(pp+i))->deptno);
+		printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",pp[i]->empno,pp[i]->ename,pp[i]->job, pp[i]->sal, pp[i]->comm, total, pp[i]->deptno);
+	}
+	printf("\n");
+}
+
+float payroll(struct tt **pp, int sz, int deptno)
+{
+	int i;
+	float proll=0;	// payroll
+	float tpay;		// totalpay
+	printf("\n\nPayroll of the Department Number : %d\n",deptno);
+	printf("\nEmpno   Ename        Job              Salary    Comm      Total_pay  Deptno\n");
+
+	for(i=0; i<sz; i++)
+	{
+		if(pp[i]->deptno == deptno)
+		{
+			tpay = 0;
+			tpay = pp[i]->sal + pp[i]->comm;
+			proll = proll + tpay;
+			printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",pp[i]->empno,pp[i]->ename,pp[i]->job, pp[i]->sal, pp[i]->comm, tpay, pp[i]->deptno);
+			//printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",(*(pp+i))->empno,(*(pp+i))->ename,(*(pp+i))->job, (*(pp+i))->sal, (*(pp+i))->comm, tpay, (*(pp+i))->deptno);
+		}
+	}
+	return proll;
+}
+
+/* The total pay of an employee. The sum of salary and commission of an employee is
+the total pay. */
+float totalpay(struct tt **pp, int sz, int empno)
+{
+	int i;
+	float sum=0;
+	printf("\n\nTotalpay of the Employee Number : %d Details\n", empno);
+	printf("\nEmpno   Ename        Job              Salary    Comm      Total_pay  Deptno\n");
+
+	for(i=0; i<sz; i++)
+	{
+		if(pp[i]->empno == empno)
+		{
+			sum = pp[i]->sal + pp[i]->comm;
+			sum = (*(pp+i))->sal + (*(pp+i))->comm;
+			printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",pp[i]->empno,pp[i]->ename,pp[i]->job, pp[i]->sal, pp[i]->comm, sum, pp[i]->deptno);
+			//printf("\n%-8d%-14s%-14s%10.2f%10.2f%10.2f%8d",(*(pp+i))->empno,(*(pp+i))->ename,(*(pp+i))->job, (*(pp+i))->sal, (*(pp+i))->comm, sum, (*(pp+i))->deptno);
+			break;
+		}
+	}
+	return sum;
+}
+
+void Sort(struct tt **pp, int sz, char ch)
+{
+	int i, j;
+	struct tt *temp;
+
+	switch(ch)
+	{
+	case 'e':		// Sorting by empno
+	case 'E':
+		printf("\nDetails of all employee's after sorting wrt empno\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->empno > pp[j]->empno)
+				// if((*(pp+i))->empno > (*(pp+j))->empno)
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}				
+				break;
+
+	case 'n':	// sorting by ename
+	case 'N':
+		printf("\nDetails of all employee's after sorting wrt name\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(strcmp(pp[i]->ename, pp[j]->ename) > 0)
+				// if(strcmp((*(pp+i))->ename, (*(pp+j))->ename) > 0)
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}
+				break;
+	case 'j':		// Sorting by job
+	case 'J':
+		printf("\nDetails of all employee's after sorting wrt job\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(strcmp(pp[i]->job, pp[j]->job) > 0)
+				// if(strcmp((*(pp+i))->job, (*(pp+j))->job) > 0)
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}
+				break;
+	case 's':		// Sorting by salary
+	case 'S':
+		printf("\nDetails of all employee's after sorting wrt salary\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->sal > pp[j]->sal)
+				// if((*(pp+i))->sal > (*(pp+j))->sal)
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}				
+				break;
+	case 'c':		// Sorting by commission
+	case 'C':
+		printf("\nDetails of all employee's after sorting wrt commission\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->comm > pp[j]->comm)
+				// if((*(pp+i))->comm > (*(pp+j))->comm)
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}								break;
+
+	case 'd':		// Sorting by deptno
+	case 'D':
+		printf("\nDetails of all employee's after sorting wrt department number\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->deptno > pp[j]->deptno)
+				// if((*(pp+i))->deptno > (*(pp+j))->deptno)
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}				
+				break;
+	case 't':		// Sorting by totalpay
+	case 'T':
+		printf("\nDetails of all employee's after sorting wrt total pay\n");
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				//if((pp[i]->sal + pp[i]->comm) > (pp[j]->sal + pp[j]->comm))
+				if( ((*(pp+i))->sal + (*(pp+i))->comm) > ( (*(pp+j))->sal + (*(pp+j))->comm))
+				{
+					temp = pp[i];		// temp = *(pp+i);
+					pp[i] = pp[j];		// *(pp+i) = *(pp+j);
+					pp[j] = temp;		// *(pp+j) = temp;
+				}				
+				break;
+
+	default:
+		printf("\nInvalid Option");
+		break;
+	}	// end of switch
+} // end of Sort()
+
+
+Output :
+
+Enter no.of employee's (max. 20 only) :  0
+
+0 is Invalid Input.
+Enter the valid no.of employee's (between 1 to 20 only :  25
+
+25 is Invalid Input.
+Enter the valid no.of employee's (between 1 to 20 only :  -4
+
+-4 is Invalid Input.
+Enter the valid no.of employee's (between 1 to 20 only :  5
+
+Enter name of Employee 1 :  Palani Kumar
+Enter job of Employee " Palani Kumar " :  Sr. Software
+Enter Salary and Commission
+40000
+10000
+
+Enter the Department Number (10 / 20 / 30) for employee " Palani Kumar " :  25
+
+25 is Invalid Department Number.
+Enter the valid Department Number (either 10 / 20 / 30) :  20
+
+Enter name of Employee 2 :  Aishwarya Roi
+Enter job of Employee " Aishwarya Roi " :  Actress
+Enter Salary and Commission
+25000
+15000
+
+Enter the Department Number (10 / 20 / 30) for employee " Aishwarya Roi " :  10
+
+Enter name of Employee 3 :  Madhu Sudhan
+Enter job of Employee " Madhu Sudhan " :  Doctor
+Enter Salary and Commission
+15000
+30000
+
+Enter the Department Number (10 / 20 / 30) for employee " Madhu Sudhan " :  30
+
+Enter name of Employee 4 :  Sowmya
+Enter job of Employee " Sowmya " :  Manager
+Enter Salary and Commission
+75000
+8000
+
+Enter the Department Number (10 / 20 / 30) for employee " Sowmya " :  20
+
+Enter name of Employee 5 :  Krishna Vamsi
+Enter job of Employee " Krishna Vamsi " :  Director
+Enter Salary and Commission
+35000
+12500
+
+Enter the Department Number (10 / 20 / 30) for employee " Krishna Vamsi " :  10
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  t
+
+Details of all employee's after sorting wrt total pay
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Do you want to sort again in another method (y/n)? :  y
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  n
+
+Details of all employee's after sorting wrt name
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Do you want to sort again in another method (y/n)? :  y
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  j
+
+Details of all employee's after sorting wrt job
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+
+
+Do you want to sort again in another method (y/n)? :  y
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  s
+
+Details of all employee's after sorting wrt salary
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Do you want to sort again in another method (y/n)? :  y
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  c
+
+Details of all employee's after sorting wrt commission
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+
+Do you want to sort again in another method (y/n)? :  y
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  d
+
+Details of all employee's after sorting wrt department number
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+
+Do you want to sort again in another method (y/n)? :  y
+
+Details of all employee's before sorting
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+
+Enter Sorting method :
+        (e)mpno, (n)ame, (j)ob, (s)al, (c)omm, (d)eptno, (t)otalpay :  e
+
+Details of all employee's after sorting wrt empno
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+
+
+Do you want to sort again in another method (y/n)? :  n
+
+Enter Department number (10 / 20 / 30 ) to find its payroll :  10
+
+
+Payroll of the Department Number : 10
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1002    Aishwarya Roi Actress         25000.00  15000.00  40000.00      10
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+
+Payroll of Department Number 10 = 87500.00
+
+Enter Employee Number to find his total pay :  1005
+
+
+Totalpay of the Employee Number : 1005 Details
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1005    Krishna Vamsi Director        35000.00  12500.00  47500.00      10
+
+Total pay of Employee Number : 1005 =  47500.00
+
+Do you want payroll's and employee's total pay's again (y/n)?:  y
+
+Enter Department number (10 / 20 / 30 ) to find its payroll :  20
+
+
+Payroll of the Department Number : 20
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1001    Palani Kumar  Sr. Software    40000.00  10000.00  50000.00      20
+1004    Sowmya        Manager         75000.00   8000.00  83000.00      20
+
+Payroll of Department Number 20 = 133000.00
+
+Enter Employee Number to find his total pay :  1003
+
+
+Totalpay of the Employee Number : 1003 Details
+
+Empno   Ename        Job              Salary    Comm      Total_pay  Deptno
+
+1003    Madhu Sudhan  Doctor          15000.00  30000.00  45000.00      30
+
+Total pay of Employee Number : 1003 =  45000.00
+
+Do you want payroll's and employee's total pay's again (y/n)?:  n
+
+
+Press any key to continue
+

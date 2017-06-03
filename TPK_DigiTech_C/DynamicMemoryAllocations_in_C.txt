@@ -1,0 +1,1288 @@
+/*  Program 1 */
+
+// Program using void pointers
+
+#include <stdio.h>
+main()
+{
+	void* vp;
+	char ch='a',op;
+	int num=10,res;
+	float r;
+	
+	printf("\nAddress of character variable, ch = %u\n",&ch);
+	vp = &ch;
+	printf("\nContent of void pointer, vp = %u\n",vp);
+	op = *(char*)vp;
+	printf("\nch = %c, op =%c\n",ch, op);
+
+	printf("\nAddress of integer variable, num = %u\n",&num);
+	vp = &num;
+	printf("\nContent of void pointer, vp = %u\n",vp);
+	res = *(int*)vp;
+	printf("\nnum = %d, res = %d\n",num,res);
+
+	printf("\nAddress of float variable, r = %u\n",&r);
+	vp = &r;
+	printf("\nContent of void pointer, vp = %u\n",vp);
+	*(float*)vp = 3.143f;
+	printf("\nr = %f, r = %f\n",r,*(float*)vp);
+
+
+	return 0;
+}
+
+/* Output */
+
+Address of character variable, ch = 1245048
+
+Content of void pointer, vp = 1245048
+
+ch = a, op =a
+
+Address of integer variable, num = 1245040
+
+Content of void pointer, vp = 1245040
+
+num = 10, res = 10
+
+Address of float variable, r = 1245032
+
+Content of void pointer, vp = 1245032
+
+r = 3.143000, r = 3.143000
+Press any key to continue
+
+/* 
+Program 2 :
+Dynamic Memory Allocation of Single Dimensional Numeric Arrays.
+Student's marks are entered. Display minimum, maximum, average,
+above average marks
+*/
+
+#include <stdio.h>
+#include <malloc.h>
+
+void main()
+{
+	int *ip, sz, min, max;
+	float res;
+
+	void Enter(int*, int);
+	float Average(int*, int);
+	void DisplayAboveAverage(int*, int, float);
+	void Min_Max(int*, int, int*, int*);
+	void Display(int*, int);
+
+	printf("Enter no.of students : ");
+	scanf("%d",&sz);
+
+	ip = (int*)malloc(sz * sizeof(int));
+
+	Enter(ip,sz);
+	
+	printf("\nEntered marks\n");
+	Display(ip, sz);
+
+	res = Average(ip, sz);
+	printf("\nAverage mark = %f",res);
+
+	printf("\nDisplaying above average marks\n");
+	DisplayAboveAverage(ip, sz, res);
+
+	Min_Max(ip, sz, &min, &max);
+	printf("\nMinimum mark = %d\nMaximum mark = %d\n",min, max);
+}
+
+void Enter(int* ip, int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\nEnter student %d marks : ",i+1);
+		scanf("%d",&ip[i]);
+		// scanf("%d",(ip+i));
+	}
+}
+
+void Display(int* ip, int sz)
+{
+	for(int i=0; i<sz; i++)
+		printf("%d\t",ip[i]);  // printf("%d\t",*(ip+i));
+}
+
+float Average(int* ip, int sz)
+{
+	int i=0, sum=0;
+	float avg;
+
+	for(; i<sz; i++)
+		sum = sum + ip[i];  // sum = sum + *(ip+i)
+	
+	avg = (float)sum/sz;
+	return avg;
+}
+
+void DisplayAboveAverage(int* ip, int sz, float avg)
+{
+	for(int i=0; i<sz; i++)
+	{
+		if(ip[i] > avg)  //  if(*(ip+i) > avg)
+			printf("%d\t",ip[i]); // printf("%f\t",*(ip+i));
+	}
+}
+
+void Min_Max(int* ip, int sz, int* pmin, int* pmax)
+{
+	int i;
+	*pmin = ip[0];
+	*pmax = ip[0];
+
+	for(i=1; i<sz; i++)
+	{
+		if(ip[i] < *pmin)
+			*pmin = ip[i];
+
+		if(ip[i] > *pmax)
+			*pmax = ip[i];
+	}
+}
+
+/* Output */
+Enter no.of students : 6
+Enter student 1 marks : 90
+Enter student 2 marks : 80
+Enter student 3 marks : 30
+Enter student 4 marks : 40
+Enter student 5 marks : 70
+Enter student 6 marks : 85
+
+Entered marks
+90      80      30      40      70      85
+Average mark = 65.833333
+Displaying above average marks
+90      80      70      85
+Minimum mark = 30
+Maximum mark = 90
+Press any key to continue
+
+/* 
+Program 3: Dynamic Memory Allocation of Single Dimensional
+Character Array. Display a line of text.
+*/
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+
+void main()
+{
+	char* cp;
+	int l;
+	void DisplayWords(char*);
+
+	cp = (char*)malloc(80 * sizeof(char));
+	printf("\nEnter a line of text\n");
+	gets(cp);
+
+	l = strlen(cp);
+
+	printf("\nLength of the entered text = %d characters\n",l);
+
+	DisplayWords(cp);
+
+}
+/*
+
+void DisplayWords(char* cp)
+{
+	int c=0;
+
+	for(int i=0; cp[i] != '\0'; i++)
+	{
+		if(cp[i] != ' ')
+		{
+			printf("%c",cp[i]);
+			c++;
+		}
+		else if(cp[i+1] != ' ')
+		{
+			if(c != 0)
+				printf("\t%d\n",c);
+			c=0;
+		}
+	}
+	if(c != 0)
+		printf("\t%d\n",c);
+}
+*/
+
+/* The following DisplayWords is same as above */
+
+void DisplayWords(char* cp)
+{
+	int c=0;
+
+	for(int i=0; *(cp+i) != '\0'; i++)
+	{
+		if(*(cp+i) != ' ')
+		{
+			printf("%c",*(cp+i));
+			c++;
+		}
+		else if(*(cp+i+1) != ' ')
+		{
+			if(c != 0)
+				printf("\t%d\n",c);
+			c=0;
+		}
+	}
+	if(c != 0)
+		printf("\t%d\n",c);
+}
+
+/* Output */
+
+Enter a line of text
+  Have a nice day mr. palani kumar
+
+Length of the entered text = 45 characters
+Have    4
+a       1
+nice    4
+day     3
+mr.     3
+palani  6
+kumar   5
+Press any key to continue
+
+/* Program 4 : Program using realloc()
+relloc() syntax:
+	void* realloc(void* block, int size);
+	i.e., void* realloc(starting address of existing block, total size of memory block)
+	Reallocates the main memory. Realloc() function attempts to shrink or expand the 
+previously allocated block to size bytes. Returns the address of the reallocated
+block which can be different than the original address. If the block can not be
+reallocated or size==0, realloc() returns null.
+Purpose:
+	To extend the existing memory block that was dynamically allocated.
+*/
+
+#include <stdio.h>
+#include<malloc.h>
+void main()
+{
+	char *cp;
+	int sz;
+	printf("\nEnter no.of characters in your first name : ");
+	scanf("%d",&sz);
+	cp = (char*)malloc(sz* sizeof(char));
+	fflush(stdin);
+	printf("\nEnter your first name : ");
+	gets(cp);
+
+	printf("\nStarting address of memory block before realloc, cp = %u",cp);
+	printf("\n%Your first name : %s",cp);
+
+	printf("\nEnter no.of characters in your full name : ");
+	scanf("%d",&sz);
+	cp = (char*)realloc(cp, (sz+1)*sizeof(char));
+	printf("\nStarting address of memory block after realloc, cp = %u",cp);
+	printf("\nYour first name : %s",cp);
+	fflush(stdin);
+	printf("\nEnter your full name : ");
+	gets(cp);
+	printf("\nYour full name : %s",cp);
+
+	printf("\n\n");
+}
+Output :
+
+Enter no.of characters in your first name : 6
+
+Enter your first name : palani
+
+Starting address of memory block before realloc, cp = 3084240
+Your first name : palani
+Enter no.of characters in your full name : 12
+
+Starting address of memory block after realloc, cp = 3084240
+Your first name : palani-------²²²²
+Enter your full name : venu gopal
+
+Your full name : venu gopal
+
+Press any key to continue
+
+Note :
+	If rellaoc() function is unable to extend the existing block, the control will allocate
+a new memory block and will automatically transfer the contents of the existing block into the
+new block.
+
+
+/* program 5 : Dynamic Memory Allocation of 2-Dimensional Numeric Arrays.
+Program using calloc.
+	malloc() function allocates memory for one block only whereas calloc() function
+allocates memory for more than one block. malloc() function allocates main memory. 
+	calloc() syntax:
+		void* calloc(no.of blocks, size of each block in bytes)
+Usage:
+	1. To dynamically allocate memory for two dimensional arrays.
+	2. To dynamically allocate memory for array of structures.
+Return value :
+	returns the starting address of the first block as a void pointer */
+
+#include <stdio.h>
+#include <malloc.h>
+
+void main()
+{
+	int *ip, sz;
+	float avg;
+	char ch='y';
+
+	void enter(int*, int);				// function prototype
+	void total(int*, int);
+	float averageTotal(int *, int);
+	void dispAboveAverage(int*, int, float);
+	void disp(int*, int);
+	
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of students : ");
+		else
+		{
+			printf("\nInvalid input. Numbers which are <= 0  not accepted.");
+			printf("\nEnter no.of students : ");
+		}
+		scanf("%d",&sz);
+		if(sz <= 0)
+			ch = 'n';
+	}while(sz<=0);
+
+	// Allocating the memory dynamically
+	ip = (int*)calloc(sz, 4*sizeof(int));
+
+	enter(ip, sz);
+	total(ip, sz);
+
+	printf("\nsub1\t\tsub2\t\tsub3\t\tTotal\n");
+	disp(ip, sz);
+
+	avg = averageTotal(ip, sz);
+	printf("\nAverage of Total marks = %.3f",avg);
+
+	printf("\nAbove average total marks");
+	printf("\nsub1\t\tsub2\t\tsub3\t\tTotal\n");
+	dispAboveAverage(ip, sz, avg);
+
+	printf("\n\n");
+}
+
+void enter(int *ip, int sz)
+{
+	int i, j;
+	char ch='y';
+	for(i=0; i<sz; i++)			// controls no.of rows
+	{
+		printf("\n");
+		for(j=0; j<3; j++)		// controls no.of columns
+		{
+			do
+			{
+				if(ch == 'y')
+					printf("Enter marks of student %d in subject %d : ",i+1,j+1);
+				else
+				{
+					printf("\nInvalid Input. Marks must be in between 0 to 100 only");
+					printf("\nEnter marks of student %d in subject %d : ",i+1,j+1);
+				}
+				scanf("%d",(ip+4*i)+j);
+				if(*((ip+4*i)+j)<0 || *((ip+4*i)+j)>100)
+					ch='n';
+				else
+					ch='y';
+			}while(*((ip+4*i)+j)<0 || *((ip+4*i)+j)>100);
+		}
+	}
+}
+
+void total(int *ip, int sz)
+{
+	int i, j, total;
+	for(i=0; i<sz; i++)
+	{
+		total = 0;
+		for(j=0; j<3; j++)
+			total = total + *(ip+4*i+j);
+		*(ip+4*i+3) = total;
+	}
+}
+
+float averageTotal(int *ip, int sz)
+{
+	int i, sum=0;
+	float avg;
+
+	for(i=0; i<sz; i++)
+		sum = sum + *(ip+4*i+3);
+
+	avg = (float)sum/sz;
+	return avg;
+}
+
+void dispAboveAverage(int *ip, int sz, float avg)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\n");
+		if(*(ip+4*i+3) > avg)
+		{
+			for(int j=0; j<4; j++)
+				printf("%d\t\t",*(ip+4*i+j));
+		}
+	}
+}
+
+void disp(int *ip, int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(int j=0; j<4; j++)
+			printf("%d\t\t",*(ip+4*i+j));
+	}
+}
+Output :
+
+Enter no.of students : -3
+
+Invalid input. Numbers which are <= 0  not accepted.
+Enter no.of students : 3
+
+Enter marks of student 1 in subject 1 : 84
+Enter marks of student 1 in subject 2 : -75
+
+Invalid Input. Marks must be in between 0 to 100 only
+Enter marks of student 1 in subject 2 : 75
+Enter marks of student 1 in subject 3 : 68
+
+Enter marks of student 2 in subject 1 : 95
+Enter marks of student 2 in subject 2 : 78
+Enter marks of student 2 in subject 3 : 101
+
+Invalid Input. Marks must be in between 0 to 100 only
+Enter marks of student 2 in subject 3 : 68
+
+Enter marks of student 3 in subject 1 : 75
+Enter marks of student 3 in subject 2 : 48
+Enter marks of student 3 in subject 3 : 67
+
+sub1            sub2            sub3            Total
+
+84              75              68              227
+95              78              68              241
+75              48              67              190
+Average of Total marks = 219.333
+Above average total marks
+sub1            sub2            sub3            Total
+
+84              75              68              227
+95              78              68              241
+
+
+Press any key to continue
+
+/* Program 6 : Dynamic memory allocation of 2-D String array.
+	Sort the given no.of words using dynamic memory allocation */
+
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+
+void main()
+{
+	char *cp;
+	int sz;
+	char ch='y';
+
+	void enter(char*, int);		// function prototype
+	void sort(char*,int);
+	void disp(char*, int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of words to be sorted : ");
+		else
+		{
+			printf("\nInvalid input. 0 or Negative numbers not accepted");
+			printf("\nEnter no.of words to be sorted : ");
+		}
+		scanf("%d",&sz);
+		if(sz <= 0)
+			ch='n';
+	}while(sz <= 0);
+
+	// Allocating memory to store words dynamically
+	cp = (char*)calloc(sz, 30*sizeof(char));
+
+	enter(cp, sz);
+	
+	printf("\nWords before sorting\n");
+	disp(cp, sz);
+
+	printf("\nWords after sorting\n");
+	sort(cp, sz);
+	disp(cp, sz);
+
+	printf("\n\n");
+}
+
+void enter(char* cp, int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("Enter word %d : ",i+1);
+		scanf("%s",(cp+30*i));
+	}
+}
+
+void disp(char* cp, int sz)
+{
+	for(int i=0; i<sz; i++)
+		printf("\n\t%s",(cp+30*i));
+}
+
+void sort(char *cp, int sz)
+{
+	char temp[30];
+	for(int i=0; i<sz-1; i++)
+		for(int j=i+1; j<sz; j++)
+			if(stricmp((cp+30*i), (cp+30*j) ) > 0)
+			{
+				strcpy(temp, (cp+30*i));
+				strcpy((cp+30*i), (cp+30*j));
+				strcpy((cp+30*j), temp);
+			}
+}
+Output : 
+
+Enter no.of words to be sorted : -5
+
+Invalid input. 0 or Negative numbers not accepted
+Enter no.of words to be sorted : 5
+Enter word 1 : potato
+Enter word 2 : onion
+Enter word 3 : brinjal
+Enter word 4 : tomato
+Enter word 5 : ladyfinger
+
+Words before sorting
+
+        potato
+        onion
+        brinjal
+        tomato
+        ladyfinger
+Words after sorting
+
+        brinjal
+        ladyfinger
+        onion
+        potato
+        tomato
+
+Press any key to continue
+
+/* Program 7 : Accept no.of lines of text dynamically and display each word of the line of text in a separate line along with no.of characters in each word. */
+
+#include <stdio.h>
+#include <conio.h>			// getch()
+#include <malloc.h>			// malloc(), calloc(), realloc(), free()
+
+void main()
+{
+	char* cp;
+	int sz;
+	char ch='y';
+
+	void enter(char*, int);				// function prototype
+	void displines(char*, int);
+	void dispwords(char*, int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of lines : ");
+		else
+		{
+			printf("\nInvalid input. 0 or Negative numbers not accepted");
+			printf("\nEnter no.of lines : ");
+		}
+		scanf("%d",&sz);
+		if(sz<=0)
+			ch='n';
+	}while(sz<=0);
+
+	// Allocating memory dynamically to store sz lines of text
+	cp = (char*)calloc(sz, 80*sizeof(char));
+
+	enter(cp, sz);
+
+	printf("\nThe following are the entered lines of text : \n");
+	displines(cp,sz);
+	
+	printf("\nThe following are the words present in the given lines of text : \n");
+	dispwords(cp, sz);
+
+	printf("\n\n");
+}
+
+void enter(char* cp, int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("Enter line %d text : ", i+1);
+		fflush(stdin);
+		gets((cp+80*i));
+	}
+}
+
+void displines(char* cp, int sz)
+{
+	for(int i=0; i<sz; i++)
+	{
+		printf("\t");
+		puts(cp+80*i);
+	}
+}
+
+void dispwords(char* cp, int sz)
+{
+	int i, j, count;
+	for(i=0; i<sz; i++)
+	{
+		printf("\n\n\t");
+		count = 0;
+		for(j=0; *(cp+80*i+j)!='\0'; j++)
+		{
+			if(*(cp+80*i+j) != ' ')
+			{
+				printf("%c",*(cp+80*i+j));
+				count++;
+			}
+			else if(*(cp+80*i+j+1) != ' ')
+			{
+				if(count != 0)
+				{
+					printf("\t%d\n\t",count);
+					count=0;
+				}
+			}
+		}
+		if(count != 0)
+			printf("\t%d",count);
+	}
+}
+Output : 
+
+Enter no.of lines : -4
+
+Invalid input. 0 or Negative numbers not accepted
+Enter no.of lines : 0
+
+Invalid input. 0 or Negative numbers not accepted
+Enter no.of lines : 4
+Enter line 1 text :    There is never a wrong time to do the right thing.
+Enter line 2 text :  Remember  one work at a time
+Enter line 3 text : Positive thoughts are very powerful.
+Enter line 4 text : Believe yourself strongly that we can achieve anything.
+
+The following are the entered lines of text :
+           There is never a wrong time to do the right thing.
+         Remember  one work at a time
+        Positive thoughts are very powerful.
+        Believe yourself strongly that we can achieve anything.
+
+The following are the words present in the given lines of text :
+
+
+        There   5
+        is      2
+        never   5
+        a       1
+        wrong   5
+        time    4
+        to      2
+        do      2
+        the     3
+        right   5
+        thing. 6
+
+        Remember        8
+        one     3
+        work    4
+        at      2
+        a       1
+        time    4
+
+        Positive        8
+        thoughts        8
+        are     3
+        very    4
+        powerful.       9
+
+        Believe 7
+        yourself        8
+        strongly        8
+        that    4
+        we      2
+        can     3
+        achieve 7
+        anything.       9
+
+Press any key to continue
+
+/* Program 8 : Dynamic Memory Allocation of Array of Structures. */
+
+#include <stdio.h>
+#include <malloc.h>
+
+struct tt
+{
+	int empno;
+	char ename[30];
+	char job[30];
+	float sal;
+	float comm;
+	int deptno;
+};
+
+void main()
+{
+	struct tt* pts;			// pointer variable of type struct tt
+	int sz;				// stores no.of employee's
+	char ch='y';
+
+	void enter(struct tt*, int);		// function prototype
+	void disp(struct tt*, int);
+
+	do
+	{
+		if(ch == 'y')
+			printf("\nEnter no.of employee's : ");
+		else
+		{
+			printf("\nInvalid input. 0 or Negative numbers are not accepted.");
+			printf("\nEnter valid no.of employee's : ");
+		}
+		scanf("%d",&sz);
+		if(sz <= 0)
+			ch='n';
+	}while(sz <= 0);
+
+	// Allocate the memory dynamically
+	pts = (struct tt*)calloc(sz, sizeof(struct tt));
+
+	// Accept the employee's details from the user
+	enter(pts, sz);
+
+	printf("\nThe following are the given Employee's Details :\n");
+	disp(pts, sz);
+
+	printf("\n\n");
+}
+
+void enter(struct tt* pts, int sz)
+{
+	int dno;
+	float sal, comm;
+	char ch='y';
+
+	for(int i=0; i<sz; i++)
+	{
+		(pts+i)->empno = 1001+i;
+		
+		printf("\nEnter name of Employee %d : ",i+1);
+		fflush(stdin);
+		gets((pts+i)->ename);
+
+		printf("Enter job of Employee %d : ",i+1);
+		fflush(stdin);
+		gets((pts+i)->job);
+
+		printf("Enter salary and commission of Employee %d : \n",i+1);
+		scanf("%f%f",&sal, &comm);
+		(pts+i)->sal = sal;
+		(pts+i)->comm = comm;
+
+		do
+		{
+			if(ch == 'y')
+				printf("\nEnter department no.(10/20/30) : ");
+			else
+			{
+				printf("\n%d is Invalid Department number.",dno);
+				printf("\nEnter the valid Department number(10/20/30 only) : ");
+			}
+			scanf("%d",&dno);
+			if(dno!=10 && dno!=20 && dno!=30)
+				ch='n';
+			else
+				ch='y';
+		}while(dno!=10 && dno!=20 && dno!=30);
+		(pts+i)->deptno = dno;
+	}
+}
+
+void disp(struct tt* pts, int sz)
+{
+	int i;
+	printf("\nEmpno\tEname\t\tJob\t\tSalary\t\tComm\tDeptno\n");
+	for(i=0; i<sz; i++)
+		printf("\n%d\t%-16s%-16s%10.2f%12.2f\t%6d",(pts+i)->empno,(pts+i)->ename,(pts+i)->job,(pts+i)->sal,(pts+i)->comm,(pts+i)->deptno);
+}
+
+Output : 
+
+Enter no.of employee's : -4
+
+Invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of employee's : 0
+
+Invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of employee's : 4
+
+Enter name of Employee 1 : Palani Kumar
+Enter job of Employee 1 : Sr. Software
+Enter salary and commission of Employee 1 :
+75000.99
+15000.62
+
+Enter department no.(10/20/30) : 20
+
+Enter name of Employee 2 : Madhu Sudhan
+Enter job of Employee 2 : Doctor
+Enter salary and commission of Employee 2 :
+55000.55
+15995.25
+
+Enter department no.(10/20/30) : 10
+
+Enter name of Employee 3 : Krishna Vamsi
+Enter job of Employee 3 : Director
+Enter salary and commission of Employee 3 :
+35000
+4585.95
+
+Enter department no.(10/20/30) : 30
+
+Enter name of Employee 4 : Sowmya
+Enter job of Employee 4 : Manager
+Enter salary and commission of Employee 4 :
+25550
+9950.99
+
+Enter department no.(10/20/30) : 20
+
+The following are the given Employee's Details :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1001    Palani Kumar    Sr. Software      75000.99    15000.62      20
+1002    Madhu Sudhan    Doctor            55000.55    15995.25      10
+1003    Krishna Vamsi   Director          35000.00     4585.95      30
+1004    Sowmya          Manager           25550.00     9950.99      20
+
+Press any key to continue
+
+/* Program 9 : Dynamic Memory Allocation of Array of Pointers to Structures */
+
+#include <stdio.h>
+#include <malloc.h>		// malloc(), calloc()
+#include <string.h>		// stricmp(), strcpy() 
+
+// structure template
+struct tt
+{
+	int empno;
+	char ename[30];
+	char job[30];
+	float sal;
+	float comm;
+	int deptno;
+};
+// global array declaration
+char info[][80] = 
+{
+	{"Displaying Employee's Details , sorted wrt. name : "},
+	{"Displaying Employee's Details ,  sorted wrt. job : "},
+	{"Displaying Employee's Details ,  sorted wrt. department number : "},
+	{"Displaying Employee's Details , sorted wrt. salary : "},
+	{"Displaying Employee's Details , sorted wrt. commission : "},
+};
+int g_index = 0;
+
+void main()
+{
+	struct tt *pts, **pp;
+	int i, sz;
+	char ch, op='y';;
+
+	void enter(struct tt**, int);					// function prototype
+	void sort(struct tt**, int, char);
+	void disp(struct tt*, struct tt**, int, char);
+
+	do
+	{
+		if(op == 'y')
+			printf("\nEnter no.of employee's : ");
+		else
+		{
+			printf("\n%d is invalid input. 0 or Negative numbers are not accepted.",sz);
+			printf("\nEnter valid no.of employee's : ");
+		}
+		scanf("%d",&sz);
+		if(sz <= 0)
+			op = 'n';
+	}while(sz <= 0);
+
+	// Allocate memory dynamically using calloc() for sz no.of employee's
+	pts = (struct tt*)calloc(sz, sizeof(struct tt));
+
+	// Allocate memory for an array of struct tt pointers whose size is sz.
+	// Note: Starting address of array of pointers is collected in double pointer.
+
+	pp = (struct tt**)malloc(sz * sizeof(struct tt*));
+	//printf("\nsize : %d  %d    %d\n",sizeof(struct tt*),sizeof(int*), sizeof(char*));
+
+	// Initialize the array of pointers
+	for(i=0; i<sz; i++)
+		pp[i] = (pts+i);		// pp[i] = *(pp+i) = i[pp] = *(i+pp)
+
+	enter(pp, sz);
+
+	do
+	{
+		printf("\n\nSort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : ");
+		fflush(stdin);
+		ch = getchar();
+
+		sort(pp, sz,  ch);			// sorting by pointers
+		
+		printf("\nDisplay (o)riginal or (s)orted list of employee's : ");
+		fflush(stdin);
+		ch = getchar();
+
+		disp(pts, pp, sz, ch);
+
+		printf("\nDo you want to sort employee's details again (y/n) ? : ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch == 'y' || ch == 'Y');
+}
+
+void enter(struct tt** pp, int sz)
+{
+	int i, dno;
+	float sal, comm;
+	char ch = 'y';
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		pp[i]->empno = 1001+i;			// pp[i] = *(pp+i) = i[pp] = *(i+pp)
+		// (*(pp+i))->empno = 1001+i;
+		printf("\nEnter the following details for employee number : %d\n",pp[i]->empno);
+		printf("Enter employee name : ");
+		fflush(stdin);
+		gets(pp[i]->ename);		// gets(i[pp]->ename); = gets((*(pp+i))->ename);
+		
+		printf("Enter job : ");
+		fflush(stdin);			// clears the keyboard buffer
+		gets(i[pp]->job);		// gets(pp[i]->job); = gets((*(pp+i))->job);
+
+		printf("Enter salary and commission\n");
+		scanf("%f%f",&sal, &comm);
+		pp[i]->sal = sal;	// i[pp]->sal = sal; = (*(pp+i))->sal = sal;
+		i[pp]->comm = comm;	// pp[i]->comm = comm;
+
+		do
+		{
+			if(ch == 'y')
+				printf("Enter department number (10/20/30) : ");
+			else
+			{
+				printf("\n%d is invalid department number.");
+				printf("\nEnter the valid department number (10/20/30) : ");
+			}
+			scanf("%d", &dno);
+			if(dno!=10 && dno!=20 && dno!=30)
+				ch = 'n';
+			else
+				ch = 'y';
+		}while(dno!=10 && dno!=20 && dno!=30);
+		pp[i]->deptno = dno;
+	}
+}
+
+void disp(struct tt* pts, struct tt** pp, int sz, char op)
+{
+	int i;
+
+	if(op == 'o')		// Displaying original list, without sorting
+	{
+		printf("\nDisplaying the original list of Employee's Details , without sorting");
+		
+		printf("\nEmpno\tEname\t\tJob\t\tSalary\t\tComm\tDeptno\n");
+		for(i=0; i<sz; i++)
+			printf("\n%d\t%-16s%-16s%10.2f%12.2f\t%6d",(pts+i)->empno,(pts+i)->ename,(pts+i)->job,(pts+i)->sal,(pts+i)->comm,(pts+i)->deptno);
+	}
+	else
+	{
+		printf("\n%s\n",info[g_index]);
+		printf("\nEmpno\tEname\t\tJob\t\tSalary\t\tComm\tDeptno\n");		
+		for(i=0; i<sz; i++)
+			printf("\n%d\t%-16s%-16s%10.2f%12.2f\t%6d",pp[i]->empno,pp[i]->ename,pp[i]->job,pp[i]->sal,pp[i]->comm,pp[i]->deptno);
+	}
+}
+
+void sort(struct tt** pp, int sz, char ch)
+{
+	int i, j;
+	struct tt* temp;
+
+	if(ch == 'n')		// sorting wrt ename
+	{
+		g_index = 0;
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(stricmp(pp[i]->ename, pp[j]->ename) > 0)
+				{
+					temp = pp[i];
+					pp[i]=pp[j];
+					pp[j]=temp;
+				}
+	}
+	else if(ch == 'j')		// sorting wrt job
+	{
+		g_index = 1;
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(stricmp(pp[i]->job, pp[j]->job) > 0)
+				{
+					temp = pp[i];
+					pp[i]=pp[j];
+					pp[j]=temp;
+				}
+	}
+	else if(ch == 'd')		// sorting wrt department number
+	{
+		g_index = 2;
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->deptno > pp[j]->deptno)
+				{
+					temp = pp[i];
+					pp[i]=pp[j];
+					pp[j]=temp;
+				}
+	}
+	else if(ch == 's')		// soring wrt salary
+	{
+		g_index = 3;
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->sal > pp[j]->sal)
+				{
+					temp = pp[i];
+					pp[i]=pp[j];
+					pp[j]=temp;
+				}
+	}
+	else if(ch == 'c')		// sorting wrt commission
+	{
+		g_index = 4;
+		for(i=0; i<sz-1; i++)
+			for(j=i+1; j<sz; j++)
+				if(pp[i]->comm > pp[j]->comm)
+				{
+					temp = pp[i];
+					pp[i]=pp[j];
+					pp[j]=temp;
+				}
+	}
+	else
+		printf("\nInvalid choice\n");
+}
+
+Output :
+
+Enter no.of employee's : 0
+
+0 is invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of employee's : -5
+
+-5 is invalid input. 0 or Negative numbers are not accepted.
+Enter valid no.of employee's : 5
+
+
+Enter the following details for employee number : 1001
+Enter employee name : Palani Kumar
+Enter job : Sr. Software
+Enter salary and commission
+35000
+15000
+Enter department number (10/20/30) : 20
+
+
+Enter the following details for employee number : 1002
+Enter employee name : Krishna Vamsi
+Enter job : Director
+Enter salary and commission
+36000
+7500
+Enter department number (10/20/30) : 10
+
+
+Enter the following details for employee number : 1003
+Enter employee name : Sowmya
+Enter job : Manager
+Enter salary and commission
+25000
+7499
+Enter department number (10/20/30) : 20
+
+
+Enter the following details for employee number : 1004
+Enter employee name : Aishwya Roi
+Enter job : Actor
+Enter salary and commission
+55000
+22500
+Enter department number (10/20/30) : 30
+
+
+Enter the following details for employee number : 1005
+Enter employee name : Madhu Sudhan
+Enter job : Doctor
+Enter salary and commission
+40000
+27500
+Enter department number (10/20/30) : 20
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : n
+
+Display (o)riginal or (s)orted list of employee's : s
+
+Displaying Employee's Details , sorted wrt. name :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+1003    Sowmya          Manager           25000.00     7499.00      20
+Do you want to sort employee's details again (y/n) ? : y
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : s
+
+Display (o)riginal or (s)orted list of employee's : s
+
+Displaying Employee's Details , sorted wrt. salary :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1003    Sowmya          Manager           25000.00     7499.00      20
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+Do you want to sort employee's details again (y/n) ? : y
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : j
+
+Display (o)riginal or (s)orted list of employee's : s
+
+Displaying Employee's Details ,  sorted wrt. job :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+1003    Sowmya          Manager           25000.00     7499.00      20
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+Do you want to sort employee's details again (y/n) ? : y
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : d
+
+Display (o)riginal or (s)orted list of employee's : s
+
+Displaying Employee's Details ,  sorted wrt. department number :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+1003    Sowmya          Manager           25000.00     7499.00      20
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+Do you want to sort employee's details again (y/n) ? : y
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : c
+
+Display (o)riginal or (s)orted list of employee's : s
+
+Displaying Employee's Details , sorted wrt. commission :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1003    Sowmya          Manager           25000.00     7499.00      20
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+Do you want to sort employee's details again (y/n) ? : y
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : n
+
+Display (o)riginal or (s)orted list of employee's : o
+
+Displaying the original list of Employee's Details , without sorting
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1003    Sowmya          Manager           25000.00     7499.00      20
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+Do you want to sort employee's details again (y/n) ? : y
+
+
+Sort by employ (n)ame, (s)alary, (d)eptno, (j)ob, or (c)omm : p
+
+Invalid choice
+
+Display (o)riginal or (s)orted list of employee's : s
+
+Displaying Employee's Details , sorted wrt. name :
+
+Empno   Ename           Job             Salary          Comm    Deptno
+
+1004    Aishwya Roi     Actor             55000.00    22500.00      30
+1002    Krishna Vamsi   Director          36000.00     7500.00      10
+1005    Madhu Sudhan    Doctor            40000.00    27500.00      20
+1001    Palani Kumar    Sr. Software      35000.00    15000.00      20
+1003    Sowmya          Manager           25000.00     7499.00      20
+Do you want to sort employee's details again (y/n) ? : n
+Press any key to continue
+

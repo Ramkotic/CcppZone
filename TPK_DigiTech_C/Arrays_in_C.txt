@@ -1,0 +1,3663 @@
+
+/* Program 1:
+ Write a program to accept 5 integer values from user and display it 
+ */
+
+#include <stdio.h>
+void main()
+{
+	int num[5];
+	int i;
+
+	printf("\nEnter 5 integer values\n");
+	for(i=0; i<5; i++)
+		scanf("%d",&num[i]);
+
+	printf("\nDisplaying the entered 5 integer values\n");
+	for(i=0; i<5; i++)
+		printf("\t\t%d\n",num[i]);
+}
+
+Output :
+
+Enter 5 integer values
+10
+20
+30
+40
+50
+
+Displaying the entered 5 integer values
+                10
+                20
+                30
+                40
+                50
+Press any key to continue
+
+/* Program 2:
+Write a program to accept 10 integer values into an array
+and then display the contents of the array in reverse order.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+void main()
+{
+	int num[10],i;
+	printf("\nEnter 10 integer values\n");
+	for(i=0; i<10; i++)
+		scanf("%d",&num[i]);
+
+	printf("\nEntered numbers in reverse order\n");
+	for(i=9; i>=0; i--)
+	{
+		printf("%d\t",num[i]);
+	}
+
+	printf("\n");
+}
+
+Output : 
+
+Enter 10 integer values
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+
+Entered numbers in reverse order
+100     90      80      70      60      50      40      30      20      10
+
+Press any key to continue
+
+
+/* Program 3:
+Program with logical errors instead of syntax errors
+*/
+
+#include <stdio.h>
+void main()
+{
+	int num[5], i;
+	for(i=0; i<10; i++)
+	{
+		printf("Enter value %d : ",i+1);
+		scanf("%d",&num[i]);
+	}
+
+	printf("\nContents of the array....\n");
+	for(i=0; i<10; i++)
+		printf("%d\t",num[i]);
+}
+
+/*
+Note :
+The above program has no syntax error but has logical error.
+Since the compiler doesn't check for array boundary limits i.e
+lower limit and upper limit of the array, it is the responsibility
+of the programmers to do so.
+
+  Since the user requirement is known only at run time, declare
+  a large array and then validate the size.
+*/
+
+
+/* Program 4 : Data Validation */
+#include <stdio.h>
+void main()
+{
+	int num[100],i,sz;
+	do
+	{
+		printf("\nEnter no.of values (max.100) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz > 100);
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter value %d : ",i+1);
+		scanf("%d",&num[i]);
+	}
+	printf("\nContents of the array.....\n");
+	for(i=0; i<sz; i++)
+		printf("%d\t",num[i]);
+
+}
+
+Output : 
+
+Enter no.of values (max.100) : -25
+
+Enter no.of values (max.100) : 125
+
+Enter no.of values (max.100) : 5
+Enter value 1 : 10
+Enter value 2 : 20
+Enter value 3 : 30
+Enter value 4 : 40
+Enter value 5 : 50
+
+Contents of the array.....
+10      20      30      40      50      
+Press any key to continue
+
+/* Program 5 : 
+  Write a program to accept integer values into an array and then
+  display the average value and display the values that are greater
+  than the average value as well as no.of values exceeding average
+  value
+*/
+
+#include  <stdio.h>
+void main()
+{
+	int num[20];
+	int i, sum=0, count=0, sz;
+	float avg;
+
+	do
+	{
+		printf("\nEnter no.of values(max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter value %d : ",i+1);
+		scanf("%d",&num[i]);
+		sum = sum+num[i];
+	}
+
+	avg = (float)sum/sz;
+	printf("\nAverage value = %f\n",avg);
+
+	printf("\nFollowing are the values greater than or equal to"
+		" the average value\n");
+	for(i=0; i<sz; i++)
+	{
+		if(num[i] >= avg)
+		{
+			printf("\n\t\t%d",num[i]);
+			count+=1;
+		}
+	}
+
+	printf("\nNo.of values exceeding the average value = %d\n",count);
+
+}
+
+Output : 
+
+Enter no.of values(max. 20) : -5
+
+Enter no.of values(max. 20) : 25
+
+Enter no.of values(max. 20) : 6
+Enter value 1 : 521
+Enter value 2 : 124
+Enter value 3 : 954
+Enter value 4 : 665
+Enter value 5 : 425
+Enter value 6 : 351
+
+Average value = 506.666656
+
+Following are the values greater than or equal to the average value
+
+                521
+                954
+                665
+No.of values exceeding the average value = 3
+Press any key to continue
+
+
+/* Program 6 :
+Write a program to accept marks obtained by the students into an
+integer array and then display no.of students whose marks are 
+	1: between 80 to 100
+	2: between 60 to 79
+	3: between 50 to 59
+	4: less than 50
+*/
+
+#include <stdio.h>
+void main()
+{
+	int marks[20];
+	int c1=0, c2=0, c3=0, c4=0, i, sz;
+
+	do
+	{
+		printf("\nEnter no.of students marks to be entered(max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+	
+	printf("\nAccepting the students marks\n");
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter marks of student %d : ",i+1);
+		scanf("%d",&marks[i]);
+	}
+
+	for(i=0; i<sz; i++)
+	{
+		if(marks[i] <= 100)
+		{
+			if(marks[i] >= 80)
+				c1++;
+			else if(marks[i] >= 60)
+				c2++;
+			else if(marks[i] >= 50)
+				c3++;
+			else
+				c4++;
+		}
+		else
+			printf("\nInvalid marks");
+	}
+
+	printf("\nNo.of students who got distinction(>=80) = %d",c1);
+	printf("\nNo.of students who got first class(>=60 and <80) = %d",c2);
+	printf("\nNo.of students who got second class(>=50 and <60) = %d",c3);
+	printf("\nNo.of students who got marks less than 50 = %d\n",c4);
+
+}
+
+Output : 
+
+Enter no.of students marks to be entered(max. 20) : -5
+
+Enter no.of students marks to be entered(max. 20) : 25
+
+Enter no.of students marks to be entered(max. 20) : 8
+
+Accepting the students marks
+Enter marks of student 1 : 85
+Enter marks of student 2 : 36
+Enter marks of student 3 : 68
+Enter marks of student 4 : 49
+Enter marks of student 5 : 84
+Enter marks of student 6 : 48
+Enter marks of student 7 : 75
+Enter marks of student 8 : 55
+
+No.of students who got distinction(>=80) = 2
+No.of students who got first class(>=60 and <80) = 2
+No.of students who got second class(>=50 and <60) = 1
+No.of students who got marks less than 50 = 3
+Press any key to continue
+
+
+/* Program 7 :
+Write a program to accept marks obtained by students and then display
+the minimum mark and maximum mark
+*/
+
+#include <stdio.h>
+void main()
+{
+	int marks[50], sz, i;
+	int min, max;
+
+	do
+	{
+		printf("\nEnter how many students (max.50) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>50);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter marks of student %d : ",i+1);
+		scanf("%d",&marks[i]);
+	}
+
+	min = marks[0];
+	max = marks[0];
+
+	for(i=1; i<sz; i++)
+	{
+		if(marks[i] < min)
+			min = marks[i];
+		if(marks[i] > max)
+			max = marks[i];
+	}
+	printf("\nMinimum mark = %d\nMaximum mark = %d\n",min,max);
+}
+
+Output : 
+
+Enter how many students (max.50) : -7
+
+Enter how many students (max.50) : 84
+
+Enter how many students (max.50) : 9
+Enter marks of student 1 : 65
+Enter marks of student 2 : 84
+Enter marks of student 3 : 25
+Enter marks of student 4 : 34
+Enter marks of student 5 : 18
+Enter marks of student 6 : 74
+Enter marks of student 7 : 29
+Enter marks of student 8 : 37
+Enter marks of student 9 : 61
+
+Minimum mark = 18
+Maximum mark = 84
+Press any key to continue
+
+
+/* Program 8:
+Write a program to sort the given numbers in ascending order 
+as well as descending order using BUBBLE SORT technique
+*/
+
+#include <stdio.h>
+#include <conio.h>
+#define space(j) \
+	for(k=0; k<j; k++) \
+		fprintf(stdout," ")
+
+#define line for(k=0; k<80; k++) \
+	fprintf(stdout,"-")
+
+void main()
+{
+	int num[50], sz;
+	int i,j,k,temp;
+
+	do
+	{
+		printf("\nEnter how many numbers to be sorted(max. 50) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>100);
+
+	line;
+	space(20);
+
+	printf("BUBBLE SORTING TECHNIQUE\n");
+	line;
+	printf("\nAccepting %d numbers\n",sz);
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter number %d : ",i+1);
+		scanf("%d",&num[i]);
+	}
+	
+	line;
+	space(20);
+	printf("Numbers before sorting\n");
+	line;
+
+	for(i=0; i<sz; i++)
+	{
+		printf("%3d\t",num[i]);
+	}
+	printf("\n");
+
+	getch();
+	space(20);
+	printf("\nNumbers after sorting in Ascending order\n");
+	for(i=0; i<sz-1; i++)
+		for(j=i+1; j<sz; j++)
+			if(num[i] > num[j])
+			{
+				num[i] = num[i] + num[j];
+				num[j] = num[i] - num[j];
+				num[i] = num[i] - num[j];
+
+				/*
+				temp = num[i];
+				num[i] = num[j];
+				num[j] = temp;
+				*/
+			}
+
+	for(i=0; i<sz; i++)
+		printf("%3d\t",num[i]);
+
+	printf("\n");
+	line;
+	getch();
+	space(20);
+	printf("Numbers after sorting in descending order\n");
+	for(i=0; i<sz-1; i++)
+		for(j=i+1; j<sz; j++)
+			if(num[i] < num[j])
+			{
+				num[i] = num[i] + num[j];
+				num[j] = num[i] - num[j];
+				num[i] = num[i] - num[j];
+
+				/*
+				temp = num[i];
+				num[i] = num[j];
+				num[j] = temp;
+				*/
+			}
+
+	for(i=0; i<sz; i++)
+		printf("%3d\t",num[i]);
+
+	printf("\n");
+	line;
+	getch();
+
+}
+
+Output : 
+
+Enter how many numbers to be sorted(max. 50) : -5
+
+Enter how many numbers to be sorted(max. 50) : 55
+
+Enter how many numbers to be sorted(max. 50) : 8
+--------------------------------------------------------------------------------
+                    BUBBLE SORTING TECHNIQUE
+--------------------------------------------------------------------------------
+
+Accepting 8 numbers
+Enter number 1 : 58
+Enter number 2 : 62
+Enter number 3 : 14
+Enter number 4 : 38
+Enter number 5 : 73
+Enter number 6 : 29
+Enter number 7 : 61
+Enter number 8 : 43
+--------------------------------------------------------------------------------
+                    Numbers before sorting
+--------------------------------------------------------------------------------
+ 58      62      14      38      73      29      61      43
+
+Numbers after sorting in Ascending order
+ 14      29      38      43      58      61      62      73
+--------------------------------------------------------------------------------
+                    Numbers after sorting in descending order
+ 73      62      61      58      43      38      29      14
+--------------------------------------------------------------------------------
+Press any key to continue
+
+
+/* Program 9:
+Write a proram to swap two numbers using pointers
+*/
+#include <stdio.h>
+void swap(int*, int*);
+void main()
+{
+	int a, b, c, d;
+	c = printf("\nEnter two integer values which are to be"
+		" swapped/interchanged\n");
+/*
+	printf() returns the no.of characters present within the double quotes
+*/
+
+	d = scanf("%d %d",&a, &b);
+/*
+	scanf() returns the integer constant which indicates the no.of
+variables which are successfully scanned/inputted.
+*/
+
+	printf("\nc = %d\td = %d\n",c,d);
+
+	printf("\nBefore swapping / Interchanging\n");
+	printf("\na = %d\tb = %d\n",a,b);
+
+	swap(&a,&b);
+
+	printf("\nAfter swapping / Interchanging\n");
+	printf("\na = %d\tb = %d\n",a,b);
+}
+
+void swap(int *pa, int* pb)
+{
+	*pa = *pa + *pb;
+	*pb = *pa - *pb;
+	*pa = *pa - *pb;
+	/*
+	int temp;
+	temp = *pa;
+	*pa = *pb;
+	*pb = temp;
+	*/
+}
+
+Output : 
+
+Enter two integer values which are to be swapped/interchanged
+15
+92
+
+c = 63  d = 2
+
+Before swapping / Interchanging
+
+a = 15  b = 92
+
+After swapping / Interchanging
+
+a = 92  b = 15
+Press any key to continue
+
+
+/* Program10.cpp
+Single Dimensional Character Array
+*/
+
+#include <stdio.h>
+void main()
+{
+	char word[15] = {'w','e','l','c','o','m','e'};
+
+	for(int i=0; i<15; i++)
+		printf("%c",word[i]);
+
+	printf("\n");
+
+
+}
+
+
+/* Program 11 : 
+Program to accept the n no.of characters
+*/
+#include <stdio.h>
+void main()
+{
+	char text[80];
+	int i, sz;
+
+	printf("\nEnter no.of characters to be typed (max. 80): ");
+	scanf("%d",&sz);
+
+	printf("\nEnter text\n");
+	for(i=0; i<sz; i++)
+		scanf("%c",&text[i]);
+
+	printf("\nThe entered text");
+	for(i=0; i<sz; i++)
+		printf("%c",text[i]);
+	printf("\n\n");
+
+}
+
+Output : 
+
+Enter no.of characters to be typed (max. 80): 20
+
+Enter text
+Have a nice day Palani Kumar
+
+The entered text
+Have a nice day Pal
+
+Press any key to continue
+
+/* Program 12 :
+Correct approach of handling single dimensional character array
+*/
+#include <stdio.h>
+#define line for(k=1; k<=80; k++)	\
+	fprintf(stdout,"-")
+
+void main()
+{
+	char text[250], ch;
+	int i=0, sz, k;
+
+	line;
+	printf("\n	Enter text as you like. Press ctrl-z or F6 to stop typing\n");
+	line;
+
+	while((ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+	line;
+
+	printf("\nThe following are the text you entered\n");
+	line;
+	for(i=0; i<sz; i++)
+		printf("%c",text[i]);
+	line;
+
+}
+
+Output : 
+--------------------------------------------------------------------------------
+
+        Enter text as you like. Press ctrl-z or F6 to stop typing
+--------------------------------------------------------------------------------
+COM components consist of executable code distributed either as Win32 dynamic li
+nk libraries(DLL's) or as executables(EXE's)
+^Z
+--------------------------------------------------------------------------------
+
+The following are the text you entered
+--------------------------------------------------------------------------------
+COM components consist of executable code distributed either as Win32 dynamic li
+nk libraries(DLL's) or as executables(EXE's)
+--------------------------------------------------------------------------------
+Press any key to continue
+
+/* Program 13 :
+Write a program to accept a line of text into an single dimensional
+character array and then display the no.of words in it.
+*/
+
+#define line for(k=0; k<80; k++)	\
+	printf("-")
+
+#include <stdio.h>
+void main()
+{
+	char text[250], ch;
+	int i=0, sz, k, c=0;
+
+	printf("\n\n");
+	line;
+	printf("\nEnter the text as you like. Press F6 or ctrl-z to stop\n");
+	line;
+
+	while((ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+
+	for(k=0; k<i; k++)
+	{
+		if(text[k]==' ' && text[k+1] != ' ')
+			c++;
+	}
+	printf("\nNo.of words present in the entered text = %d\n",c+1);
+}
+
+Output :
+
+
+--------------------------------------------------------------------------------
+
+Enter the text as you like. Press F6 or ctrl-z to stop
+--------------------------------------------------------------------------------
+ Have a nice day  Palani Kumar
+One work at a   time
+^Z
+
+No.of words present in the entered text = 11
+Press any key to continue
+
+/* Program 14 :
+Write a program to accept a line of text into a single dimensional
+character array and then accept a single character into a variable
+and then display no.of occurences of the given character in the array */
+
+#include <stdio.h>
+void main()
+{
+	char text[250], ch, ch1;
+	int i=0, sz, k, c=0;
+
+	printf("\nEnter the text as you like. \nTo stop typing, first press"
+		" return key and then press either F6 or ctrl-z\n");
+
+	while((ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+
+	printf("\nEnter the character to count its occurences in the entered text : ");
+	fflush(stdin);
+	ch1 = getchar();
+
+	for(k=0; k<sz; k++)
+	{
+		if(text[k] == ch1)
+			c++;
+	}
+	printf("\nNo.of occurences of %c in the entered text = %d\n",ch,c);
+
+
+}
+
+Output : 
+
+Enter the text as you like.
+To stop typing, first press return key and then press either F6 or ctrl-z
+  Have a nice day palani kumar
+^Z
+
+Enter the character to count its occurences in the entered text : e
+
+No.of occurences of   in the entered text = 2
+Press any key to continue
+
+/* Program 15 :
+Write a program to accept a line of text into an character array
+and then display no.of vowels in it. */
+
+#include <stdio.h>
+void main()
+{
+	char text[250], ch, ch1;
+	int i=0, sz, k, c=0;
+
+	printf("\nEnter the text as you like. After finishing typing, first press "
+		" return key and then press either F6 or ctrl-z to stop"
+		" further typing.\n");
+
+	while((ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+
+	printf("\n\nFollowing are the vowels present in the entered text\n");
+	for(k=0; k<=sz; k++)
+		if( 
+			(text[k]=='a' || text[k]=='A') ||
+			(text[k]=='e' || text[k]=='E') ||
+			(text[k]=='i' || text[k]=='I') ||
+			(text[k]=='o' || text[k]=='O') ||
+			(text[k]=='u' || text[k]=='U')
+		)
+		{
+			printf("%c  ",text[k]);
+			c++;
+		}
+		printf("\nThe no.of vowels present in the entered text = %d\n",c);
+
+
+}
+
+Output : 
+
+Enter the text as you like. After finishing typing, first press  return key and
+then press either F6 or ctrl-z to stop further typing.
+  Have a nice day Palani kumar
+One work at a time.
+Determine strongly. Nothing is impossible.
+^Z
+
+
+Following are the vowels present in the entered text
+a  e  a  i  e  a  a  a  i  u  a  O  e  o  a  a  i  e  e  e  i  e  o  o  i  i  i
+ o  i  e
+The no.of vowels present in the entered text = 30
+Press any key to continue
+
+/* Program 16 :
+Write a program to count the no.of words in the entered text */
+
+#include <stdio.h>
+void main()
+{
+	char text[250],ch;
+	int i=0, sz, nw=1;
+
+	printf("\nEnter text (ctrl-z or F6 to stop)\n");
+	while((ch=getchar()) != EOF)
+	{
+		text[i]= ch;
+		i++;
+	}
+	sz = i;
+
+	for(i=0; i<sz; i++)
+		if(text[i]==' ' && text[i+1]!=' ')
+			nw++;
+
+	if(text[0]==' ')
+		nw--;
+
+	printf("\nNo.of words = %d\n",nw);
+}
+
+Output:
+
+Enter text (ctrl-z or F6 to stop)
+   Criticisms are  homing pegions.
+^Z
+
+No.of words = 4
+Press any key to continue
+
+/* Program 17:
+Write a program to accept a line of text into the character array and then display
+each word in the separate line along with the no.of characters in each word. */
+
+#include <stdio.h>
+void main()
+{
+	char text[250], ch;
+	int i=0, sz, count=0;
+
+	printf("\nEnter text (ctrl-z to stop)\n");
+	while((ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+
+	for(i=0; i<sz; i++)
+	{
+		if(text[i] != ' ')
+		{
+			printf("%c",text[i]);
+			count++;
+		}
+		else if(text[i+1] != ' ')
+		{
+			if(count != 0)
+				printf("\t%d\n",count);
+			count=0;
+		}
+	}
+	if(count != 0)
+		printf("\t%d\n",count);
+}
+Output : 
+
+Enter text (ctrl-z to stop)
+   One  work  at  a time
+^Z
+One     3
+work    4
+at      2
+a       1
+time
+        5
+Press any key to continue
+
+/* Program 18:
+Write a program to test whether the entered character is a number/alphabet/special
+character */
+
+#include <stdio.h>
+#include <ctype.h>
+
+void main()
+{
+	char ch, op;
+	printf("\nEnter a character : ");
+	ch = getchar();
+
+	if(isalpha(ch))
+	{
+		printf("\n%c is an alphabet",ch);
+		if(islower(ch))
+			op = toupper(ch);
+		else if(isupper(ch))
+			op = tolower(ch);
+
+		printf("\nch = %c\top = %c\n",ch,op);
+	}
+	else if(isdigit(ch))
+		printf("\n%c is a digit\n",ch);
+	else
+		printf("\n%c is a special character\n",ch);
+}
+
+Output :
+
+Enter a character : s
+
+s is an alphabet
+ch = s  op = S
+Press any key to continue
+
+Enter a character : #
+
+# is a special character
+Press any key to continue
+
+Enter a character : 7
+
+7 is a digit
+Press any key to continue
+
+/* Program 19:
+Write a program to accept a line of text and then display
+1. no.of lowercase letters
+2. no.of uppercase letters
+3. no.of digits
+4. no.of special characters
+*/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
+void main()
+{
+	char text[250], ch;
+	int i=0, sz;
+	int c1, c2, c3, c4;
+	c1=c2=c3=c4=0;
+
+	printf("\nEnter a line of text(ctrl-z or F6 to stop)\n\t");
+	while( (ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+
+	for(i=0; i<sz; i++)
+	{
+		if(isalpha(text[i]))
+		{
+			if(islower(text[i]))
+				c1++;
+			else if(isupper(text[i]))
+				c2++;
+		}
+		else if(isdigit(text[i]))
+			c3++;
+		else
+			c4++;
+	}
+
+	printf("\nNo.of lowercase letters = %d",c1);
+	printf("\nNo.of uppercase letters = %d",c2);
+	printf("\nNo.of digits = %d",c3);
+	printf("\nNo.of special characters = %d\n",c4);
+}
+Output:
+
+Enter a line of text(ctrl-z or F6 to stop)
+        One Work at a time 1. Palani 2. Manoj 3. Sowmya # $898.98
+^Z
+
+No.of lowercase letters = 26
+No.of uppercase letters = 5
+No.of digits = 8
+No.of special characters = 19
+Press any key to continue
+
+
+/* Program 20 :
+Write a program to accept a line of text into the character array and then convert
+the lowercase letter to uppercase and vice-versa. Display the contents of the array
+before and after conversion */
+
+#include <stdio.h>
+#include <ctype.h>
+void main(int argc, char* argv[], char* arge[])
+{
+	char text[250], ch;
+	int i=0, sz;
+
+	printf("\nNo.of arguments = %d\n",argc);
+	for(i=0; i< argc; i++)
+		printf("\nargv[%d] = %s\narge[%d] = %s\n",i,argv[i],i,arge[i]);
+
+	printf("\nEnter a line of text (ctrl-z or F6 to stop)\n");
+	i=0;
+	while( (ch=getchar()) != EOF)
+	{
+		text[i]=ch;
+		i++;
+	}
+	sz = i;
+
+	printf("\nBefore Conversion\n");
+	for(i=0; i<sz; i++)
+		printf("%c",text[i]);
+
+	for(i=0; i<sz; i++)
+	{
+		if(isalpha(text[i]))
+			if(islower(text[i]))
+				text[i] = toupper(text[i]);
+			else if(isupper(text[i]))
+				text[i] = tolower(text[i]);
+	}
+	printf("\nAfter Conversion\n");
+	for(i=0; i<sz; i++)
+		printf("%c",text[i]);
+}
+Output :
+
+No.of arguments = 4
+
+argv[0] = d:\DotNet\CPrograms\Arrays\Debug\Arrays.exe
+arge[0] = ALLUSERSPROFILE=D:\Documents and Settings\All Users
+
+argv[1] = One
+arge[1] = APPDATA=D:\Documents and Settings\Administrator\Application Data
+
+argv[2] = Two
+arge[2] = CI_HOLOS_CLI=D:\Program Files\Seagate Software\Open Olap\
+
+argv[3] = Three
+arge[3] = CLASSPATH=D:\Oracle\Ora81\orb\classes\yoj.jar;D:\Oracle\Ora81\orb\clas
+ses\share.zip
+
+Enter a line of text (ctrl-z or F6 to stop)
+  Wish You Best Of Luck
+^Z
+
+Before Conversion
+  Wish You Best Of Luck
+
+After Conversion
+  wISH yOU bEST oF lUCK
+Press any key to continue
+
+
+/* Program 21:
+Write a program to accept a line of text into character array and then convert the
+initial character of each word into uppercase letter and then display the line of
+text */
+
+#include <stdio.h>
+#include <ctype.h>
+
+void main()
+{
+	char text[250], ch;
+	int i=0, sz;
+
+	printf("\nEnter text (ctrl-z to stop)\n");
+	while( (ch=getchar()) != EOF)
+	{
+		text[i] = ch;
+		i++;
+	}
+	sz = i;
+	for(i=0; i<sz; i++)
+	{
+		if(text[i] == ' ' && text[i+1] != ' ')
+			if(islower(text[i+1]))
+				text[i+1] = toupper(text[i+1]);
+	}
+	if(text[0] != ' ' && islower(text[0]))
+		text[0] = toupper(text[0]);
+
+	printf("\nAfter Conversion.....\n");
+	for(i=0; i<sz; i++)
+		printf("%c",text[i]);
+}
+Output :
+
+Enter text (ctrl-z to stop)
+ two things to follow in life. 1. 4 to 6 work. 2. Attitude of novelist
+^Z
+
+After Conversion.....
+ Two Things To Follow In Life. 1. 4 To 6 Work. 2. Attitude Of Novelist
+Press any key to continue
+
+/* Program 22 : Single Dimensional String Array
+Write a program to accept a line of text into a single dimensional string array
+and then display no.of characters in it. */
+
+#include <stdio.h>
+void main()
+{
+	char text[80];
+	int i;
+
+	printf("\nEnter text\n");
+	gets(text);
+
+	for(i=0; text[i] != '\0'; i++)
+		;
+/*
+	i=0;
+	while(text[i] != '\0')
+	   i++;
+
+*/
+
+	printf("\nNo.of characters = %d\n",i);
+}
+
+Output :
+
+Enter text
+Have a nice day Palani kumar.
+
+No.of characters = 29
+Press any key to continue
+
+/* Program 23 : String Handling Functions
+strlen()  strcpy()    strcat()     strcmp()
+*/
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+	char word[30], text[30];
+
+	strcpy(word,"welcome ");
+	strcpy(text,"hello ");
+	printf("\n\t %s \n\t %s \n",word,text);
+
+	strcat(word, " to c");
+	printf("\n\t %s \n",word);
+
+	strcat(text, word);
+	printf("\n\t %s \n",text);
+
+	strcpy(word, text);
+	printf("\n\t %s \n",word);
+}
+Output :
+
+         welcome
+         hello
+
+         welcome  to c
+
+         hello welcome  to c
+
+         hello welcome  to c
+Press any key to continue
+
+/* Program 24 :
+Write a program to accept a line of text into a string array and then encrypt the
+contents of the array and display the line of text after encryption and then 
+decrypt(reverse of encryption)the contents of array and then display the line of text 
+after decryption 
+
+	Encryption Formula						Decryption Formula
+a -> b		A -> B		0 -> 1			b -> a		B -> A		1 -> 0
+b -> c		B -> C		1 -> 2			c -> b		C -> B		2 -> 1
+....		.....		....			....		.....		....
+z -> a		Z -> A		9 -> 0			a -> z		A -> Z		0 -> 9
+
+*/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+void main()
+{
+	char text[250];
+	int i;
+
+	printf("\nEnter a line of text\n");
+	gets(text);
+
+	// Encryption	
+	for(i=0; text[i] != '\0'; i++)	// for(i=0; i<strlen(text); i++)
+	{
+		if(isalpha(text[i]))
+		{
+			if(text[i] == 'z')
+				text[i]='a';
+			else if(text[i] == 'Z')
+				text[i]='A';
+			else
+				text[i] = text[i]+1;
+		}
+		else if(isdigit(text[i]))
+		{
+			if(text[i] == '9')
+				text[i] = '0';
+			else
+				text[i] = text[i]+1;
+		}
+	}
+	printf("\nAfter Encryption .....\n%s\n",text);
+
+	// Decryption
+	for(i=0; i<strlen(text); i++)	// for(i=0; text[i]!='\0'; i++)
+	{
+		if(isalpha(text[i]))
+		{
+			if(text[i] == 'a')
+				text[i] = 'z';
+			else if(text[i] == 'A')
+				text[i] = 'Z';
+			else
+				text[i] = text[i]-1;
+		}
+		else if(isdigit(text[i]))
+		{
+			if(text[i] == '0')
+				text[i] = '9';
+			else 
+				text[i] = text[i]-1;
+		}
+	}
+	printf("\nAfter Decryption....\n%s\n",text);
+}
+
+Output :
+
+Enter a line of text
+abc ABC  xyz  XYZ  012 567 789 #$%
+
+After Encryption .....
+bcd BCD  yza  YZA  123 678 890 #$%
+
+After Decryption....
+abc ABC  xyz  XYZ  012 567 789 #$%
+Press any key to continue
+
+/* Program 25 : Using strcmp() */
+#include <stdio.h>
+#include <string.h>
+void main()
+{
+	char word[15] = "hello";
+	char text[15] = "Hello";
+
+	if(strcmp(word,text) > 0)
+		printf("\n%s is alphabetically greater than %s\n",word,text);
+	else if(strcmp(word,text) < 0)
+		printf("\n%s is alphabetically lesser than %s\n",word,text);
+	else if(strcmp(word,text) == 0)
+		printf("\n%s is alphabetically equal to %s\n",word,text);
+}
+Output : 
+
+hello is alphabetically greater than Hello
+Press any key to continue
+
+/* Program 26 :
+Write a program to accept a word into a string array and then display whether
+it is polyndrome or not 
+eg. madam , malayalam etc are string polyndromes */
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+	char word[30], ch='y';
+	int i, sz, j;
+
+	printf("\nEnter a word to test its polyndrome nature : ");
+	scanf("%s",word);
+
+	sz = strlen(word);
+	for(i=0, j=sz-1; i<sz/2; i++,j--)
+	{
+		if(word[i] != word[j])
+		{
+			ch = 'n';
+			printf("\n%s is not a polyndrome word\n",word);
+			break;
+		}
+	}
+
+	if(ch != 'n')
+		printf("\n%s is a polyndrome word\n",word);
+}
+
+Output:
+
+Enter a word to test its polyndrome nature : malayalam
+
+malayalam is a polyndrome word
+Press any key to continue
+
+Enter a word to test its polyndrome nature : sowmya
+
+sowmya is not a polyndrome word
+Press any key to continue
+
+/* Program 27 :
+String Polyndrome. One more method */
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+	char word[30], text[30];
+	int i, j, sz;
+
+	printf("\nEnter a word : ");
+	scanf("%s",word);
+	sz = strlen(word);
+
+	for(i=0, j=sz-1; i<sz; i++,j--)
+		text[i] = word[j];
+	text[i] = '\0';
+
+	if(stricmp(word,text) == 0)
+		printf("\n%s is a polyndrome\n",word);
+	else
+		printf("\n%s is not a polyndrome\n\n", word);
+}
+
+/* Program 28 : Two dimensional Arrays
+Scanning a 2-D numeric arrays */
+
+#include <stdio.h>
+void main()
+{
+	int num[20][20];
+	int i, j, nr, nc;
+
+	printf("\nEnter no.of rows(Max.20) : ");
+	scanf("%d",&nr);
+
+	printf("\nEnter no.of columns(Max.20) : ");
+	scanf("%d",&nc);
+
+	for(i=0; i<nr; i++)
+	{
+		printf("\n");
+		for(j=0; j<nc; j++)
+		{
+			printf("Enter a value into row %d, column %d : ",i+1, j+1);
+			scanf("%d",&num[i][j]);
+		}
+	}
+
+	printf("\nContents of the array....\n");
+	for(i=0; i<nr; i++)
+	{
+		printf("\n");
+		for(j=0; j<nc; j++)
+			printf("%3d\t",num[i][j]);
+	}
+	printf("\n\n");
+}
+Output : 
+
+Enter no.of rows(Max.20) : 4
+
+Enter no.of columns(Max.20) : 3
+
+Enter a value into row 1, column 1 : 10
+Enter a value into row 1, column 2 : 20
+Enter a value into row 1, column 3 : 30
+
+Enter a value into row 2, column 1 : 40
+Enter a value into row 2, column 2 : 50
+Enter a value into row 2, column 3 : 60
+
+Enter a value into row 3, column 1 : 70
+Enter a value into row 3, column 2 : 80
+Enter a value into row 3, column 3 : 90
+
+Enter a value into row 4, column 1 : 10
+Enter a value into row 4, column 2 : 40
+Enter a value into row 4, column 3 : 70
+
+Contents of the array....
+
+ 10      20      30
+ 40      50      60
+ 70      80      90
+ 10      40      70
+
+Press any key to continue
+
+/* Program 29 :
+Write a program to accept marks obtained by students in 3 subjects and also store
+their individual total marks in the same array. Display average total marks and also
+display marks of all the students in all the subjects whose total marks exceeds average
+total marks. Also display subjectwise maximum mark. */
+
+#include <stdio.h>
+#include <conio.h>	// getch()
+void main()
+{
+	int marks[50][4];
+	int i, j, sz, total=0, max, sum=0;
+	float avg;
+
+	do
+	{
+		printf("\nEnter no.of students(Max.50) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>50);
+
+	for(i=0; i<sz; i++)
+	{
+		sum=0;
+		printf("\n");
+		for(j=0; j<3; j++)
+		{
+			printf("Enter marks of student %d in subject %d : ",i+1, j+1);
+			scanf("%d",&marks[i][j]);
+			sum+=marks[i][j];	// sum = sum + marks[i][j];
+		}
+		marks[i][3] = sum;
+	}
+
+	for(i=0; i<sz; i++)
+		total = total + marks[i][3];	// total += marks[i][3];
+
+	avg = (float)total/sz;
+
+	printf("\nIndividual student marks and their total\n");
+	printf("\nsubject1  subject2 subject3 Total_Marks");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+	/*	for(j=0; j<4; j++)
+			printf("%3d\t    ",marks[i][j]);
+	*/
+		for(j=0; j<3; j++)
+			printf("%3d\t   ",marks[i][j]);
+		printf("|  %4d",marks[i][3]);
+	}
+	printf("\nAverage total mark = %f\n",avg);
+	
+	printf("\n\t Press any key to continue.....\n");
+	getch();
+	
+	printf("\nLists of students marks who got more than average of total marks\n");
+
+	printf("subject1  subject2 subject3 Total_Marks");
+	for(i=0; i<sz; i++)
+	{
+		if(marks[i][3] >= avg)
+		{
+			printf("\n");
+			for(j=0; j<3; j++)
+				printf("%3d\t   ",marks[i][j]);
+			printf("|  %4d",marks[i][3]);
+		}
+	}
+
+	printf("\n\nDisplaying subjectwise maximum mark\n");
+	for(i=0; i<3; i++)
+	{
+		max = marks[0][i];
+		for(j=1; j<sz; j++)
+		{
+			if(marks[j][i] > max)
+				max = marks[j][i];
+		}
+		printf("Maximum mark in subject %d = %5d\n",i+1, max);
+	}
+
+/*
+	// Without using for loop, subjectwise maximum mark calculation
+	// subject1 maximum mark
+	max = marks[0][0];
+	for(i=1; i<sz; i++)
+		if(marks[i][0] > max)
+			max = marks[i][0];
+	printf("\nMaximum mark in subject 1 = %d",max);
+
+	// subject2 maximum mark
+	max = marks[0][1];
+	for(i=1; i<sz; i++)
+		if(marks[i][1] > max)
+			max = marks[i][1];
+	printf("\nMaximum mark in subject 2 = %d",max);
+
+	// subject3 maximum mark
+	max = marks[0][2];
+	for(i=1; i<sz; i++)
+		if(marks[i][2] > max)
+			max = marks[i][2];
+	printf("\nMaximum mark in subject 3 = %d\n",max);
+*/
+
+	printf("\n\n");
+}
+Output : 
+
+Enter no.of students(Max.50) : 4
+
+Enter marks of student 1 in subject 1 : 68
+Enter marks of student 1 in subject 2 : 78
+Enter marks of student 1 in subject 3 : 95
+
+Enter marks of student 2 in subject 1 : 87
+Enter marks of student 2 in subject 2 : 58
+Enter marks of student 2 in subject 3 : 76
+
+Enter marks of student 3 in subject 1 : 48
+Enter marks of student 3 in subject 2 : 68
+Enter marks of student 3 in subject 3 : 59
+
+Enter marks of student 4 in subject 1 : 49
+Enter marks of student 4 in subject 2 : 67
+Enter marks of student 4 in subject 3 : 72
+
+Individual student marks and their total
+
+subject1  subject2 subject3 Total_Marks
+ 68         78      95     |   241
+ 87         58      76     |   221
+ 48         68      59     |   175
+ 49         67      72     |   188
+Average total mark = 206.250000
+
+         Press any key to continue.....
+
+Lists of students marks who got more than average of total marks
+subject1  subject2 subject3 Total_Marks
+ 68         78      95     |   241
+ 87         58      76     |   221
+
+Displaying subjectwise maximum mark
+Maximum mark in subject 1 =    87
+Maximum mark in subject 2 =    78
+Maximum mark in subject 3 =    95
+
+
+Press any key to continue
+
+/* Program 30 :
+Write a program to accept data into a square matrix and then display the contents of the
+matrix as well as its transpose.
+	In transpose, original matrix rows are displayed as columns and original columns as
+rows */
+
+#include <stdio.h>
+void main()
+{
+	int matrix[20][20];
+	int i, sz, j;
+
+	do
+	{
+		printf("\nEnter the order of the matrix(max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<sz; j++)
+		{
+			printf("Enter a value in row %d, column %d : ",i+1,j+1);
+			scanf("%d",&matrix[i][j]);
+		}
+	}
+
+	printf("\n\t\tOriginal Matrix\n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n\t\t");
+		for(j=0; j<sz; j++)
+			printf("%d\t",matrix[i][j]);
+	}
+
+	printf("\n\n\t\tTranspose Matrix\n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n\t\t");
+		for(j=0; j<sz; j++)
+			printf("%d\t",matrix[j][i]);
+	}
+
+	printf("\n\n");
+
+}
+Output :
+
+Enter the order of the matrix(max. 20) : 3
+
+Enter a value in row 1, column 1 : 10
+Enter a value in row 1, column 2 : 20
+Enter a value in row 1, column 3 : 30
+
+Enter a value in row 2, column 1 : 40
+Enter a value in row 2, column 2 : 50
+Enter a value in row 2, column 3 : 60
+
+Enter a value in row 3, column 1 : 70
+Enter a value in row 3, column 2 : 80
+Enter a value in row 3, column 3 : 90
+
+                Original Matrix
+
+                10      20      30
+                40      50      60
+                70      80      90
+
+                Transpose Matrix
+
+                10      40      70
+                20      50      80
+                30      60      90
+
+Press any key to continue
+
+
+/* Program 31 :
+Example for Lookup Table(Static Table).
+	Lookup tables (also called as Static tables)  are two dimensional arrays which contains data that has to be accessed 
+based on the queries */
+
+#include <stdio.h>
+void main()
+{
+	float train[6][3] = {
+		{7560 , 6.00 , 17.00},
+		{7540 , 8.00 , 18.30},
+		{6540 , 14.00 , 19.00},
+		{8745 , 7.25 , 20.00},
+		{7150 , 5.00 , 14.45},
+		{8540 , 18.00 , 6.15}
+};
+	int i, tno;
+	char ch, op;
+
+	printf("\nTRAIN NUMBERS : \n");
+	for(i=0; i<6; i++)
+		printf("%4.0f\t",train[i][0]);
+
+	do
+	{
+		printf("\nEnter train number : ");
+		scanf("%d",&tno);
+
+		for(i=0; i<6; i++)	
+		{
+			ch = 'n';
+			if(train[i][0] == tno)
+			{
+				ch = 'y';
+				printf("\nArrival Time : %5.2f",train[i][1]);
+				printf("\nDeparture Time : %5.2f",train[i][2]);
+				break;
+			}
+		}
+
+		if(ch != 'y')
+			printf("\nInvalid Train Number\n");
+		fflush(stdin);
+		printf("\nEnter y or Y to continue.......");
+		op = getchar();
+	}while(op=='y' || op=='Y');
+	printf("\n");
+}
+
+Output :
+
+TRAIN NUMBERS :
+7560    7540    6540    8745    7150    8540
+Enter train number : 8745
+
+Arrival Time :  7.25
+Departure Time : 20.00
+Enter y or Y to continue.......y
+
+Enter train number : 7540
+
+Arrival Time :  8.00
+Departure Time : 18.30
+Enter y or Y to continue.......Y
+
+Enter train number : 4780
+
+Invalid Train Number
+
+Enter y or Y to continue.......y
+
+Enter train number : 6540
+
+Arrival Time : 14.00
+Departure Time : 19.00
+Enter y or Y to continue.......Y
+
+Enter train number : 6570
+
+Invalid Train Number
+
+Enter y or Y to continue.......n
+
+Press any key to continue
+
+/* Program 32 : Formatted outputs example */
+#include <stdio.h>
+void main()
+{
+	int n=6545;
+	float r=6545.6785;
+
+	printf("\n%d",n);
+	printf("\n%8d",n);
+	printf("\n%08d",n);
+	printf("\n%-8d",n);
+	printf("\n%2d",n);
+
+	printf("\n\n%f",r);
+	printf("\n%7.2f",r);
+	printf("\n%4.0f",r);
+
+	printf("\n");
+
+}
+
+Output :
+
+6545
+    6545
+00006545
+6545
+6545
+
+6545.678711
+6545.68
+6546
+Press any key to continue
+
+/* Program 33:
+Extend the static train problem by displaying the train numbers that depart the station
+between 6pm (18) to 10pm (22) */
+
+#include <stdio.h>
+void main()
+{
+	float train[6][3] = {
+		{7560 , 6.00 , 17.00},
+		{7540 , 8.00 , 18.30},
+		{6540 , 14.00 , 19.00},
+		{8745 , 7.25 , 20.00},
+		{7150 , 5.00 , 14.45},
+		{8540 , 18.00 , 6.15}
+};
+	int i, tno;
+	char ch, op;
+
+	printf("\nTRAIN NUMBERS : \n");
+	for(i=0; i<6; i++)
+		printf("%4.0f\t",train[i][0]);
+
+	printf("\nTrains that depart between 6pm(18) to 10pm(22)\n");
+	printf("\nTrain_Number  Arrival_Time  Departure_Time\n");
+	for(i=0; i<6; i++)
+		if(train[i][2] >= 18 && train[i][2] <= 22)
+			printf("\n%4.0f\t\t%5.2f\t\t%5.2f\n",train[i][0],train[i][1],train[i][2]);
+		do
+	{
+		printf("\nEnter train number : ");
+		scanf("%d",&tno);
+
+		for(i=0; i<6; i++)	
+		{
+			ch = 'n';
+			if(train[i][0] == tno)
+			{
+				ch = 'y';
+				printf("\nArrival Time : %5.2f",train[i][1]);
+				printf("\nDeparture Time : %5.2f",train[i][2]);
+				break;
+			}
+		}
+
+		if(ch != 'y')
+			printf("\nInvalid Train Number\n");
+		fflush(stdin);
+		printf("\nEnter y or Y to continue.......");
+		op = getchar();
+	}while(op=='y' || op=='Y');
+	printf("\n");
+}
+Output :
+
+TRAIN NUMBERS :
+7560    7540    6540    8745    7150    8540
+Trains that depart between 6pm(18) to 10pm(22)
+
+Train_Number  Arrival_Time  Departure_Time
+
+7540             8.00           18.30
+
+6540            14.00           19.00
+
+8745             7.25           20.00
+
+Enter train number : 8540
+
+Arrival Time : 18.00
+Departure Time :  6.15
+Enter y or Y to continue.......n
+
+Press any key to continue
+
+/* Program 34 :
+Write a program to accept the minimum and maximum temperatures recorded in various
+cities and also store their average temperatures. Then display the highest average
+temperature and lowest average temperature */
+
+#include <stdio.h>
+void main()
+{
+	char city[10][20];	// to store max. of 10 cities
+	float temp[10][3];	// to store min, max and average temp
+	float a, b;
+	float min, max;	// to store min. and max. average temp.
+	int i, j, sz;
+
+	do
+	{
+		printf("\nEnter no.of cities(max.10) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>10);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\nEnter the name of the city %d : ",i+1);
+		fflush(stdin);
+		gets(city[i]);
+		
+		printf("Enter the minimum and maximum temperature of \" %s \"\n",city[0]);
+		scanf("%f%f",&a,&b);
+		temp[i][0] = a;
+		temp[i][1] = b;
+
+		temp[i][2] = (a+b)/2.0;	// stores average temp.
+	}
+
+	printf("\n    city \t\t min_temp \t max_temp \t average\n");
+	for(i=0; i<sz; i++)
+		printf("%-25s  %5.2f \t %5.2f \t\t %5.2f\n",&city[i][0],temp[i][0],temp[i][1],temp[i][2]);
+
+	min = temp[0][2];
+	max = temp[0][2];
+
+	for(i=0; i<sz; i++)
+	{
+		if(temp[i][2] < min)
+			min = temp[i][2];
+		if(temp[i][2] > max)
+			max = temp[i][2];
+	}
+	printf("\nMinimum Average temperature = %5.2f",min);
+	printf("\nMaximum Average temperature = %5.2f\n",max);
+	printf("\n");
+}
+Output : 
+
+Enter no.of cities(max.10) : 11
+
+Enter no.of cities(max.10) : 5
+
+Enter the name of the city 1 : Hyderabad
+Enter the minimum and maximum temperature of "Hyderabad"
+17
+38
+
+Enter the name of the city 2 : Chennai
+Enter the minimum and maximum temperature of "Hyderabad"
+22
+41
+
+Enter the name of the city 3 : New Delhi
+Enter the minimum and maximum temperature of "Hyderabad"
+18
+29
+
+Enter the name of the city 4 : Mumbai
+Enter the minimum and maximum temperature of "Hyderabad"
+25
+36
+
+Enter the name of the city 5 : Calcutta
+Enter the minimum and maximum temperature of "Hyderabad"
+19
+29
+
+    city                 min_temp        max_temp        average
+Hyderabad                  17.00         38.00           27.50
+Chennai                    22.00         41.00           31.50
+New Delhi                  18.00         29.00           23.50
+Mumbai                     25.00         36.00           30.50
+Calcutta                   19.00         29.00           24.00
+
+Minimum Average temperature = 23.50
+Maximum Average temperature = 31.50
+
+Press any key to continue
+
+/* Program 35:
+Write a program to accept experiment number, n1, n2 and fill up the fourth column
+based on the given formula : 
+if experiment no. is 1, res = (n1 + n2)/2
+if experiment no. is 2, res = (n1*n2)/(n1+n2)
+if experiment no. is other than 1 and 2, res = sqrt(n1+n2)
+
+	Display the average results of experiment no.s 1, 2, and others. Display the details
+of the experiment no. 1, 2 and others conducted by the students.
+*/
+
+#include <stdio.h>
+#include <math.h>
+#include <conio.h>		//getch()
+
+#define line for(k=1; k<=60; k++) fprintf(stdout,"-")
+void main()
+{
+	float expt[20][4], res, avg, expno, n1, n2;
+	int i, j, sz, c1=0, c2=0, c3=0, k;
+	float sum1=0, sum2=0, sum3=0;
+
+	line;
+	do
+	{
+		printf("\nEnter how many students conducted the experiments(max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+	line;
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		
+		printf("Enter the experiment no. conducted by student %d : ",i+1);
+		scanf("%f",&expno);
+		expt[i][0] = expno;
+
+		printf("Enter a value n1 : ");
+		scanf("%f",&n1);
+		expt[i][1] = n1;
+
+		printf("Enter a value n2 : ");
+		scanf("%f",&n2);
+		expt[i][2] = n2;
+
+		if(expt[i][0] == 1)	// if(expno == 1)
+		{
+			res = (n1+n2)/2;
+			expt[i][3] = res;
+			sum1 = sum1+res;	//sum1+=res;
+			c1++;
+		}
+		else if(expno == 2)	// if(expt[i][0] == 2)
+		{
+			res = (n1*n2)/(n1+n2);
+			expt[i][3] = res;
+			sum2 = sum2+res;	//sum2+=res;
+			c2++;
+		}
+		else
+		{
+			res = sqrt(n1+n2);
+			expt[i][3] = res;
+			sum3 += res;	// sum3 = sum3 + res;
+			c3++;
+		}
+	}
+
+	printf("\nExpt_no \t n1 \t\t n2 \t\t result\n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<4; j++)
+			printf("%-8.2f \t",expt[i][j]);
+	}
+	
+	printf("\n");
+	line;
+	getch();
+	printf("\nDetails of experiment no.1 conducted by the students\n");
+	printf("\nExpt_no \t n1 \t\t n2 \t\t result\n");
+	if(c1 != 0)
+	{
+		for(i=0; i<sz; i++)
+		{
+			if(expt[i][0] == 1)
+			{
+				printf("\n");
+				for(j=0; j<4; j++)
+					printf("%-8.2f \t",expt[i][j]);
+			}
+		}
+		printf("\nAverage results of experiment 1 = %8.2f\n",sum1/c1);
+	}
+	else
+		printf("\nNo student conducted this experiment 1\n");
+		line;
+
+	getch();
+	printf("\nDetails of experiment no.2 conducted by the students\n");
+	printf("\nExpt_no \t n1 \t\t n2 \t\t result\n");
+	if(c2 != 0)
+	{
+		for(i=0; i<sz; i++)
+		{
+			if(expt[i][0] == 2)
+			{
+				printf("\n");
+				for(j=0; j<4; j++)
+					printf("%-8.2f \t",expt[i][j]);
+			}
+		}
+		printf("\nAverage results of experiment 2 = %8.2f\n",sum2/c2);
+	}
+	else
+		printf("\nNo student conducted this experiment 1\n");
+		line;
+	
+	getch();
+	printf("\nDetails of experiments other than 1 and 2 conducted by the students\n");
+	printf("\nExpt_no \t n1 \t\t n2 \t\t result\n");
+	if(c3 != 0)
+	{
+		for(i=0; i<sz; i++)
+		{
+			if(expt[i][0] != 1 && expt[i][0] != 2)
+			{
+				printf("\n");
+				for(j=0; j<4; j++)
+					printf("%-8.2f \t",expt[i][j]);
+			}
+		}
+		printf("\nAverage results of experiment 1 = %8.2f\n",sum1/c1);
+		line;
+	}
+	else 
+		printf("\nNo students conducted this experiment\n");
+
+}
+Output :
+------------------------------------------------------------
+Enter how many students conducted the experiments(max. 20) : 6
+------------------------------------------------------------
+Enter the experiment no. conducted by student 1 : 1
+Enter a value n1 : 10
+Enter a value n2 : 30
+
+Enter the experiment no. conducted by student 2 : 3
+Enter a value n1 : 25
+Enter a value n2 : 12
+
+Enter the experiment no. conducted by student 3 : 2
+Enter a value n1 : 10
+Enter a value n2 : 25
+
+Enter the experiment no. conducted by student 4 : 1
+Enter a value n1 : 20
+Enter a value n2 : 30
+
+Enter the experiment no. conducted by student 5 : 5
+Enter a value n1 : 15
+Enter a value n2 : 34
+
+Enter the experiment no. conducted by student 6 : 2
+Enter a value n1 : 16
+Enter a value n2 : 34
+
+Expt_no          n1              n2              result
+
+1.00            10.00           30.00           20.00
+3.00            25.00           12.00           6.08
+2.00            10.00           25.00           7.14
+1.00            20.00           30.00           25.00
+5.00            15.00           34.00           7.00
+2.00            16.00           34.00           10.88
+------------------------------------------------------------
+Details of experiment no.1 conducted by the students
+
+Expt_no          n1              n2              result
+
+1.00            10.00           30.00           20.00
+1.00            20.00           30.00           25.00
+Average results of experiment 1 =    22.50
+------------------------------------------------------------
+Details of experiment no.2 conducted by the students
+
+Expt_no          n1              n2              result
+
+2.00            10.00           25.00           7.14
+2.00            16.00           34.00           10.88
+Average results of experiment 2 =     9.01
+------------------------------------------------------------
+Details of experiments other than 1 and 2 conducted by the students
+
+Expt_no          n1              n2              result
+
+3.00            25.00           12.00           6.08
+5.00            15.00           34.00           7.00
+Average results of experiment 1 =    22.50
+------------------------------------------------------------
+
+Press any key to continue
+
+/* Program 36 :
+	Write a program to accept data into two square matrices and then display its sum */
+
+#include <stdio.h>
+#include <conio.h>		// getch()
+void main()
+{
+	int a[10][10], b[10][10];
+	int i, j, sz, c;
+
+	do
+	{
+		printf("\nEnter the order of the matrix(max. 10) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>10);
+
+	c = sz*sz;
+	printf("\nEnter %d elements for matrix 1\n",c);
+	for(i=0; i<sz; i++)
+		for(j=0; j<sz; j++)
+			scanf("%d",&a[i][j]);
+
+	printf("\nEnter %d elements for matrix 2\n",c);
+	for(i=0; i<sz; i++)
+		for(j=0; j<sz; j++)
+			scanf("%d",&b[i][j]);
+
+	printf("\n\nMatrix 1 \n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<sz; j++)
+			printf("%d\t",a[i][j]);
+	}
+	getch();
+
+	printf("\n\nMatrix 2 \n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<sz; j++)
+			printf("%d\t",b[i][j]);
+	}
+	getch();
+
+	printf("\nSum of two matrices\n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<sz; j++)
+			printf("%3d\t",a[i][j] + b[i][j]);
+	}
+
+	printf("\n\n");
+
+}
+Output :
+
+Enter the order of the matrix(max. 10) : 3
+
+Enter 9 elements for matrix 1
+5 10 15 20 25 30 35 40 45
+
+Enter 9 elements for matrix 2
+45 40 35 30
+25 20
+15
+10
+5
+
+
+Matrix 1
+
+5       10      15
+20      25      30
+35      40      45
+
+Matrix 2
+
+45      40      35
+30      25      20
+15      10      5
+Sum of two matrices
+
+ 50      50      50
+ 50      50      50
+ 50      50      50
+
+Press any key to continue
+
+/* Program 37 : Dynamic Table */
+
+#include <stdio.h>
+#include <conio.h>
+
+void main()
+{
+	float item[6][3] = {	// itemcode, unit_price, stock
+		{101, 16.50, 20},
+		{105, 15.00, 10},
+		{110, 75.00, 20},
+		{108, 150.00, 15},
+		{115, 18.75, 30},
+		{125, 6.50, 50}
+	};
+
+	float bill, total=0;
+	int i, j, qty, icode;
+	char ch, op, ch1;
+	char invaliditem = 'n';
+
+	do
+	{
+		bill = 0;
+		printf("\nItem_Code     Unit_Price      Current_Stock\n");
+		for(i=0; i<6; i++)
+			printf("\n  %3.0f\t\t%6.2f\t\t%6.0f",item[i][0],item[i][1],item[i][2]);
+
+		printf("\nEnter item code : ");
+		scanf("%d",&icode);
+
+		for(i=0; i<6; i++)
+		{
+			ch = 'n';
+			if(item[i][0] == icode)
+			{
+				ch = 'y';
+				do
+				{
+					printf("\nEnter Quantity (max %3.0f only) : ",item[i][2]);
+					scanf("%d",&qty);
+				}while(qty < 0);
+
+				if(qty <= item[i][2])
+				{
+					bill = qty * item[i][1];
+					item[i][2] -= qty;	// item[i][2] = item[i][2] - qty;
+					printf("\nBill of %d quantities of item code %d with unit price %6.2f = %6.2f",qty,icode,item[i][1],bill);
+				}
+				else if(item[i][2] != 0)
+				{
+					printf("\nStock is only %3.0f quantities",item[i][2]);
+					printf("\nDo you want the current stock ? (y/n) : ");
+					fflush(stdin);
+					ch1 = getchar();
+					if(ch1 == 'y' || ch1 == 'Y')
+					{
+						qty = item[i][2];
+						bill = qty * item[i][1];
+						item[i][2] = 0;
+						printf("\nBill of %d quantities of item code %d = %6.2f",qty,icode,bill);
+					}
+				}
+				else
+				{
+					printf("\nItem out of stock");
+					bill = 0;
+				}
+				break;
+			}
+		}	// end of for
+		if(ch != 'y')
+		{
+			printf("\nInvalid Item code");
+			invaliditem = 'y';
+		}
+		else
+		{
+			printf("\nTotal bill upto previous = %6.2f",total);
+			total = total + bill;
+			printf("\nTotal bill upto now = %6.2f",total);
+		}
+		fflush(stdin);
+		if(invaliditem == 'n')
+			printf("\nDo you want to purchase one more item (y/n) : ");
+		else if(invaliditem = 'y')
+		{
+			printf("\nDo you want to continue (y/n) : ");
+			invaliditem = 'n';
+		}
+		op = getchar();
+	}while(op=='y' || op=='Y');
+
+	printf("\nTotal bill payable = %f",total);
+
+	printf("\nStock after sales\n");
+	printf("\nItem_Code     Unit_Price      Current_Stock\n");
+	for(i=0; i<6; i++)
+		printf("\n  %3.0f\t\t%6.2f\t\t%6.0f",item[i][0],item[i][1],item[i][2]);
+
+	printf("\n\n");
+}
+
+Output :
+
+Item_Code     Unit_Price      Current_Stock
+
+  101            16.50              20
+  105            15.00              10
+  110            75.00              20
+  108           150.00              15
+  115            18.75              30
+  125             6.50              50
+Enter item code : 154
+
+Invalid Item code
+Do you want to continue (y/n) : y
+
+Item_Code     Unit_Price      Current_Stock
+
+  101            16.50              20
+  105            15.00              10
+  110            75.00              20
+  108           150.00              15
+  115            18.75              30
+  125             6.50              50
+Enter item code : 110
+
+Enter Quantity (max  20 only) : 15
+
+Bill of 15 quantities of item code 110 with unit price  75.00 = 1125.00
+Total bill upto previous =   0.00
+Total bill upto now = 1125.00
+Do you want to purchase one more item (y/n) : y
+
+Item_Code     Unit_Price      Current_Stock
+
+  101            16.50              20
+  105            15.00              10
+  110            75.00               5
+  108           150.00              15
+  115            18.75              30
+  125             6.50              50
+Enter item code : 125
+
+Enter Quantity (max  50 only) : 36
+
+Bill of 36 quantities of item code 125 with unit price   6.50 = 234.00
+Total bill upto previous = 1125.00
+Total bill upto now = 1359.00
+Do you want to purchase one more item (y/n) : y
+
+Item_Code     Unit_Price      Current_Stock
+
+  101            16.50              20
+  105            15.00              10
+  110            75.00               5
+  108           150.00              15
+  115            18.75              30
+  125             6.50              14
+Enter item code : 101
+
+Enter Quantity (max  20 only) : 25
+
+Stock is only  20 quantities
+Do you want the current stock ? (y/n) : y
+
+Bill of 20 quantities of item code 101 = 330.00
+Total bill upto previous = 1359.00
+Total bill upto now = 1689.00
+Do you want to purchase one more item (y/n) : y
+
+Item_Code     Unit_Price      Current_Stock
+
+  101            16.50               0
+  105            15.00              10
+  110            75.00               5
+  108           150.00              15
+  115            18.75              30
+  125             6.50              14
+Enter item code : 115
+
+Enter Quantity (max  30 only) : 30
+
+Bill of 30 quantities of item code 115 with unit price  18.75 = 562.50
+Total bill upto previous = 1689.00
+Total bill upto now = 2251.50
+Do you want to purchase one more item (y/n) : n
+
+Total bill payable = 2251.500000
+Stock after sales
+
+Item_Code     Unit_Price      Current_Stock
+
+  101            16.50               0
+  105            15.00              10
+  110            75.00               5
+  108           150.00              15
+  115            18.75               0
+  125             6.50              14
+
+Press any key to continue
+
+/* Program 38 : Two Dimensional Character Array 
+Scanning 2-D Character Array 
+*/
+
+#include <stdio.h>
+void main(int argc, char* argv[], char* arge[])
+{
+	char text[20][80] , ch;
+	int i , j , k , sz;
+	int length[20] ; // It is single dimensional array which holds the length of line of text
+
+	do
+	{
+		printf("\nEnter no.of lines (max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz <= 0 || sz > 20);
+
+	k=0;
+	for(i=0;   i<sz; i++)
+	{
+		// outer for loop controls the no.of lines
+		j=0; 
+		printf("Enter line %d text\n",i+1);
+		while((ch=getchar()) != EOF)
+		{
+			text[i][j] = ch;
+			j++;
+		}
+		length[i] = j;
+	}
+
+	printf("\nDisplaying the lines \n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<length[i]; j++)
+			printf("%c",text[i][j]);
+	}
+	printf("\n\n");
+}
+
+Output : 
+
+Enter no.of lines (max. 20) : 5
+Enter line 1 text
+ one work at a time
+^Z
+Enter line 2 text
+4 to 6 am work
+^Z
+Enter line 3 text
+ Attitude of Novelist
+^Z
+Enter line 4 text
+Smile --- most important in life
+^Z
+Enter line 5 text
+  Help others
+^Z
+
+Displaying the lines
+
+ one work at a time
+4 to 6 am work
+ Attitude of Novelist
+Smile --- most important in life
+  Help others
+
+
+Press any key to continue
+
+/* Program 39 :
+	Write a program to accept the following details of the employee.
+1. employee number
+2. salary
+3. commission
+4. department number
+
+Employee numbers have to be unique starting from 1001.
+Department numbers should be either 10 20 or 30.
+
+Perform the following :
+1. Given the employee number, Display its total pay( salary + commission )
+2. Given the department number, display its total payroll
+	(payroll of a department number is the sum of ( salary + commission ) of all
+employees working in the given department ).
+3. Update the salaries of employees based on the following condition
+	if salary < 5000 , increment amount is 2000
+	if salary is between 5000 to 10000 , increment amount is 1500
+	if salary is > 10000 , increment amount is 1000.
+Display the employee number and their salaries.
+[ No.of columns required = 5 , empno , salary , comm , deptno , total_pay]
+*/
+
+#include <stdio.h>
+#include <conio.h>
+#include <process.h>
+
+void main()
+{
+	long int emp[10][5] , payroll ;	// empno,sal,comm,
+	int i , j , sz , d , n , empno;
+	int choice;
+	char op , ch;
+
+	do
+	{
+		printf("\nEnter how many employee's details are to be entered (max. 10) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>10);
+
+	for(i=0; i<sz; i++)
+	{
+		emp[i][0] = 1001+i;
+		
+		printf("Enter salary of employee %d : ",i+1);
+		scanf("%ld",&emp[i][1]);
+		
+		printf("Enter commission of employee %d : ",i+1);
+		scanf("%ld",&emp[i][2]);
+
+		printf("\nValid Department numbers are : 10  20  30\n");
+		do
+		{
+			printf("Enter Valid department number for employee %d : ",i+1);
+			scanf("%d",&d);
+			if(d==10 || d==20 || d==30)
+			{
+				emp[i][3] = d;	// 0->empno 1->sal 2->comm 3->deptno 4->total_pay
+				emp[i][4] = emp[i][1] + emp[i][2];
+			}
+			else
+			{
+				printf("\n%d is invalid department number\n",d);
+			}
+		}while(d!=10 && d!=20 && d!=30);
+
+		printf("\nParticulars of employee %d : \n",i+1);
+		printf("\nEmpno    Salary   Comm   Deptno  Total_pay\n\n");
+		for(j=0; j<5; j++)
+			printf("%ld\t  ",emp[i][j]);
+
+		n = sz-(i+1);
+	//	gotoxy(3,22);
+		if(n!=0)
+			printf("\n\nStill %d employee's details are required",n);
+		printf("\n\nPress any key to proceed forward\n");
+		getch();
+	}
+
+	do
+	{
+//		system("cls");
+		
+		printf("\n1. Display all the employee's particulars");
+		printf("\n2. Display all employee's details of a given department no. ");
+		printf("\n3. Display total pay of a given employee");
+		printf("\n4. Display total payroll of a given department");
+		printf("\n5. Update the salary");
+		printf("\n6. Exit");
+
+		printf("\n\nEnter your choice : ");
+		scanf("%d",&choice);
+
+		//system("cls");
+
+		switch(choice)
+		{
+		case 1 :
+			printf("\nDisplaying all the employee's particulars\n");
+			printf("\nEmpno    Salary   Comm   Deptno  Total_pay\n");
+			for(i=0; i<sz; i++)
+			{
+				printf("\n");
+				for(j=0; j<5; j++)
+					printf("%ld\t  ",emp[i][j]);
+			}
+			break;
+		case 2:
+			payroll = 0;
+			do
+			{
+				printf("\nEnter the valid department number : ");
+				scanf("%d",&d);
+			}while(d!=10 && d!=20 && d!=30);
+			printf("\nDetails of Department %d\n",d);
+			
+			printf("\nEmpno    Salary   Comm   Deptno  Total_pay\n");
+			for(i=0; i<sz; i++)
+			{
+				if(d == emp[i][3])
+				{
+					printf("\n");
+					for(j=0; j<5; j++)
+						printf("%ld\t  ",emp[i][j]);
+					payroll += emp[i][4];	// payroll = payroll + emp[i][4];
+				}
+			}
+			printf("\n\nTotal payroll of Department %d = %ld\n",d, payroll);
+			break;
+		case 3:
+			printf("\nTotal pay of a given employee\n");
+			printf("\nEnter the employee number : ");
+			scanf("%d",&empno);
+
+			for(i=0; i<sz; i++)
+			{
+				ch = 'n';
+				if(empno == emp[i][0])
+				{
+					ch = 'y';
+					printf("\nEmpno    Salary   Comm   Deptno  Total_pay\n");
+					for(j=0; j<5; j++)
+						printf("%ld\t  ",emp[i][j]);
+					break;
+				}
+			}
+			if(ch != 'y')
+				printf("\nGiven employee number %d is not present\n",empno);
+			break;
+		case 4:
+			printf("\nTotal payroll of a given department\n");
+			payroll = 0 ;
+			do
+			{
+				printf("\nEnter the Valid Department number (10 / 20 / 30) : ");
+				scanf("%d",&d);
+			}while(d != 10 && d!=20 && d!=30);
+
+			for(i=0; i<sz; i++)
+				if(d == emp[i][3])
+					payroll += emp[i][4];	//payroll = payroll + emp[i][4];
+			printf("\nTotal payroll for a given department %d = %ld\n",d,payroll);
+			break;
+		case 5:
+			printf("\nUpdation of the salaries\n");
+
+			printf("\nEmployee's Particulars before updation of salaries\n");
+			printf("\nEmpno    Salary   Comm   Deptno  Total_pay\n");
+			for(i=0; i<sz; i++)
+			{
+				printf("\n");
+				for(j=0; j<5; j++)
+					printf("%ld\t  ",emp[i][j]);
+			}
+
+			fflush(stdin);
+			printf("\nDo you really want to update the salaries of employee's (y/n) : ");
+			ch = getchar();
+
+			if(ch == 'y' || ch == 'Y')
+			{
+				for(i=0; i<sz; i++)
+				{
+					if(emp[i][1] <= 5000)
+					{
+						emp[i][1] = emp[i][1] + 2000;
+						emp[i][4] = emp[i][1] + emp[i][2];
+					}
+					else if(emp[i][1] <= 10000)
+					{
+						emp[i][1] = emp[i][1] + 1500;
+						emp[i][4] = emp[i][1] + emp[i][2];
+					}
+					else
+					{
+						emp[i][1] = emp[i][1] + 1000;
+						emp[i][4] = emp[i][1] + emp[i][2];
+					}
+				}
+				printf("\nEmployee's Particulars after updation of salaries\n");
+				printf("\nEmpno    Salary   Comm   Deptno  Total_pay\n");
+				for(i=0; i<sz; i++)
+				{
+					printf("\n");
+					for(j=0; j<5; j++)
+						printf("%ld\t  ",emp[i][j]);
+				}
+			}
+			break;
+		case 6:
+			printf("\nProgram terminated. Press any key .....\n\n");
+			getch();
+			exit(0);
+		default:
+			printf("\nInvalid choice\n");
+			getch();
+			break;
+		}
+
+		printf("\nDo you want to get other details (y/n) : ");
+		fflush(stdin);
+		op = getchar();
+	}while(op == 'y' || op == 'Y');
+}
+
+Output : 
+
+Enter how many employee's details are to be entered (max. 10) : -5
+
+Enter how many employee's details are to be entered (max. 10) : 15
+
+Enter how many employee's details are to be entered (max. 10) : 5
+Enter salary of employee 1 : 15000
+Enter commission of employee 1 : 2500
+
+Valid Department numbers are : 10  20  30
+Enter Valid department number for employee 1 : 10
+
+Particulars of employee 1 :
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1001      15000   2500    10      17500
+
+Still 4 employee's details are required
+
+Press any key to proceed forward
+Enter salary of employee 2 : 35000
+Enter commission of employee 2 : 3750
+
+Valid Department numbers are : 10  20  30
+Enter Valid department number for employee 2 : 20
+
+Particulars of employee 2 :
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1002      35000   3750    20      38750
+
+Still 3 employee's details are required
+
+Press any key to proceed forward
+Enter salary of employee 3 : 25000
+Enter commission of employee 3 : 2500
+
+Valid Department numbers are : 10  20  30
+Enter Valid department number for employee 3 : 30
+
+Particulars of employee 3 :
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1003      25000   2500    30      27500
+
+Still 2 employee's details are required
+
+Press any key to proceed forward
+Enter salary of employee 4 : 2750
+Enter commission of employee 4 : 1500
+
+Valid Department numbers are : 10  20  30
+Enter Valid department number for employee 4 : 10
+
+Particulars of employee 4 :
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1004      2750    1500    10      4250
+
+Still 1 employee's details are required
+
+Press any key to proceed forward
+Enter salary of employee 5 : 17500
+Enter commission of employee 5 : 2650
+
+Valid Department numbers are : 10  20  30
+Enter Valid department number for employee 5 : 30
+
+Particulars of employee 5 :
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1005      17500   2650    30      20150
+
+Press any key to proceed forward
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 1
+
+Displaying all the employee's particulars
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1001      15000   2500    10      17500
+1002      35000   3750    20      38750
+1003      25000   2500    30      27500
+1004      2750    1500    10      4250
+1005      17500   2650    30      20150
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 2
+
+Enter the valid department number : 30
+
+Details of Department 30
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1003      25000   2500    30      27500
+1005      17500   2650    30      20150
+
+Total payroll of Department 30 = 47650
+
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 2
+
+Enter the valid department number : 10
+
+Details of Department 10
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1001      15000   2500    10      17500
+1004      2750    1500    10      4250
+
+Total payroll of Department 10 = 21750
+
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 3
+
+Total pay of a given employee
+
+Enter the employee number : 1003
+
+Empno    Salary   Comm   Deptno  Total_pay
+1003      25000   2500    30      27500
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 4
+
+Total payroll of a given department
+
+Enter the Valid Department number (10 / 20 / 30) : 10
+
+Total payroll for a given department 10 = 21750
+
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 4
+
+Total payroll of a given department
+
+Enter the Valid Department number (10 / 20 / 30) : 30
+
+Total payroll for a given department 30 = 47650
+
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 5
+
+Updation of the salaries
+
+Employee's Particulars before updation of salaries
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1001      15000   2500    10      17500
+1002      35000   3750    20      38750
+1003      25000   2500    30      27500
+1004      2750    1500    10      4250
+1005      17500   2650    30      20150
+Do you really want to update the salaries of employee's (y/n) : y
+
+Employee's Particulars after updation of salaries
+
+Empno    Salary   Comm   Deptno  Total_pay
+
+1001      16000   2500    10      18500
+1002      36000   3750    20      39750
+1003      26000   2500    30      28500
+1004      4750    1500    10      6250
+1005      18500   2650    30      21150
+Do you want to get other details (y/n) : y
+
+1. Display all the employee's particulars
+2. Display all employee's details of a given department no.
+3. Display total pay of a given employee
+4. Display total payroll of a given department
+5. Update the salary
+6. Exit
+
+Enter your choice : 6
+
+Program terminated. Press any key .....
+
+Press any key to continue
+
+/* Program 40 : Scanning 2-D String Arrays. 
+Accepting group of words */
+
+#include <stdio.h>
+void main()
+{
+	char words[20][30];
+	int i , sz;
+	
+	do
+	{
+		printf("\nEnter no.of words (max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter word %d : ",i+1);
+		fflush(stdin);
+		scanf("%s",words[i]);
+	}
+
+	printf("\n\tThe Words are : \n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n\t\t%s",words[i]);
+	}
+	printf("\n\n");
+}
+Output :
+
+Enter no.of words (max. 20) : 25
+
+Enter no.of words (max. 20) : -52
+
+Enter no.of words (max. 20) : 0
+
+Enter no.of words (max. 20) : 5
+Enter word 1 : Banana
+Enter word 2 : Apple
+Enter word 3 : Mango
+Enter word 4 : Orange
+Enter word 5 : Pineapple
+
+        The Words are :
+
+                Banana
+                Apple
+                Mango
+                Orange
+                Pineapple
+
+Press any key to continue
+
+/* Program 41 : Accepting lines of text (Multiple lines) */
+
+#include <stdio.h>
+void main()
+{
+	char text[20][80];
+	int i, sz;
+
+	do
+	{
+		printf("\nEnter no.of lines (max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\nEnter line %d text :\n\t",i+1);
+		fflush(stdin);
+		gets(text[i]);
+	}
+
+	printf("\nEntered lines of text\n");
+	for(i=0; i<sz; i++)
+		printf("\n%s",text[i]);
+
+	printf("\n\n");
+}
+
+Output :
+
+Enter no.of lines (max. 20) : -4
+
+Enter no.of lines (max. 20) : 25
+
+Enter no.of lines (max. 20) : 5
+
+Enter line 1 text :
+        Have a nice day palani kumar
+
+Enter line 2 text :
+        One work at a time
+
+Enter line 3 text :
+        There is never a wrong time to do the right thing
+
+Enter line 4 text :
+        smile --- most important in life
+
+Enter line 5 text :
+        success easy when strongly sticking to the proper schedule
+
+Entered lines of text
+
+Have a nice day palani kumar
+One work at a time
+There is never a wrong time to do the right thing
+smile --- most important in life
+success easy when strongly sticking to the proper schedule
+
+Press any key to continue
+
+/* Program 42 : 
+	Write a program to accept a group of words into two dimensional string array
+and then rearrange the words in alphabetical order. Display the contents of the array
+before sorting and after sorting. */
+
+#include <stdio.h>
+#include <conio.h>		// getch()
+#include <string.h>		// strcpy() , strcat() etc
+void main()
+{
+	char words[20][30], temp[30];
+	int i, j, sz;
+
+	do
+	{
+		printf("Enter no.of words to be sorted(max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter word %d : ",i+1);
+		scanf("%s",words[i]);
+	}
+
+	printf("\n\nWords before sorting\n");
+	for(i=0; i<sz; i++)
+		printf("\n%s",words[i]);
+	getch();
+
+	printf("\n\nWords after sorting");
+	for(i=0; i<sz-1; i++)
+		for(j=i+1; j<sz; j++)
+			if(stricmp(words[i],words[j]) > 0)
+			{
+				strcpy(temp, words[i]);
+				strcpy(words[i], words[j]);
+				strcpy(words[j], temp);
+			}
+
+	for(i=0; i<sz; i++)
+		printf("\n%s",words[i]);
+
+	printf("\n\n");
+
+}
+
+
+Output :
+Enter no.of words to be sorted(max. 20) : -5
+Enter no.of words to be sorted(max. 20) : 24
+Enter no.of words to be sorted(max. 20) : 5
+Enter word 1 : banana
+Enter word 2 : apple
+Enter word 3 : orange
+Enter word 4 : mango
+Enter word 5 : pineapple
+
+
+Words before sorting
+
+banana
+apple
+orange
+mango
+pineapple
+
+Words after sorting
+apple
+banana
+mango
+orange
+pineapple
+
+Press any key to continue
+
+/* Program 43 :
+	Write a program to accept a group of words into two dimensional string array
+and display the contents of the array in lengthwise order */
+
+#include <stdio.h>
+#include <string.h>
+void main()
+{
+	char words[20][30] , temp[30];
+	int i, j, sz;
+
+	do
+	{
+		printf("\nEnter no.of words (max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter word %d : ",i+1);
+		scanf("%s",words[i]);
+	}
+
+	printf("\nEntered words \n");
+	for(i=0; i<sz; i++)
+		printf("%s\n",words[i]);
+
+	printf("\nEntered words arranged in lengthwise ascending order\n");
+	for(i=0; i<sz-1; i++)
+		for(j=i+1; j<sz; j++)
+			if(strlen(words[i]) > strlen(words[j]))
+			{
+				strcpy(temp, words[i]);
+				strcpy(words[i],words[j]);
+				strcpy(words[j], temp);
+			}
+	for(i=0; i<sz; i++)
+		printf("%s\n",words[i]);
+
+}
+
+Output : 
+Enter no.of words (max. 20) : 5
+Enter word 1 : abcdefg
+Enter word 2 : abcdef
+Enter word 3 : abcde
+Enter word 4 : abcd
+Enter word 5 : abc
+
+Entered words
+abcdefg
+abcdef
+abcde
+abcd
+abc
+
+Entered words arranged in lengthwise ascending order
+abc
+abcd
+abcde
+abcdef
+abcdefg
+Press any key to continue
+
+/* program 44 : 
+	Write a program to accept lines of text into a two dimensional string array
+and then display each word of all the rows in a separate line along with no.of 
+characters in each word */
+
+#include <stdio.h>
+#include <string.h>
+#include <conio.h>	// getch()
+
+void main()
+{
+	char text[20][80];
+	int i, j, sz, count=0;
+
+	do
+	{
+		printf("\nEnter no.of lines (max. 20) : ");
+		scanf("%d",&sz);
+	}while(sz<=0 || sz>20);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter line %d text : \n\t",i+1);
+		fflush(stdin);
+		gets(text[i]);
+	}
+
+	printf("\nEntered lines\n");
+	for(i=0; i<sz; i++)
+		printf("%s\n",text[i]);
+
+	getch();
+	printf("\nDisplaying the words\n");
+	for(i=0; i<sz; i++)
+	{
+		printf("\n\n");
+		count = 0;
+		for(j=0; text[i][j] != '\0'; j++)
+		{
+			if(text[i][j] != ' ')
+			{
+				printf("%c",text[i][j]);
+				count++;
+			}
+			else if(text[i][j+1] != ' ')
+			{
+				printf("\t%d\n",count);
+				count = 0;
+			}
+		}
+	}
+	printf("\t%d\n\n",count);
+
+}
+Output :
+
+Enter no.of lines (max. 20) : 4
+Enter line 1 text :
+        There is never a wrong time to do the right thing.
+Enter line 2 text :
+        One work at a time
+Enter line 3 text :
+        Encourage the speaker to talk
+Enter line 4 text :
+        Make a habit of doing it now
+
+Entered lines
+There is never a wrong time to do the right thing.
+One work at a time
+Encourage the speaker to talk
+Make a habit of doing it now
+
+Displaying the words
+
+
+There   5
+is      2
+never   5
+a       1
+wrong   5
+time    4
+to      2
+do      2
+the     3
+right   5
+thing.
+
+One     3
+work    4
+at      2
+a       1
+time
+
+Encourage       9
+the     3
+speaker 7
+to      2
+talk
+
+Make    4
+a       1
+habit   5
+of      2
+doing   5
+it      2
+now     3
+
+Press any key to continue
+
+/* Program 45 : 
+	Write a program to accept a line of text into a string array and then copy each
+word of the line of text into each row of a two dimensional string array. Display
+the words */
+
+#include <stdio.h>
+void main()
+{
+	char text[80];
+	char words[20][15];
+	int i, j=0, k=0;
+
+	printf("\nEnter a line of text : \n\t");
+	gets(text);
+
+	for(i=0; text[i]!='\0'; i++)
+	{
+		if(text[i] != ' ')
+		{
+			words[j][k] = text[i];
+			k++;
+		}
+		else if(text[i+1] != ' ')
+		{
+			words[j][k] = '\0';
+			k=0;
+			j++;
+		}
+	}
+	words[j][k] = text[i];	// words[j][k] = '\0';
+
+	printf("\nDisplaying the words\n");
+	for(i=0; i<=j; i++)
+		printf("\t%s\n",words[i]);
+}
+Output : 
+
+Enter a line of text :
+                 There  is        never  a wrong time        to do the right thing.
+
+Displaying the words
+
+        There
+        is
+        never
+        a
+        wrong
+        time
+        to
+        do
+        the
+        right
+        thing.
+Press any key to continue
+
+/* Program 46 : Multi-Dimensional Arrays
+	Write a program to calculate the total average marks of each section of a class
+and display the summary report of each section. Use 3 dimensional numeric array */
+
+#include <stdio.h>
+#include <conio.h>	// getch()
+#define line for(k=0; k<75; k++) printf("-")
+
+char subjects[6][15] = {"English" , "Telugu", "Hindi", "Maths", "Social", "Science" };
+char ok = 'y';
+void main()
+{
+	int marks[5][10][7];
+	/*
+		Max. 5 sections. Max 10 students/section. subjects 6+1 for total
+	*/
+	int i, j, k, sz, sum , total=0;
+	int capacity=0;
+	float avg;
+	int strength[5];	// stores each section's no.of students
+
+	do
+	{
+		if(ok == 'y')
+			printf("\nEnter no.of sections (Max. 5) : ");
+		else
+			printf("Maximum sections allowed is only 5.\nEntered value %d is not accepted.\nPlease Enter the correct value(1 to 5) to proceed : ",sz);
+		scanf("%d",&sz);
+
+		if(sz<=0 || sz>5)
+			ok='n';
+		else
+			ok='y';
+	}while(sz<=0 || sz>5);
+
+	for(i=0; i<sz; i++)
+	{
+		do
+		{
+			if(ok == 'y')
+				printf("\nEnter no.of students in section %d (max. 10 students) : ",i+1);
+			else
+			{
+				printf("\nEnter value %d is not accepted.\nMaximum students allowed per section is only 10\n",capacity);
+				printf("\nEnter the correct no.of students  in section %d to proceed : ",i+1);
+			}
+			scanf("%d",&capacity);
+			
+			if(capacity<=0 || capacity>10)
+				ok = 'n';
+			else
+				ok = 'y';
+
+		}while(capacity<=0 || capacity>10);
+		strength[i] = capacity;
+
+		for(j=0; j<strength[i]; j++)
+		{
+			sum=0;
+			printf("\n");
+			for(k=0; k<6; k++)
+			{
+				do
+				{
+					if(ok == 'y')
+						printf("Enter marks of student %d in subject \" %s \" of section %d : ",j+1,subjects[k],i+1);
+					else
+					{
+						printf("\nInvalid mark. Please enter the correct mark (1 to 100)\n");
+						printf("Enter marks of student %d in subject \" %s \" of section %d : ",j+1,subjects[k],i+1);
+					}
+					scanf("%d",&marks[i][j][k]);
+					if( marks[i][j][k]<0 || marks[i][j][k]>100 )
+						ok = 'n';
+					else
+						ok = 'y';
+				}while(marks[i][j][k]<0 || marks[i][j][k]>100);
+				sum = sum + marks[i][j][k];
+			}
+			marks[i][j][6] = sum;
+		}
+	}
+
+	// Summary report of each section
+	getch();
+	printf("\nSummary report  of each section\n");
+	for(i=0; i<sz; i++)
+	{
+		total = 0;
+		printf("\nDetails of section %d : \n",i+1);
+		line;
+		printf("\nRoll_No.  English  Telugu    Hindi    Maths    Social    Science    Total \n");
+		for(j=0; j<strength[i]; j++)
+		{
+			printf("%3d",j+1);
+			total = total + marks[i][j][6];
+			for(k=0; k<7; k++)
+				printf("%9d ",marks[i][j][k]);
+			printf("\n");
+		}
+		
+		avg = (float)total/strength[i];
+		printf("\nNo.of students present in section %d = %d",i+1,strength[i]);
+		printf("\nAverage total marks = %.2f\n",avg);
+
+		line;
+		getch();
+	}
+	printf("\n");
+}
+Output : 
+
+Enter no.of sections (Max. 5) : -14
+Maximum sections allowed is only 5.
+Entered value -14 is not accepted.
+Please Enter the correct value(1 to 5) to proceed : 3
+
+Enter no.of students in section 1 (max. 10 students) : 12
+
+Enter value 12 is not accepted.
+Maximum students allowed per section is only 10
+
+Enter the correct no.of students  in section 1 to proceed : 3
+
+Enter marks of student 1 in subject " English " of section 1 : 150
+
+Invalid mark. Please enter the correct mark (1 to 100)
+Enter marks of student 1 in subject " English " of section 1 : 65
+Enter marks of student 1 in subject " Telugu " of section 1 : 75
+Enter marks of student 1 in subject " Hindi " of section 1 : 80
+Enter marks of student 1 in subject " Maths " of section 1 : 99
+Enter marks of student 1 in subject " Social " of section 1 : 57
+Enter marks of student 1 in subject " Science " of section 1 : 75
+
+Enter marks of student 2 in subject " English " of section 1 : 75
+Enter marks of student 2 in subject " Telugu " of section 1 : 68
+Enter marks of student 2 in subject " Hindi " of section 1 : 54
+Enter marks of student 2 in subject " Maths " of section 1 : 36
+Enter marks of student 2 in subject " Social " of section 1 : -47
+
+Invalid mark. Please enter the correct mark (1 to 100)
+Enter marks of student 2 in subject " Social " of section 1 : 65
+Enter marks of student 2 in subject " Science " of section 1 : 58
+
+Enter marks of student 3 in subject " English " of section 1 : 65
+Enter marks of student 3 in subject " Telugu " of section 1 : 48
+Enter marks of student 3 in subject " Hindi " of section 1 : 87
+Enter marks of student 3 in subject " Maths " of section 1 : 96
+Enter marks of student 3 in subject " Social " of section 1 : 25
+Enter marks of student 3 in subject " Science " of section 1 : 41
+
+Enter no.of students in section 2 (max. 10 students) : 2
+
+Enter marks of student 1 in subject " English " of section 2 : 65
+Enter marks of student 1 in subject " Telugu " of section 2 : 25
+Enter marks of student 1 in subject " Hindi " of section 2 : 84
+Enter marks of student 1 in subject " Maths " of section 2 : 78
+Enter marks of student 1 in subject " Social " of section 2 : 69
+Enter marks of student 1 in subject " Science " of section 2 : 85
+
+Enter marks of student 2 in subject " English " of section 2 : 84
+Enter marks of student 2 in subject " Telugu " of section 2 : 75
+Enter marks of student 2 in subject " Hindi " of section 2 : 69
+Enter marks of student 2 in subject " Maths " of section 2 : 85
+Enter marks of student 2 in subject " Social " of section 2 : 57
+Enter marks of student 2 in subject " Science " of section 2 : 49
+
+Enter no.of students in section 3 (max. 10 students) : 3
+
+Enter marks of student 1 in subject " English " of section 3 : 58
+Enter marks of student 1 in subject " Telugu " of section 3 : 68
+Enter marks of student 1 in subject " Hindi " of section 3 : 74
+Enter marks of student 1 in subject " Maths " of section 3 : 96
+Enter marks of student 1 in subject " Social " of section 3 : 58
+Enter marks of student 1 in subject " Science " of section 3 : 57
+
+Enter marks of student 2 in subject " English " of section 3 : 48
+Enter marks of student 2 in subject " Telugu " of section 3 : 65
+Enter marks of student 2 in subject " Hindi " of section 3 : 84
+Enter marks of student 2 in subject " Maths " of section 3 : 36
+Enter marks of student 2 in subject " Social " of section 3 : 45
+Enter marks of student 2 in subject " Science " of section 3 : 68
+
+Enter marks of student 3 in subject " English " of section 3 : 48
+Enter marks of student 3 in subject " Telugu " of section 3 : 68
+Enter marks of student 3 in subject " Hindi " of section 3 : 58
+Enter marks of student 3 in subject " Maths " of section 3 : 95
+Enter marks of student 3 in subject " Social " of section 3 : 74
+Enter marks of student 3 in subject " Science " of section 3 : 95
+
+Summary report  of each section
+
+Details of section 1 :
+---------------------------------------------------------------------------
+Roll_No.  English  Telugu    Hindi    Maths    Social    Science    Total
+  1       65        75        80        99        57        75       451
+  2       75        68        54        36        65        58       356
+  3       65        48        87        96        25        41       362
+
+No.of students present in section 1 = 3
+Average total marks = 389.67
+---------------------------------------------------------------------------
+Details of section 2 :
+---------------------------------------------------------------------------
+Roll_No.  English  Telugu    Hindi    Maths    Social    Science    Total
+  1       65        25        84        78        69        85       406
+  2       84        75        69        85        57        49       419
+
+No.of students present in section 2 = 2
+Average total marks = 412.50
+---------------------------------------------------------------------------
+Details of section 3 :
+---------------------------------------------------------------------------
+Roll_No.  English  Telugu    Hindi    Maths    Social    Science    Total
+  1       58        68        74        96        58        57       411
+  2       48        65        84        36        45        68       346
+  3       48        68        58        95        74        95       438
+
+No.of students present in section 3 = 3
+Average total marks = 398.33
+---------------------------------------------------------------------------
+Press any key to continue
+
+
+/* Program 47 : 3-Dimensional String array */
+#include <stdio.h>
+#include <conio.h>	// getch()
+
+void main()
+{
+	char page[10][20][80];
+	int i, j, sz, nlines[10];
+
+	printf("\nEnter no.of paragraphs(max. 10) : ");
+	scanf("%d",&sz);
+
+	fflush(stdin);
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter no.of lines in paragraph %d : ",i+1);
+		scanf("%d",&nlines[i]);
+
+		fflush(stdin);
+		for(j=0; j<nlines[i]; j++)
+		{
+			printf("Enter line %d of paragraph %d\n",j+1, i+1);
+			gets(page[i][j]);
+		}
+	}
+
+	// Displaying the paragraphs
+	for(i=0; i<sz; i++)
+	{
+		printf("\n");
+		for(j=0; j<nlines[i]; j++)
+			printf("\n%s",page[i][j]);
+	}
+}
+
+Output : 
+
+Enter no.of paragraphs(max. 10) : 2
+Enter no.of lines in paragraph 1 : 3
+Enter line 1 of paragraph 1
+ One work at a time
+Enter line 2 of paragraph 1
+Have a nice day
+Enter line 3 of paragraph 1
+Slow and steady wins the race
+Enter no.of lines in paragraph 2 : 2
+Enter line 1 of paragraph 2
+There is never a wrong time to do the right thing
+Enter line 2 of paragraph 2
+Have desire then only we can achieve
+
+
+ One work at a time
+Have a nice day
+Slow and steady wins the race
+
+There is never a wrong time to do the right thing
+Have desire then only we can achieve
+
+Press any key to continue

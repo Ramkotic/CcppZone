@@ -1,0 +1,341 @@
+
+/* Program 1 : Opening a new file text.dat in write mode and entering the data into the file. */
+
+#include <stdio.h>
+
+void main(int argc, char* argv[])
+{
+	FILE* fp;
+	char ch;
+
+	fp = fopen("text.dat","w");
+	//fp = fopen("text.dat","a");	// append mode
+	printf("\nEnter the text. (ctrl+z to stop)\n");
+	while((ch=getchar()) != EOF)
+	{
+		putc(ch,fp);
+	}
+	fclose(fp);
+
+	printf("\nContents of the file\n");
+	fp = fopen("text.dat","r");
+
+	if(fp != NULL)
+	{
+		while( (ch = getc(fp)) != EOF)
+		{
+			putchar(ch);
+		}
+		fclose(fp);
+	}
+}
+
+
+
+/* Program 2 : Program to copy the contents of the file text.dat into the new file called newtext.dat */
+
+#include <stdio.h>
+#include <process.h>
+void main()
+{
+	FILE *fp1, *fp2;
+	char ch;
+
+	fp1 = fopen("text.dat","r");
+	if( fp1 == NULL )
+	{
+		printf("\nFile \"text.dat\" doesn't exist\n");
+		exit(0);
+	}
+
+	fp2 = fopen("newtext.dat","w");
+
+	while( (ch = getc(fp1)) != EOF)
+	{
+		putc(ch,fp2);
+	}
+	fclose(fp2);
+	fclose(fp1);
+
+	printf("\nContents of the file \"text.dat\" :\n");
+	fp1 = fopen("text.dat","r");
+	while((ch=getc(fp1)) != EOF)
+		putchar(ch);
+	fclose(fp1);
+
+	printf("\nContents of the file \"newtext.dat\" :\n");
+	fp2 = fopen("newtext.dat","r");
+	while((ch=getc(fp2)) != EOF)
+		putchar(ch);
+	fclose(fp2);
+}
+
+
+
+/* program 3 : Storing and retrieving integer values into/from a file using putw() and getw() functions */
+
+#include <stdio.h>
+#include <process.h>
+
+void main()
+{
+	FILE* fp;
+	int sal, i, sz;
+
+	fp = fopen("sal.dat","a");
+	//fp = fopen("sal.dat","a");	// append mode
+	printf("\nEnter the no.of employee's : ");
+	scanf("%d",&sz);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter salary of employee %d : ",i+1);
+		scanf("%d",&sal);
+		putw(sal,fp);
+	}
+	fclose(fp);
+
+	printf("\nContents of the file sal.dat are :\n");
+	fp = fopen("sal.dat","rb");
+
+	if(fp == NULL)
+	{
+		printf("\nFile \"sal.dat\" is not existing\n");
+		exit(0);
+	}
+
+	while( (sal=getw(fp)) != EOF)
+	{
+		printf("%d\t",sal);
+	}
+	printf("\n\n");
+	fclose(fp);
+
+}
+
+
+/* Program 4 : Previous program using fprintf(), fscanf() functions instead of using putw(),getw() */
+
+#include <stdio.h>
+#include <process.h>
+
+void main(int argc, char* argv[])
+{
+	FILE * fp;
+	int sal, i, sz;
+
+	fp = fopen("salary.dat","w");
+	printf("\nEnter no.of employee's : ");
+	scanf("%d",&sz);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("\nEnter salary of employee %d : ",i+1);
+		scanf("%d",&sal);
+		fprintf(fp,"%d\n",sal);
+	}
+	fclose(fp);
+
+	printf("\nContents of the file \"salary.dat\" :\n");
+	fp = fopen("salary.dat","r");
+
+	if(fp == NULL)
+	{
+		printf("\nFile \"salary.dat\" is not existing\n");
+		exit(0);
+	}
+	while( fscanf(fp,"%d\n",&sal) != EOF)
+		printf("%d\t",sal);
+	fclose(fp);
+}
+
+
+
+
+
+
+/* Program 5 : Write a program to copy salaries of all employee's < 5000 in one file, 
+between 5000 to 10000 in another file and salaries > 10000 in another file. */
+
+#include <stdio.h>
+#include <process.h>
+
+void main(int argc, char* argv[])
+{
+	FILE *fp, *fp1, *fp2, *fp3;
+	int sal, i, sz;
+
+	fp  = fopen("sal1.dat","w");
+	fp1 = fopen("lsal.dat","w");
+	fp2 = fopen("msal.dat","w");
+	fp3 = fopen("hsal.dat","w");
+
+	printf("\nEnter no.of employee's : ");
+	scanf("%d",&sz);
+
+	for(i=0; i<sz; i++)
+	{
+		printf("Enter employee %d salary : ",i+1);
+		scanf("%d",&sal);
+
+		fprintf(fp,"%d\t",sal);
+
+		if(sal <= 5000)
+			fprintf(fp1,"%d\t",sal);
+		else if(sal <= 10000)
+			fprintf(fp2,"%d\t",sal);
+		else
+			fprintf(fp3,"%d\t",sal);
+	}
+	fclose(fp);
+	fclose(fp1);
+	fclose(fp2);
+	fclose(fp3);
+
+	fp  = fopen("sal1.dat","r");
+	//printf("\nThe contents of the file \"sal1.dat\" are :\n");
+	printf("\n\nDisplaying the salaries of all the employees\n");
+	while(fscanf(fp,"%d\t",&sal) != EOF)
+		printf("%d\t",sal);
+	fclose(fp);
+
+	fp1  = fopen("lsal.dat","r");
+	//printf("\n\nThe contents of the file \"lsal.dat\" are :\n");
+	printf("\n\nDisplaying salaries <= 5000\n");
+	while(fscanf(fp1,"%d\t",&sal) != EOF)
+		printf("%d\t",sal);
+	fclose(fp1);
+
+	fp2  = fopen("msal.dat","r");
+	//printf("\n\nThe contents of the file \"msal.dat\" are :\n");
+	printf("\n\nDisplaying salaries >5000 and <= 10000\n");
+	while(fscanf(fp2,"%d\t",&sal) != EOF)
+		printf("%d\t",sal);
+	fclose(fp2);
+
+	fp3  = fopen("hsal.dat","r");
+	//printf("\n\nThe contents of the file \"hsal.dat\" are :\n");
+	printf("\n\nDisplaying salaries >10000\n");
+	while(fscanf(fp3,"%d\t",&sal) != EOF)
+		printf("%d\t",sal);
+	fclose(fp3);
+
+	printf("\n\n");
+
+
+
+}
+/* Output */
+
+Enter no.of employee's : 8
+Enter employee 1 salary : 7500
+Enter employee 2 salary : 2500
+Enter employee 3 salary : 15000
+Enter employee 4 salary : 350
+Enter employee 5 salary : 4584
+Enter employee 6 salary : 6952
+Enter employee 7 salary : 13524
+Enter employee 8 salary : 4521
+
+
+Displaying the salaries of all the employees
+7500    2500    15000   350     4584    6952    13524   4521
+
+Displaying salaries <= 5000
+2500    350     4584    4521
+
+Displaying salaries >5000 and <= 10000
+7500    6952
+
+Displaying salaries >10000
+15000   13524
+
+Press any key to continue
+
+
+/* Program 6 : fseek() program 
+	d:\dotnet\cprograms\cfiles> copy con abt.dat
+		Welcome to files ^z
+*/
+
+#include <stdio.h>
+#include <process.h>
+void main()
+{
+	FILE* fp;
+	char ch;
+	int sz;
+
+	fp = fopen("ant.dat","r");
+	if(fp == NULL)
+	{
+		printf("\nFile ant.dat is not existing\n");
+		exit(0);
+	}
+
+	printf("\nThe contents of the file \"ant.dat\" are :\n");
+	while((ch=getc(fp)) != EOF)
+		putchar(ch);
+	fclose(fp);
+
+	fp = fopen("ant.dat","r");
+	if(fp == NULL)
+		exit(0);
+	
+	printf("\n");	// welcome to files<eof>
+	fseek(fp,3l,0);	// 0 - move from the beginning of the file
+	putchar(getc(fp));	// output: c
+	printf("\n");
+
+	fseek(fp,4L,1);		// welcome to files<eof>
+	putchar(getc(fp));	// 1 - move from the current location
+	printf("\n");	// output: t
+
+	fseek(fp,-3l,1);	// welcome to files<eof>
+	putchar(getc(fp));	// output: e
+	printf("\n");
+
+	fseek(fp,4l,0);		// welcome to files<eof>
+	putchar(getc(fp));	// output: o
+	printf("\n");
+
+	fseek(fp,-4L,2);	// welcome to files<eof>
+	putchar(getc(fp));	// output: i
+	printf("\n");		// 2 - move the file pointer from the end of the file
+
+	fseek(fp,-1L,1);
+	putchar(getc(fp));	// output: i
+	printf("\n");	
+
+	fseek(fp,2L,1);
+	putchar(getc(fp));	// output: s
+	printf("\n");
+
+	fseek(fp,5L,0);
+	putchar(getc(fp));	// output: m
+	printf("\n");
+
+	fseek(fp,0L,2);
+	sz = ftell(fp);
+	printf("\nsize of the file : %d\n",sz);	// // output: 16
+
+	printf("\n\n");
+	fclose(fp);
+}
+
+/* output */
+
+The contents of the file "ant.dat" are :
+welcome to files
+c
+t
+e
+o
+i
+i
+s
+m
+
+size of the file : 16
+
+Press any key to continue

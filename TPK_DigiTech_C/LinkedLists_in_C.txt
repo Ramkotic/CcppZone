@@ -1,0 +1,1216 @@
+/* Program 1 : Implementation  of the Single Linked List */
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+
+struct tt
+{
+	int sno;
+	char name[30];
+	int age;
+	struct tt* next;
+};
+
+void main()
+{
+	struct tt* head , *previous, *present;
+	char ch;
+
+	struct tt * create();		// function prototype
+	void enter(struct tt* pts);
+	void add_link(struct tt* pre, struct tt* pts);
+	void display(struct tt* head);
+
+	head = create();
+	enter(head);
+	previous = head;
+	do
+	{
+		present = create();
+		enter(present);
+		add_link(previous, present);
+		previous = present;
+
+		printf("\nDo you want to create one more block (y/n)? : ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch=='y' || ch=='Y');
+
+	display(head);
+}
+
+struct tt * create()
+{
+	return (struct tt*)malloc(sizeof(struct tt));
+}
+
+void enter(struct tt* pts)
+{
+	printf("\n");
+	static int i=101;
+	pts->sno = i;
+	printf("Enter name : ");
+	fflush(stdin);
+	gets(pts->name);
+	printf("Enter age : ");
+	scanf("%d",&pts->age);
+
+	i++;
+}
+
+void add_link(struct tt* pre, struct tt* pts)
+{
+	pre->next = pts;
+	pts->next = NULL;
+}
+
+void display(struct tt* head)
+{
+	struct tt* temp;
+	printf("\n\n");
+	for(temp = head; temp != NULL ; temp = temp->next)
+		printf("%d  %s  %d\n",temp->sno, temp->name, temp->age);
+
+}
+Output :
+
+Enter name : ram gopal varma
+Enter age : 32
+
+Enter name : Krishna vamsi
+Enter age : 28
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : venu gopal
+Enter age : 33
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : Yaswant Kanetkar
+Enter age : 40
+
+Do you want to create one more block (y/n)? : n
+
+101  ram gopal varma  32
+102  Krishna vamsi  28
+103  venu gopal  33
+104  Yaswant Kanetkar  40
+
+Press any key to continue
+
+/* Program 2 : Implementation of the Single Circular Linked List */
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+#include <windows.h>
+
+struct tt
+{
+	int sno;
+	char name[30];
+	int age;
+	struct tt* next;
+};
+
+void main()
+{
+	struct tt* head , *previous, *present;
+	char ch;
+
+	struct tt * create();		// function prototype
+	void enter(struct tt* pts);
+	void add_link(struct tt* pre, struct tt* pts);
+	void display(struct tt* head);
+
+	head = create();
+	enter(head);
+	previous = head;
+	do
+	{
+		present = create();
+		enter(present);
+		add_link(previous, present);
+		previous = present;
+
+		printf("\nDo you want to create one more block (y/n)? : ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch=='y' || ch=='Y');
+	present->next = head;
+
+	display(head);
+}
+
+struct tt * create()
+{
+	return (struct tt*)malloc(sizeof(struct tt));
+}
+
+void enter(struct tt* pts)
+{
+	printf("\n");
+	static int i=101;
+	pts->sno = i;
+	printf("Enter name : ");
+	fflush(stdin);
+	gets(pts->name);
+	printf("Enter age : ");
+	scanf("%d",&pts->age);
+
+	i++;
+}
+
+void add_link(struct tt* pre, struct tt* pts)
+{
+	pre->next = pts;
+	pts->next = NULL;
+}
+
+void display(struct tt* head)
+{
+	struct tt* temp;
+	printf("\n\n");
+	for(temp = head; temp != NULL ; temp = temp->next)
+	{
+		printf("%d  %s  %d\n",temp->sno, temp->name, temp->age);
+		Sleep(1000);
+	}
+
+}
+
+Output : 
+
+Enter name : palani kumar
+Enter age : 28
+
+Enter name : krishna vamsi
+Enter age : 29
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : ram gopal varma
+Enter age : 29
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : mamooty
+Enter age : 37
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : mohan lal
+Enter age : 35
+
+Do you want to create one more block (y/n)? : n
+
+101  palani kumar  28
+102  krishna vamsi  29
+103  ram gopal varma  29
+104  mamooty  37
+105  mohan lal  35
+101  palani kumar  28
+102  krishna vamsi  29
+103  ram gopal varma  29
+104  mamooty  37
+105  mohan lal  35
+101  palani kumar  28
+102  krishna vamsi  29
+103  ram gopal varma  29
+104  mamooty  37
+105  mohan lal  35
+101  palani kumar  28
+102  krishna vamsi  29
+......
+......
+
+
+/* Program 3 : Implementation of the Double Linked List */
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+
+struct tt
+{
+	struct tt* early;
+	int sno;
+	char name[30];
+	int age;
+	struct tt* next;
+};
+
+void main()
+{
+	struct tt* head , *previous, *present;
+	char ch;
+
+	struct tt * create();		// function prototype
+	void enter(struct tt* pts);
+	void add_link(struct tt* pre, struct tt* pts);
+	void display(struct tt* head, struct tt* last, char op);
+
+	head = create();
+	enter(head);
+	head->early = NULL;
+
+	previous = head;
+	do
+	{
+		present = create();
+		enter(present);
+		add_link(previous, present);
+		previous = present;
+
+		printf("\nDo you want to create one more block (y/n)? : ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch=='y' || ch=='Y');
+
+	for(int i=0; i<3; i++)
+	{
+		printf("\nDisplay from (b)eginning or from the (e)nd of the list\n");
+		fflush(stdin);
+		ch = getchar();
+		display(head, present, ch);
+	}
+}
+
+struct tt * create()
+{
+	return (struct tt*)malloc(sizeof(struct tt));
+}
+
+void enter(struct tt* pts)
+{
+	printf("\n");
+	static int i=101;
+	pts->sno = i;
+	printf("Enter name : ");
+	fflush(stdin);
+	gets(pts->name);
+	printf("Enter age : ");
+	scanf("%d",&pts->age);
+
+	i++;
+}
+
+void add_link(struct tt* pre, struct tt* pts)
+{
+	pre->next = pts;
+	pts->early = pre;
+	pts->next = NULL;
+}
+
+void display(struct tt* head, struct tt* last, char ch)
+{
+	struct tt* temp;
+	printf("\n\n");
+	if(ch == 'b')
+	{
+		for(temp = head; temp != NULL ; temp = temp->next)
+		{
+			printf("%d  %s  %d\n",temp->sno, temp->name, temp->age);
+		}
+	}
+	else
+	{
+		for(temp = last; temp != NULL ; temp = temp->early)
+		{
+			printf("%d  %s  %d\n",temp->sno, temp->name, temp->age);
+		}
+	}
+
+}
+
+Output :
+
+Enter name : palani kumar
+Enter age : 28
+
+Enter name : sailesh kumar panda
+Enter age : 29
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : krishna vamsi
+Enter age : 39
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : ram gopal varma
+Enter age : 33
+
+Do you want to create one more block (y/n)? : n
+
+Display from (b)eginning or from the (e)nd of the list
+e
+
+104  ram gopal varma  33
+103  krishna vamsi  39
+102  sailesh kumar panda  29
+101  palani kumar  28
+
+Display from (b)eginning or from the (e)nd of the list
+b
+
+101  palani kumar  28
+102  sailesh kumar panda  29
+103  krishna vamsi  39
+104  ram gopal varma  33
+
+Display from (b)eginning or from the (e)nd of the list
+e
+
+104  ram gopal varma  33
+103  krishna vamsi  39
+102  sailesh kumar panda  29
+101  palani kumar  28
+Press any key to continue
+
+/* Program 4 : Implementation of the Double Circular Linked List */
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+#include <windows.h>
+
+struct tt
+{
+	struct tt* early;
+	int sno;
+	char name[30];
+	int age;
+	struct tt* next;
+};
+
+void main()
+{
+	struct tt* head , *previous, *present;
+	char ch;
+
+	struct tt * create();		// function prototype
+	void enter(struct tt* pts);
+	void add_link(struct tt* pre, struct tt* pts);
+	void display(struct tt* head, struct tt* last, char op);
+
+	head = create();
+	enter(head);
+	head->early = NULL;
+
+	previous = head;
+	do
+	{
+		present = create();
+		enter(present);
+		add_link(previous, present);
+		previous = present;
+
+		printf("\nDo you want to create one more block (y/n)? : ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch=='y' || ch=='Y');
+
+	head->early = present;
+	present->next = head;
+
+	for(int i=0; i<3; i++)
+	{
+		printf("\nDisplay from (b)eginning or from the (e)nd of the list\n");
+		fflush(stdin);
+		ch = getchar();
+		display(head, present, ch);
+	}
+}
+
+struct tt * create()
+{
+	return (struct tt*)malloc(sizeof(struct tt));
+}
+
+void enter(struct tt* pts)
+{
+	printf("\n");
+	static int i=101;
+	pts->sno = i;
+	printf("Enter name : ");
+	fflush(stdin);
+	gets(pts->name);
+	printf("Enter age : ");
+	scanf("%d",&pts->age);
+
+	i++;
+}
+
+void add_link(struct tt* pre, struct tt* pts)
+{
+	pre->next = pts;
+	pts->early = pre;
+	pts->next = NULL;
+}
+
+void display(struct tt* head, struct tt* last, char ch)
+{
+	struct tt* temp;
+	printf("\n\n");
+	if(ch == 'b')
+	{
+		for(temp = head; temp != NULL ; temp = temp->next)
+		{
+			printf("%d  %s  %d\n",temp->sno, temp->name, temp->age);
+			Sleep(1000);
+		}
+	}
+	else
+	{
+		for(temp = last; temp != NULL ; temp = temp->early)
+		{
+			printf("%d  %s  %d\n",temp->sno, temp->name, temp->age);
+			Sleep(1000);
+		}
+	}
+
+}
+
+
+Output :
+
+Enter name : Krishna Vamsi
+Enter age : 29
+
+Enter name : Ram Gopal Varma
+Enter age : 33
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : Mohan Lal
+Enter age : 33
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : Chiranjeevi
+Enter age : 39
+
+Do you want to create one more block (y/n)? : y
+
+Enter name : surya prakash
+Enter age : 25
+
+Do you want to create one more block (y/n)? : n
+
+Display from (b)eginning or from the (e)nd of the list
+e
+
+105  surya prakash  25
+104  Chiranjeevi  39
+103  Mohan Lal  33
+102  Ram Gopal Varma  33
+101  Krishna Vamsi  29
+105  surya prakash  25
+104  Chiranjeevi  39
+103  Mohan Lal  33
+102  Ram Gopal Varma  33
+101  Krishna Vamsi  29
+105  surya prakash  25
+104  Chiranjeevi  39
+103  Mohan Lal  33
+102  Ram Gopal Varma  33
+101  Krishna Vamsi  29
+105  surya prakash  25
+104  Chiranjeevi  39
+103  Mohan Lal  33
+102  Ram Gopal Varma  33
+101  Krishna Vamsi  29
+105  surya prakash  25
+......
+......
+
+
+/* program 5 : Double linked list program with update, delete, insert options.
+		Manipulating double linked lists. */
+
+#include <stdio.h>
+#include <malloc.h>
+#include <conio.h>		// getch()
+
+struct tt
+{
+	struct tt* early;
+	int sno;
+	char name[30];
+	int age;
+	struct tt* next;
+};
+
+void main()
+{
+	struct tt* head, *previous, *present;
+	char ch, op;
+	int i;
+
+	struct tt* create();		// function prototype
+	void enter(struct tt* pt);
+	void add_link(struct tt* previous, struct tt* present);
+	void disp(struct tt* head, struct tt* pts, char ch);
+
+	void insert(struct tt** pphead, struct tt** pplast);
+	void Delete(struct tt** pphead, struct tt** pplast);
+	void update(struct tt* head);
+
+	head = create();
+	enter(head);
+	head->early = NULL;
+
+	previous = head;
+
+	do
+	{
+		present = create();
+		enter(present);
+		add_link(previous, present);
+
+		previous = present;
+		printf("\nDo you want to create one more block (y/n) ? :  ");
+		fflush(stdin);
+		ch = getchar();
+	}while(ch=='y' || ch=='Y');
+
+	//printf("\nFirst block address = %u\n",head);
+
+	printf("\nDisplay the records from the (b)eginning or from the (e)nd of the list: ");
+	fflush(stdin);
+	op = getchar();
+
+	disp(head,present,op);
+
+	do
+	{
+		printf("\n\nSelect the following option you want\n");
+		printf("(i)nsert , (d)delete, or (u)pdate the records\n");
+		fflush(stdin);
+		ch = getchar();
+
+		switch(ch)
+		{
+		case 'i':
+			insert(&head, &present);
+			break;
+		case 'd':
+			Delete(&head, &present);	
+			// head -> first block, present -> last block
+			break;
+		case 'u':
+			update(head);
+			break;
+		default:
+			printf("\nInvalid Option.\n");
+			break;
+		}
+		printf("\n\nIn which way you want to display the records\n");
+		printf("\nSelect from the (b)eginning or (e)nd of the list\n");
+		fflush(stdin);
+		op = getchar();
+
+		disp(head, present, op);
+		printf("\n\nDo you want to manipulate the records again(y/n)? : ");
+		fflush(stdin);
+		op = getchar();
+	}while(op == 'y' || op == 'Y');
+
+	printf("\nDisplaying the records from the beginning of the list\n");
+	disp(head, present, 'b');
+
+	printf("\nDisplaying the records from the end of the list\n");
+	disp(head, present, 'e');
+
+	printf("\n\n");
+
+}	// end of main() function
+
+struct tt* create()
+{
+	struct tt* pts = NULL;
+	pts = (struct tt*)malloc(sizeof(struct tt));
+	return pts;
+}
+
+void enter(struct tt* pt)
+{
+	static int i = 1;
+
+	pt->sno = i;
+	printf("\nEnter name : ");
+	fflush(stdin);
+	gets(pt->name);
+
+	printf("Enter age : ");
+	scanf("%d",&pt->age);
+
+	i++;
+}
+
+void add_link(struct tt* pre, struct tt* pts)
+{
+	pre->next = pts;
+	pts->early = pre;
+	pts->next = NULL;
+}
+
+void disp(struct tt* head, struct tt* pts, char ch)
+{
+	struct tt* temp;
+	if(ch == 'b')
+	{
+		for(temp = head; temp!=NULL; temp= temp->next)
+		{
+			//printf("\n%u   %d  %s   %d   %u",temp->early,temp->sno, temp->name, temp->age, temp->next);
+			printf("\n%4d\t    %-30s %4d ",temp->sno, temp->name, temp->age);
+		}
+	}
+	else
+	{
+		for(temp=pts; temp != NULL; temp= temp->early)
+		{
+			//printf("\n%u   %d  %s   %d   %u",temp->early,temp->sno, temp->name, temp->age, temp->next);
+			printf("\n%4d\t    %-30s %4d ",temp->sno, temp->name, temp->age);
+		}
+	}
+}
+
+void insert(struct tt** pphead, struct tt** pplast)
+{
+	char ch, op;
+	struct tt* pnew = create();
+	struct tt* temp , *pnext;
+	int rpos, count=0, nrecords=0;
+
+	enter(pnew);
+
+	printf("\nInsert at (b)eginning or e(n)d or (m)iddle of the list\n");
+	fflush(stdin);
+	ch = getchar();
+
+	if(ch == 'b' || ch == 'B')
+	{
+		pnew->early = NULL;
+		pnew->next = *pphead;
+		(*pphead)->early = pnew;
+		*pphead = pnew;
+		printf("\nRecord is inserted successfully");
+		printf("\npress any key to continue .... ");
+		getch();
+	}
+	else if(ch == 'n' || ch == 'N')
+	{
+		pnew->next = NULL;
+		pnew->early = *pplast;
+		(*pplast)->next = pnew;
+		*pplast = pnew;
+		printf("\nRecord is inserted successfully");
+		printf("\npress any key to continue .... ");
+		getch();
+	}
+	else if(ch == 'm' || ch == 'M')
+	{
+		printf("\nEnter record position after which new record has to be inserted : ");
+		scanf("%d",&rpos);
+
+		// counting the no.of records
+		for(temp = *pphead; temp!=NULL; temp=temp->next)
+		{
+			nrecords++;
+		}
+		//printf("\nNo.of records present = %d\n",nrecords);
+		if(rpos < nrecords)
+		{
+			for(temp = *pphead; temp!=NULL; temp=temp->next)
+			{
+				count++;
+				if(count == rpos)
+				{
+					op = 'y';
+					break;
+				}
+			}
+			if(op == 'y')
+			{
+				pnext = temp->next;
+				temp->next = pnew;
+				pnew->next = pnext;
+				pnext->early = pnew;
+				pnew->early = temp;
+				printf("\nRecord is inserted successfully");
+				printf("\npress any key to continue .... ");
+				getch();
+
+			}
+		}
+		else
+		{
+			printf("\nInvalid Record position. Record position should be below %d\n",nrecords);	
+			printf("\nInsertion operation cancelled\n");
+			free(pnew);
+			printf("\npress any key to continue .... ");
+			getch();
+		}
+	}
+	else
+	{
+		printf("\nInvalid Option");
+		printf("\nInsertion operation cancelled\n");
+		printf("\npress any key to continue .... ");
+		getch();
+		free(pnew);
+	}
+}
+
+void Delete(struct tt** pphead, struct tt** pplast)
+{
+	struct tt* pearly, *pnext , *temp;
+	char ch, op;
+	int rpos, count=0, nrecords=0;
+
+	printf("\nSelect the following option for deletion\n");
+	printf("\nDelete (b)eginning or e(n)d or (m)iddle of the records : ");
+	fflush(stdin);
+	ch = getchar();
+
+	if(ch=='b' || ch=='B')	// Deleting the beginning of the record
+	{
+		pnext = (*pphead)->next;
+		pnext->early = NULL;
+		free(*pphead);
+		*pphead = pnext;
+		printf("\nRecord is deleted successfully");
+		printf("\npress any key to continue .... ");
+		getch();
+	}
+	else if(ch=='n' || ch=='N')	// Deleting the end of the record
+	{
+		pearly = (*pplast)->early;
+		pearly->next = NULL;
+		free(*pplast);
+		*pplast = pearly;
+		printf("\nRecord is deleted successfully");
+		printf("\npress any key to continue .... ");
+		getch();
+	}
+	else if(ch=='m' || ch=='M')		// Deleting middle of the record
+	{
+		printf("\nEnter record position which has to be deleted : ");
+		scanf("%d",&rpos);
+
+		// counting the no.of records
+		for(temp = *pphead; temp!=NULL; temp=temp->next)
+		{
+			nrecords++;
+		}
+		//printf("\nNo.of records present = %d\n",nrecords);
+		if(rpos < nrecords)
+		{
+			for(temp = *pphead; temp!=NULL; temp=temp->next)
+			{
+				count++;
+				if(count == rpos)
+				{
+					op = 'y';
+					break;
+				}
+			}
+			if(op == 'y')
+			{
+				pearly = temp->early;
+				pnext = temp->next;
+				pearly->next = pnext;
+				pnext->early = pearly;
+				free(temp);
+				printf("\nRecord is deleted successfully");
+
+				printf("\npress any key to continue .... ");
+				getch();
+				
+			}
+		}
+		else
+		{
+			printf("\nInvalid Record position. Record position should be below %d\n",nrecords);	
+			printf("\nDeletion operation cancelled\n");
+			printf("\npress any key to continue .... ");
+			getch();
+		}
+	}
+	else
+	{
+		printf("\nInvalid Option\n");
+		printf("\npress any key to continue .... ");
+		getch();
+	}
+
+}	// end of Delete()
+
+void update(struct tt* head)
+{
+	struct tt* temp;
+	char ch;
+	int rno;
+
+	printf("\nEnter the record no. (i.e., serial no.) to be updated : ");
+	scanf("%d",&rno);
+
+	for(temp=head; temp!=NULL; temp=temp->next)
+	{
+		if(temp->sno == rno)
+		{
+			ch = 'y';
+			break;
+		}
+	}
+
+	if(ch == 'y')
+	{
+		printf("\ncurrent details are ....\n");
+		printf("\nName : %s\tAge : %d\n",temp->name,temp->age);
+		
+		printf("\nEnter new name :  ");
+		fflush(stdin);
+		gets(temp->name);
+		
+		printf("\nEnter new age :  ");
+		scanf("%d",&temp->age);
+
+		printf("\nRecord is successfully updated\n");
+		printf("\nPress any key to continue....");
+		getch();
+	}
+	else
+	{
+		printf("\nInvalid record number(i.e, serial number) ");
+		printf("\nPress any key to continue....");
+		getch();
+	}
+}	// end of update()
+
+Output : 
+
+Enter name : Palani Kumar
+Enter age : 28
+
+Enter name : sowmya
+Enter age : 24
+
+Do you want to create one more block (y/n) ? :  n
+
+Display the records from the (b)eginning or from the (e)nd of the list: b
+
+   1        Palani Kumar                     28
+   2        sowmya                           24
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+i
+
+Enter name : manoj kumar
+
+Enter age : 3
+
+Insert at (b)eginning or e(n)d or (m)iddle of the list
+m
+
+Enter record position after which new record has to be inserted : 1
+
+Record is inserted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+i
+
+Enter name : swaroop
+Enter age : 8
+
+Insert at (b)eginning or e(n)d or (m)iddle of the list
+n
+
+Record is inserted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+e
+
+   4        swaroop                           8
+   2        sowmya                           24
+   3        manoj kumar                       3
+   1        palani kumar                     28
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+i
+
+Enter name : satya prakash
+Enter age : 34
+
+Insert at (b)eginning or e(n)d or (m)iddle of the list
+m
+
+Enter record position after which new record has to be inserted : 3
+
+Record is inserted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   5        satya prakash                    34
+   4        swaroop                           8
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+d
+
+Select the following option for deletion
+
+Delete (b)eginning or e(n)d or (m)iddle of the records : m
+
+Enter record position which has to be deleted : 4
+
+Record is deleted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   4        swaroop                           8
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+u
+
+Enter the record no. (i.e., serial no.) to be updated : 4
+
+current details are ....
+
+Name : swaroop  Age : 8
+
+Enter new name :  swaroop kumar
+
+Enter new age :  20
+
+Record is successfully updated
+
+Press any key to continue....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   4        swaroop kumar                    20
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+i
+
+Enter name : aishwarya roi
+Enter age : 30
+
+Insert at (b)eginning or e(n)d or (m)iddle of the list
+m
+
+Enter record position after which new record has to be inserted : 3
+
+Record is inserted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   6        aishwarya roi                    30
+   4        swaroop kumar                    20
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+i
+
+Enter name : vishnu vardhan
+Enter age : 36
+
+Insert at (b)eginning or e(n)d or (m)iddle of the list
+b
+
+Record is inserted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   7        vishnu vardhan                   36
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   6        aishwarya roi                    30
+   4        swaroop kumar                    20
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+i
+
+Enter name : mamooty
+Enter age : 38
+
+Insert at (b)eginning or e(n)d or (m)iddle of the list
+m
+
+Enter record position after which new record has to be inserted : 5
+
+Record is inserted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   7        vishnu vardhan                   36
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   6        aishwarya roi                    30
+   8        mamooty                          38
+   4        swaroop kumar                    20
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+d
+
+Select the following option for deletion
+
+Delete (b)eginning or e(n)d or (m)iddle of the records : m
+
+Enter record position which has to be deleted : 6
+
+Record is deleted successfully
+press any key to continue ....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+b
+
+   7        vishnu vardhan                   36
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   6        aishwarya roi                    30
+   4        swaroop kumar                    20
+
+Do you want to manipulate the records again(y/n)? : y
+
+
+Select the following option you want
+(i)nsert , (d)delete, or (u)pdate the records
+u
+
+Enter the record no. (i.e., serial no.) to be updated : 6
+
+current details are ....
+
+Name : aishwarya roi    Age : 30
+
+Enter new name :  aishwarya
+
+Enter new age :  28
+
+Record is successfully updated
+
+Press any key to continue....
+
+In which way you want to display the records
+
+Select from the (b)eginning or (e)nd of the list
+e
+
+   4        swaroop kumar                    20
+   6        aishwarya                        28
+   2        sowmya                           24
+   3        manoj kumar                       3
+   1        palani kumar                     28
+   7        vishnu vardhan                   36
+
+Do you want to manipulate the records again(y/n)? : n
+
+Displaying the records from the beginning of the list
+
+   7        vishnu vardhan                   36
+   1        palani kumar                     28
+   3        manoj kumar                       3
+   2        sowmya                           24
+   6        aishwarya                        28
+   4        swaroop kumar                    20
+Displaying the records from the end of the list
+
+   4        swaroop kumar                    20
+   6        aishwarya                        28
+   2        sowmya                           24
+   3        manoj kumar                       3
+   1        palani kumar                     28
+   7        vishnu vardhan                   36
+
+Press any key to continue
+
